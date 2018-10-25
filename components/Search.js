@@ -173,24 +173,23 @@ export default class Search extends Component {
           isVisible={this.state.isCreateMessageModalVisible}
           onBackdropPress={this.handleDismissCreateMessageModal}
         />
-
-        <Footer>
-          <FooterTab>
-            <Button onPress={() => navigate("Home")}>
-              <Icon name="contact" />
-              <Text>Profile</Text>
-            </Button>
-            <Button>
-              <Icon name="people" />
-              <Text>Search</Text>
-            </Button>
-            <Button onPress={() => navigate("Messages")}>
-              <Icon name="chatboxes" />
-              <Text>Messages</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     );
   }
 }
+// <Footer>
+//   <FooterTab>
+//     <Button onPress={() => navigate("Home")}>
+//       <Icon name="contact" />
+//       <Text>Profile</Text>
+//     </Button>
+//     <Button>
+//       <Icon name="people" />
+//       <Text>Search</Text>
+//     </Button>
+//     <Button onPress={() => navigate("Messages")}>
+//       <Icon name="chatboxes" />
+//       <Text>Messages</Text>
+//     </Button>
+//   </FooterTab>
+// </Footer>

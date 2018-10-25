@@ -1,31 +1,49 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import React from "react";
+import { Platform } from "react-native";
+import { Icon } from "native-base";
+import { Ionicons } from "@expo/vector-icons";
+import Router from "./Router";
+import Landing from "../components/Landing";
+import Home from "../components/Home";
+import Search from "../components/Search";
+import Messages from "../components/Messages";
+import Connections from "../components/Connections";
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 
-export default TabNavigator(
+export default (MainTabNavigator = createMaterialBottomTabNavigator(
   {
-    Test: {
-      screen: TestScreen,
+    Home: {
+      screen: Home,
+      title: "Profile"
     },
+    Search: {
+      screen: Search
+    },
+    Connections: {
+      screen: Connections
+    }
   },
   {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused }) => {
         const { routeName } = navigation.state;
         let iconName;
-        return (
-          <Ionicons
-            name={iconName}
-            size={28}
-            style={{ marginBottom: -3 }}
-          />
-        );
-      },
+        if (routeName === "Home") {
+          iconName = "contact";
+          backBehavior: "none";
+        } else if (routeName === "Connections") {
+          iconName = "chatboxes";
+        } else if (routeName === "Search") {
+          iconName = "people";
+        }
+        return <Icon name={iconName} size={2} style={{ marginBottom: -1 }} />;
+      }
     }),
-    tabBarComponent: TabBarBottom,
-    tabBarPosition: 'bottom',
-    animationEnabled: false,
+    // tabBarComponent: react-navigation-tabs,
+    initialRouteName: "Home",
+    tabBarPosition: "bottom",
+    animationEnabled: true,
     swipeEnabled: false,
+    backBehavior: "none"
   }
-);
+));

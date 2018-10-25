@@ -124,7 +124,7 @@ export default class Home extends Component {
     } else {
       this._getLocationAsync();
     }
-    let userId = firebase.auth().currentUser.uid;
+    let userId = firebase.auth().currentUser.uid || "";
     firebase
       .database()
       .ref("/users/" + userId)
@@ -191,28 +191,6 @@ export default class Home extends Component {
             </Col>
           </Row>
         </Grid>
-        <Footer>
-          <FooterTab>
-            <Button>
-              <Icon name="contact" />
-              <Text>Profile</Text>}
-            </Button>
-            <Button
-              onPress={() => this._getCity().then(() => navigate("Search"))}
-            >
-              <Icon name="people" />
-              <Text>Search</Text>
-            </Button>
-            <Button onPress={() => navigate("Messages")}>
-              <Icon name="chatboxes" />
-              <Text>Messages</Text>
-            </Button>
-            <Button onPress={() => navigate("Connections")}>
-              <Icon name="chatboxes" />
-              <Text>Connections</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     );
   }
@@ -240,3 +218,25 @@ const styles = StyleSheet.create({
     flex: 0.5
   }
 });
+// <Footer>
+// <FooterTab>
+// <Button>
+// <Icon name="contact" />
+// <Text>Profile</Text>}
+// </Button>
+// <Button
+// onPress={() => this._getCity().then(() => navigate("Search"))}
+// >
+// <Icon name="people" />
+// <Text>Search</Text>
+// </Button>
+// <Button onPress={() => navigate("Messages")}>
+// <Icon name="chatboxes" />
+// <Text>Messages</Text>
+// </Button>
+// <Button onPress={() => navigate("Connections")}>
+// <Icon name="chatboxes" />
+// <Text>Connections</Text>
+// </Button>
+// </FooterTab>
+// </Footer>

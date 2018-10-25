@@ -147,24 +147,23 @@ export default class Connections extends Component {
             )}
           />
         </Content>
-
-        <Footer>
-          <FooterTab>
-            <Button onPress={() => navigate("Home")}>
-              <Icon name="contact" />
-              <Text>Profile</Text>
-            </Button>
-            <Button>
-              <Icon name="people" />
-              <Text>Search</Text>
-            </Button>
-            <Button onPress={() => navigate("Messages")}>
-              <Icon name="chatboxes" />
-              <Text>Messages</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     );
   }
 }
+// <Footer>
+//   <FooterTab>
+//     <Button onPress={() => navigate("Home")}>
+//       <Icon name="contact" />
+//       <Text>Profile</Text>
+//     </Button>
+//     <Button>
+//       <Icon name="people" />
+//       <Text>Search</Text>
+//     </Button>
+//     <Button onPress={() => navigate("Messages")}>
+//       <Icon name="chatboxes" />
+//       <Text>Messages</Text>
+//     </Button>
+//   </FooterTab>
+// </Footer>

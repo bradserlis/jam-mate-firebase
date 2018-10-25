@@ -141,23 +141,6 @@ export default class Messages extends Component {
             )}
           />
         </Content>
-
-        <Footer>
-          <FooterTab>
-            <Button onPress={() => navigate("Home")}>
-              <Icon name="contact" />
-              <Text>Profile</Text>
-            </Button>
-            <Button onPress={() => navigate("Search")}>
-              <Icon name="people" />
-              <Text>Search</Text>
-            </Button>
-            <Button>
-              <Icon name="chatboxes" />
-              <Text>Messages</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     );
   }
@@ -166,3 +149,19 @@ export default class Messages extends Component {
 Messages.defaultProps = {
   messages: []
 };
+// <Footer>
+//   <FooterTab>
+//     <Button onPress={() => navigate("Home")}>
+//       <Icon name="contact" />
+//       <Text>Profile</Text>
+//     </Button>
+//     <Button onPress={() => navigate("Search")}>
+//       <Icon name="people" />
+//       <Text>Search</Text>
+//     </Button>
+//     <Button>
+//       <Icon name="chatboxes" />
+//       <Text>Messages</Text>
+//     </Button>
+//   </FooterTab>
+// </Footer>
