@@ -103,7 +103,7 @@ export default class ProfileEdit extends Component {
 
     return (
       <Container>
-        <ProfileEditContainer />
+        <ProfileEditContainer navigation={navigate} />
       </Container>
     );
   }

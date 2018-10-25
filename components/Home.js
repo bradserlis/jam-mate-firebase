@@ -181,6 +181,10 @@ export default class Home extends Component {
               username={this.state.username}
               userphoto={this.state.userphoto}
             />
+            <TouchableOpacity onPress={() => navigate("ProfileEdit")}>
+              <Icon name="menu" />
+              <Text>Edit</Text>
+            </TouchableOpacity>
           </Row>
           <Row style={{ backgroundColor: "#72b4e0" }}>
             <Col>

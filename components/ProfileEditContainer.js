@@ -13,6 +13,8 @@ import {
   Container,
   Content,
   Header,
+  Footer,
+  FooterTab,
   Form,
   Icon,
   Input,
@@ -113,6 +115,7 @@ export default class ProfileEditContainer extends Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
     const { toggle } = this.state;
     const textValue = toggle ? "On" : "Off";
     const buttonBg = toggle ? "dodgerblue" : "white";
@@ -143,6 +146,15 @@ export default class ProfileEditContainer extends Component {
         </Form>
         <InstrumentAdder userId={userId} />
         <GenreAdder userId={userId} />
+
+        <Footer>
+          <FooterTab>
+            <Button onPress={() => this.props.navigation("Home")}>
+              <Icon name="contact" />
+              <Text>Return Home</Text>}
+            </Button>
+          </FooterTab>
+        </Footer>
       </Container>
     );
   }

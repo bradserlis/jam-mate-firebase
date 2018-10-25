@@ -29,11 +29,11 @@ import { Text, View, ImageBackground } from "react-native";
 const Router = createSwitchNavigator(
   {
     Landing: Landing,
-    MainTabNavigator: MyNavigator
+    MainTabNavigator: MyNavigator,
+    ProfileEdit: ProfileEdit
   },
   {
-    initialRouteName: "Landing",
-    backBehavior: "none"
+    initialRouteName: "Landing"
   }
 );
 
