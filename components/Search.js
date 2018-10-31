@@ -82,21 +82,23 @@ export default class Search extends Component {
   componentWillMount = () => {};
 
   componentDidMount = () => {
+    const currentUser = firebase.auth().currentUser.uid;
     handleShowCreateMessageModal();
     let newList = [];
-    let that = this;
     let ref = firebase.database().ref("/users/");
     ref
       .orderByKey()
       .once("value")
-      .then(function(snapshot) {
-        snapshot.forEach(function(userSnapshot) {
-          let myObj = {};
-          myObj["userid"] = userSnapshot.key;
-          myObj["data"] = userSnapshot;
-          newList.push(myObj);
+      .then(snapshot => {
+        snapshot.forEach(userSnapshot => {
+          if (userSnapshot.key !== currentUser) {
+            let myObj = {};
+            myObj["userid"] = userSnapshot.key;
+            myObj["data"] = userSnapshot;
+            newList.push(myObj);
+          }
         });
-        that.setState({
+        this.setState({
           usersArray: newList
         });
       });
@@ -148,7 +150,7 @@ export default class Search extends Component {
     return (
       <Container>
         <Content>
-          <H2> Search Page </H2>
+          <H2 style={styles.topBuffer}> Search Page </H2>
           <FlatList
             data={results}
             extraData={results}

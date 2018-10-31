@@ -124,44 +124,48 @@ export default class Home extends Component {
     } else {
       this._getLocationAsync();
     }
-    let userId = firebase.auth().currentUser.uid || "";
-    firebase
-      .database()
-      .ref("/users/" + userId)
-      .child("userphoto")
-      .once("value")
-      .then(snapshot => {
-        let userphoto = snapshot.val() || "";
-        // TODO : dont try to use userphoto until it has a value
-        this.setState({ userphoto: userphoto });
-        // ...
-      });
-    firebase
-      .database()
-      .ref("/users/" + userId)
-      .child("instruments")
-      .once("value")
-      .then(instruments => {
-        let jInstruments = instruments.toJSON();
-        let instrumentList = [];
-        for (let key in jInstruments) {
-          instrumentList.push(jInstruments[key]);
-        }
-        this.setState({ instrumentsList: instrumentList });
-      });
-    firebase
-      .database()
-      .ref("/users/" + userId)
-      .child("genres")
-      .once("value")
-      .then(genres => {
-        let jGenres = genres.toJSON();
-        let genreList = [];
-        for (let key in jGenres) {
-          genreList.push(jGenres[key]);
-        }
-        this.setState({ genresList: genreList });
-      });
+    let userId = firebase.auth().currentUser
+      ? firebase.auth().currentUser.uid
+      : null;
+    if (userId) {
+      firebase
+        .database()
+        .ref("/users/" + userId)
+        .child("userphoto")
+        .once("value")
+        .then(snapshot => {
+          let userphoto = snapshot.val() || "";
+          // TODO : dont try to use userphoto until it has a value
+          this.setState({ userphoto: userphoto });
+          // ...
+        });
+      firebase
+        .database()
+        .ref("/users/" + userId)
+        .child("instruments")
+        .once("value")
+        .then(instruments => {
+          let jInstruments = instruments.toJSON();
+          let instrumentList = [];
+          for (let key in jInstruments) {
+            instrumentList.push(jInstruments[key]);
+          }
+          this.setState({ instrumentsList: instrumentList });
+        });
+      firebase
+        .database()
+        .ref("/users/" + userId)
+        .child("genres")
+        .once("value")
+        .then(genres => {
+          let jGenres = genres.toJSON();
+          let genreList = [];
+          for (let key in jGenres) {
+            genreList.push(jGenres[key]);
+          }
+          this.setState({ genresList: genreList });
+        });
+    }
   };
 
   render() {
