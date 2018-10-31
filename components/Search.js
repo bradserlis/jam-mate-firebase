@@ -8,7 +8,8 @@ import {
   Alert,
   Image,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
+  SafeAreaView
 } from "react-native";
 import {
   Card,
@@ -150,7 +151,7 @@ export default class Search extends Component {
     return (
       <Container>
         <Content>
-          <H2 style={styles.topBuffer}> Search Page </H2>
+          <H2 style={styles.notchCompensation}> Search Page </H2>
           <FlatList
             data={results}
             extraData={results}

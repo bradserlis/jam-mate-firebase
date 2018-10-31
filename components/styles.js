@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, StatusBar, Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 const MODAL_HEIGHT = height / 3;
@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: -70,
     left: -200
+  },
+  notchCompensation: {
+    marginTop: 0
   },
   addIconStyle: {
     padding: 4,

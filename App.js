@@ -6,7 +6,8 @@ import {
   View,
   Navigator,
   Image,
-  ImageBackground
+  ImageBackground,
+  SafeAreaView
 } from "react-native";
 import {
   Container,
@@ -42,9 +43,11 @@ firebase.initializeApp(firebaseconfig);
 export default class App extends Component {
   render() {
     return (
-      <Container>
-        <Router />
-      </Container>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Container>
+          <Router />
+        </Container>
+      </SafeAreaView>
     );
   }
 }
