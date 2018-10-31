@@ -118,6 +118,11 @@ export default class Search extends Component {
       for (let key in obj.instruments) {
         instruments.push(obj.instruments[key]);
       }
+      // Get connectedusers
+      let connectedusers = [];
+      for (let key in obj.connectedusers) {
+        connectedusers.push(obj.connectedusers[key]);
+      }
       // Add the result to the table
       results.push({
         userid: originalObj.userid,
@@ -127,7 +132,8 @@ export default class Search extends Component {
         zipcode: obj.zipcode,
         userphoto: obj.userphoto || "http://temp.changeme.com",
         genres: genres,
-        instruments: instruments
+        instruments: instruments,
+        connectedusers: connectedusers
       });
     });
 
@@ -159,6 +165,7 @@ export default class Search extends Component {
                       instruments={item.instruments || []}
                       genres={item.genres || []}
                       name={item.firstname || []}
+                      connectedusers={item.connectedusers || []}
                     />
                     <Text style={{ marginBottom: 5, marginTop: 20 }}>
                       additional text

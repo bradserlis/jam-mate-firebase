@@ -43,14 +43,23 @@ import {
 import FooterNav from "./FooterNav";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
+import styles from "./styles";
 
 export default class SearchProfilesCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userIsConnected: this._userIsConnected()
+    };
   }
 
   componentDidMount = () => {};
+
+  _userIsConnected = () => {
+    let currentUserId = firebase.auth().currentUser.uid;
+    const connectedUserIds = this.props.connectedusers;
+    return connectedUserIds.some(id => id === currentUserId);
+  };
 
   _addContact = targetUser => {
     let currentuser = firebase.auth().currentUser.uid;
@@ -83,7 +92,12 @@ export default class SearchProfilesCard extends Component {
               .database()
               .ref("/users/" + targetUser)
               .child("connectedusers")
-              .push(currentuser);
+              .push(currentuser)
+              .then(() => {
+                this.setState({
+                  userIsConnected: true
+                });
+              });
             // give alert that connection was sent
             Alert.alert("connection sent to", this.props.name);
           }
@@ -93,12 +107,19 @@ export default class SearchProfilesCard extends Component {
           .database()
           .ref("/users/" + targetUser)
           .child("connectedusers")
-          .push(currentuser);
+          .push(currentuser)
+          .then(() => {
+            this.setState({
+              userIsConnected: true
+            });
+          });
         Alert.alert("connection sent to", this.props.name);
       }
     });
   };
   render() {
+    let currentUserId = firebase.auth().currentUser.uid;
+
     let combo = ["INSTRUMENTS"].concat(
       this.props.instruments,
       [" ", "GENRES"],
@@ -124,13 +145,15 @@ export default class SearchProfilesCard extends Component {
                   );
                 }}
               />
-              <Button
-                onPress={() => {
-                  this._addContact(this.props.userid);
-                }}
-              >
-                <Text> Send Contact Info to {this.props.name} </Text>
-              </Button>
+              {!this.state.userIsConnected ? (
+                <Button
+                  onPress={() => {
+                    this._addContact(this.props.userid);
+                  }}
+                >
+                  <Text> Send Contact Info to {this.props.name} </Text>
+                </Button>
+              ) : null}
             </Body>
           </CardItem>
         </Card>
