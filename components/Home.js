@@ -59,23 +59,26 @@ export default class Home extends Component {
     };
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    title: "Home",
-    headerLeft: null,
-    headerRight: (
-      <TouchableOpacity onPress={() => navigation.navigate("ProfileEdit")}>
-        <Icon name="menu" />
-        <Text>Edit</Text>
-      </TouchableOpacity>
-    ),
-    headerStyle: {
-      backgroundColor: "#007bff"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
-  });
+  // static navigationOptions = ({ navigation }) => ({
+  //   title: "Home",
+  //   headerLeft: null,
+  //   headerRight: (
+  //     <TouchableOpacity onPress={() => navigation.navigate("ProfileEdit")}>
+  //       <Icon name="menu" />
+  //       <Text>Edit</Text>
+  //     </TouchableOpacity>
+  //   ),
+  //   headerStyle: {
+  //     backgroundColor: "#007bff"
+  //   },
+  //   headerRightContainerStyle: {
+  //     paddingRight: 100
+  //   },
+  //   headerTintColor: "#fff",
+  //   headerTitleStyle: {
+  //     fontWeight: "bold"
+  //   }
+  // });
 
   _getCity = async () => {
     Expo.Location.reverseGeocodeAsync(this.state.usercityobject)
@@ -185,10 +188,12 @@ export default class Home extends Component {
               username={this.state.username}
               userphoto={this.state.userphoto}
             />
-            <TouchableOpacity onPress={() => navigate("ProfileEdit")}>
-              <Icon name="menu" />
-              <Text>Edit</Text>
-            </TouchableOpacity>
+            <View style={{ marginRight: 10 }}>
+              <TouchableOpacity onPress={() => navigate("ProfileEdit")}>
+                <Icon name="menu" />
+                <Text>Edit</Text>
+              </TouchableOpacity>
+            </View>
           </Row>
           <Row style={{ backgroundColor: "#72b4e0" }}>
             <Col>
