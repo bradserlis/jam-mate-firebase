@@ -23,7 +23,8 @@ import {
   Right,
   Title,
   H3,
-  H2
+  H2,
+  Root
 } from "native-base";
 import Router from "./routes/Router";
 import { MainTabNavigator } from "./routes/MainTabNavigator";
@@ -43,11 +44,13 @@ firebase.initializeApp(firebaseconfig);
 export default class App extends Component {
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <Container>
-          <Router />
-        </Container>
-      </SafeAreaView>
+      <Root>
+        <SafeAreaView style={{ flex: 1 }}>
+          <Container>
+            <Router />
+          </Container>
+        </SafeAreaView>
+      </Root>
     );
   }
 }

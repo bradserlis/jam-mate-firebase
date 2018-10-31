@@ -2,6 +2,7 @@ import { StyleSheet, StatusBar, Dimensions } from "react-native";
 
 const { width, height } = Dimensions.get("window");
 const MODAL_HEIGHT = height / 3;
+const CENTER = width / 2;
 
 const styles = StyleSheet.create({
   topBuffer: {
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     marginTop: 0
   },
   addIconStyle: {
-    padding: 4,
+    padding: 7,
     marginBottom: 6,
     borderRadius: 10,
     borderColor: "dodgerblue",

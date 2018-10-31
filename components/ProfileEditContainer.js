@@ -33,8 +33,10 @@ import {
   List,
   ListItem,
   CheckBox,
-  Separator
+  Separator,
+  Toast
 } from "native-base";
+import styles from "./styles";
 import InstrumentAdder from "./InstrumentAdder";
 import GenreAdder from "./GenreAdder";
 import * as firebase from "firebase";
@@ -52,6 +54,17 @@ export default class ProfileEditContainer extends Component {
     };
   }
 
+  // static navigationOptions = {
+  //   title: "Edit Profile",
+  //   headerStyle: {
+  //     backgroundColor: "#007bff"
+  //   },
+  //   headerTintColor: "#fff",
+  //   headerTitleStyle: {
+  //     fontWeight: "bold"
+  //   }
+  // };
+
   _onPress() {
     let newState = !this.state.toggle;
     this.setState({
@@ -64,28 +77,19 @@ export default class ProfileEditContainer extends Component {
   }
 
   _addContactInfo = contact => {
-    console.log("will add contact info", contact);
     let userId = firebase.auth().currentUser.uid;
     firebase
       .database()
       .ref("/users/" + userId)
       .child("contactinfo")
-      .set(this.state.formContent);
-    this.setState({
-      contactinfo: this.state.formContent,
-      formContent: ""
-    });
-  };
-
-  static navigationOptions = {
-    title: "Edit Profile",
-    headerStyle: {
-      backgroundColor: "#007bff"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
+      .set(this.state.contactinfo)
+      .then(() => {
+        Toast.show({
+          text: "Contact Info Updated",
+          type: "success",
+          duration: 1750
+        });
+      });
   };
 
   checkBoxTest() {
@@ -126,46 +130,55 @@ export default class ProfileEditContainer extends Component {
 
     return (
       <Container>
-        <View>
-          <Text>Contact info you are sharing:</Text>
-        </View>
-        <View>
-          <Text> {this.state.contactinfo} </Text>
-        </View>
         <Form>
           <Item floatingLabel>
-            <Label> Update Contact Info</Label>
+            <Label> Contact Info</Label>
             <Input
-              onChangeText={formContent => this.setState({ formContent })}
-              value={this.state.formContent}
+              onChangeText={formContent =>
+                this.setState({
+                  contactinfo: formContent
+                })
+              }
+              value={this.state.contactinfo}
             />
+            <Button
+              style={styles.addIconStyle}
+              onPress={() => this._addContactInfo(this.state.contactinfo)}
+            >
+              <Text style={{ color: "white" }}> Save </Text>
+            </Button>
           </Item>
-          <Button onPress={() => this._addContactInfo(this.state.contactinfo)}>
-            <Icon name="add" />
-          </Button>
         </Form>
         <InstrumentAdder userId={userId} />
         <GenreAdder userId={userId} />
-
-        <Footer>
-          <FooterTab>
-            <Button onPress={() => this.props.navigation("Home")}>
-              <Icon name="contact" />
-              <Text>Return Home</Text>}
-            </Button>
-          </FooterTab>
-        </Footer>
+        <View
+          style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}
+        >
+          <TouchableOpacity onPress={() => this.props.navigation("Home")}>
+            <Icon name="contact" />
+            <Text>Return Home</Text>
+          </TouchableOpacity>
+        </View>
       </Container>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  buttons: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    flexWrap: "wrap",
-    flexDirection: "column"
-  }
-});
+// const styles = StyleSheet.create({
+//   buttons: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     flexWrap: "wrap",
+//     flexDirection: "column"
+//   }
+// });
+
+// <Footer>
+//           <FooterTab style={{ paddingBottom: 0 }}>
+//             <Button onPress={() => this.props.navigation("Home")}>
+//               <Icon name="contact" />
+//               <Text>Return Home</Text>}
+//             </Button>
+//           </FooterTab>
+//         </Footer>

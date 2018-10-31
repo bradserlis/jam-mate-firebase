@@ -129,7 +129,7 @@ export default class Connections extends Component {
     return (
       <Container>
         <Content>
-          <H2 style={styles.topBuffer}> Connections </H2>
+          <H2> Connections </H2>
           <FlatList
             data={this.state.contactinfo}
             extraData={this.state.contactinfo}
