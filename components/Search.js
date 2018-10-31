@@ -46,6 +46,7 @@ import SearchProfilesGenres from "./SearchProfilesGenres";
 import CreateMessageModal from "./CreateMessageModal";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
+import styles from "./styles";
 
 export default class Search extends Component {
   constructor(props) {
@@ -169,14 +170,14 @@ export default class Search extends Component {
             )}
           />
         </Content>
-        <CreateMessageModal
-          isVisible={this.state.isCreateMessageModalVisible}
-          onBackdropPress={this.handleDismissCreateMessageModal}
-        />
       </Container>
     );
   }
 }
+// <CreateMessageModal
+// isVisible={this.state.isCreateMessageModalVisible}
+// onBackdropPress={this.handleDismissCreateMessageModal}
+// />
 // <Footer>
 //   <FooterTab>
 //     <Button onPress={() => navigate("Home")}>

@@ -46,6 +46,7 @@ import SearchProfilesGenres from "./SearchProfilesGenres";
 import CreateMessageModal from "./CreateMessageModal";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
+import styles from "./styles";
 
 export default class Connections extends Component {
   constructor(props) {
@@ -128,7 +129,7 @@ export default class Connections extends Component {
     return (
       <Container>
         <Content>
-          <H2> Connections </H2>
+          <H2 style={styles.topBuffer}> Connections </H2>
           <FlatList
             data={this.state.contactinfo}
             extraData={this.state.contactinfo}
