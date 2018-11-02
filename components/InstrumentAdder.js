@@ -93,11 +93,12 @@ export default class InstrumentAdder extends Component {
     return (
       <Container>
         <Content>
-          <Form>
+          <Form style={{flex: 1, flexDirection: "row"}}>
             <Input
               placeholder="Enter New Instrument..."
               onChangeText={formContent => this.setState({ formContent })}
               value={this.state.formContent}
+              style={{width: "80%"}}
             />
             <Button onPress={() => this._addInstrument()}>
               <Icon name="add" />

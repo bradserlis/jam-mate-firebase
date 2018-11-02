@@ -151,14 +151,14 @@ export default class ProfileEditContainer extends Component {
         </Form>
         <InstrumentAdder userId={userId} />
         <GenreAdder userId={userId} />
-        <View
-          style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}
-        >
-          <TouchableOpacity onPress={() => this.props.navigation("Home")}>
-            <Icon name="contact" />
-            <Text>Return Home</Text>
-          </TouchableOpacity>
-        </View>
+        <Footer>
+          <FooterTab style={{ paddingBottom: 0 }}>
+            <Button onPress={() => this.props.navigation("Home")}>
+              <Icon name="contact" />
+              <Text>Return Home</Text>}
+            </Button>
+          </FooterTab>
+        </Footer>
       </Container>
     );
   }
@@ -174,11 +174,3 @@ export default class ProfileEditContainer extends Component {
 //   }
 // });
 
-// <Footer>
-//           <FooterTab style={{ paddingBottom: 0 }}>
-//             <Button onPress={() => this.props.navigation("Home")}>
-//               <Icon name="contact" />
-//               <Text>Return Home</Text>}
-//             </Button>
-//           </FooterTab>
-//         </Footer>

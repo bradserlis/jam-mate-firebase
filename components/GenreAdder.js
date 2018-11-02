@@ -6,7 +6,7 @@ import {
   ImageBackground,
   Alert,
   Image,
-  FlatList,
+  ScrollView,
   TouchableOpacity
 } from "react-native";
 import {
@@ -30,7 +30,8 @@ import {
   List,
   ListItem,
   CheckBox,
-  Icon
+  Icon,
+  Badge
 } from "native-base";
 import FooterNav from "./FooterNav";
 import styles from "./styles";
@@ -76,16 +77,14 @@ export default class GenreAdder extends Component {
   };
 
   componentDidMount = () => {
-    let newList = [];
     let ref = firebase
       .database()
       .ref("/users/" + this.props.userId)
       .child("genres");
     ref.orderByKey().on("child_added", snapshot => {
-      newList.push(snapshot);
-      this.setState({
-        genreList: newList
-      });
+      this.setState(previousState => ({
+        genreList: [...previousState.genreList, snapshot]
+      }));
     });
   };
 
@@ -93,11 +92,12 @@ export default class GenreAdder extends Component {
     return (
       <Container>
         <Content>
-          <Form>
+            <Form style={{flex: 1, flexDirection: "row"}}>
             <Input
               placeholder="Genres..."
               onChangeText={formContent => this.setState({ formContent })}
               value={this.state.formContent}
+              style={{width: "80%"}}
             />
             }
             <Button onPress={() => this._addGenre()}>
@@ -105,26 +105,19 @@ export default class GenreAdder extends Component {
             </Button>
           </Form>
 
-          <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
-            <List>
-              <FlatList
-                extraData={this.state.refresher}
-                style={{ flexDirection: "row" }}
-                data={this.state.genreList}
-                renderItem={({ item, index }) => (
-                  <TouchableOpacity
-                    onPress={() => this._removeGenre(item.key, index)}
-                    style={styles.addIconStyle}
-                  >
-                    <Text style={{ textAlign: "center", letterSpacing: 1.5 }}>
-                      {item.val()}
-                      <Icon name="close" style={{ textAlign: "right" }} />
-                    </Text>
-                  </TouchableOpacity>
+          <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row', paddingHorizontal: 5}}>
+                  {this.state.genreList.map((genre, index) => (
+                    <Badge primary style={{marginRight: 5, marginBottom: 10}} key={genre.key}>
+                      <TouchableOpacity
+                        onPress={() => this._removeGenre(genre.key, index)}
+                      >
+                        <Text style={{color: "white"}}>
+                          {genre.val()} &times;
+                        </Text>
+                      </TouchableOpacity>
+                    </Badge>
+                  )
                 )}
-                keyExtractor={item => item.key}
-              />
-            </List>
           </View>
         </Content>
       </Container>
