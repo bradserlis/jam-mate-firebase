@@ -6,7 +6,6 @@ import {
   ImageBackground,
   Alert,
   Image,
-  ScrollView,
   TouchableOpacity
 } from "react-native";
 import {
@@ -15,6 +14,7 @@ import {
   Header,
   Form,
   Input,
+  Icon,
   Item,
   Button,
   Label,
@@ -30,7 +30,6 @@ import {
   List,
   ListItem,
   CheckBox,
-  Icon,
   Badge
 } from "native-base";
 import FooterNav from "./FooterNav";
@@ -92,32 +91,39 @@ export default class GenreAdder extends Component {
     return (
       <Container>
         <Content>
-            <Form style={{flex: 1, flexDirection: "row"}}>
+          <Form style={{ flex: 1, flexDirection: "row" }}>
             <Input
               placeholder="Genres..."
               onChangeText={formContent => this.setState({ formContent })}
               value={this.state.formContent}
-              style={{width: "80%"}}
+              style={{ width: "80%" }}
             />
-            }
             <Button onPress={() => this._addGenre()}>
               <Icon name="add" />
             </Button>
           </Form>
 
-          <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row', paddingHorizontal: 5}}>
-                  {this.state.genreList.map((genre, index) => (
-                    <Badge primary style={{marginRight: 5, marginBottom: 10}} key={genre.key}>
-                      <TouchableOpacity
-                        onPress={() => this._removeGenre(genre.key, index)}
-                      >
-                        <Text style={{color: "white"}}>
-                          {genre.val()} &times;
-                        </Text>
-                      </TouchableOpacity>
-                    </Badge>
-                  )
-                )}
+          <View
+            style={{
+              flex: 1,
+              flexWrap: "wrap",
+              flexDirection: "row",
+              paddingHorizontal: 5
+            }}
+          >
+            {this.state.genreList.map((genre, index) => (
+              <Badge
+                primary
+                style={{ marginRight: 5, marginBottom: 10 }}
+                key={genre.key}
+              >
+                <TouchableOpacity
+                  onPress={() => this._removeGenre(genre.key, index)}
+                >
+                  <Text style={{ color: "white" }}>{genre.val()} &times;</Text>
+                </TouchableOpacity>
+              </Badge>
+            ))}
           </View>
         </Content>
       </Container>

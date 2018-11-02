@@ -6,7 +6,6 @@ import {
   ImageBackground,
   Alert,
   Image,
-  FlatList,
   TouchableOpacity
 } from "react-native";
 import {
@@ -14,6 +13,7 @@ import {
   Content,
   Header,
   Form,
+  Icon,
   Input,
   Item,
   Button,
@@ -30,7 +30,7 @@ import {
   List,
   ListItem,
   CheckBox,
-  Icon
+  Badge
 } from "native-base";
 import FooterNav from "./FooterNav";
 import styles from "./styles";
@@ -76,16 +76,14 @@ export default class InstrumentAdder extends Component {
   };
 
   componentDidMount = () => {
-    let newList = [];
     let ref = firebase
       .database()
       .ref("/users/" + this.props.userId)
       .child("instruments");
     ref.orderByKey().on("child_added", snapshot => {
-      newList.push(snapshot);
-      this.setState({
-        instrumentList: newList
-      });
+      this.setState(previousState => ({
+        instrumentList: [...previousState.instrumentList, snapshot]
+      }));
     });
   };
 
@@ -93,38 +91,41 @@ export default class InstrumentAdder extends Component {
     return (
       <Container>
         <Content>
-          <Form style={{flex: 1, flexDirection: "row"}}>
+          <Form style={{ flex: 1, flexDirection: "row" }}>
             <Input
               placeholder="Enter New Instrument..."
               onChangeText={formContent => this.setState({ formContent })}
               value={this.state.formContent}
-              style={{width: "80%"}}
+              style={{ width: "80%" }}
             />
             <Button onPress={() => this._addInstrument()}>
               <Icon name="add" />
             </Button>
           </Form>
 
-          <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
-            <List>
-              <FlatList
-                extraData={this.state.refresher}
-                style={{ flexDirection: "row" }}
-                data={this.state.instrumentList}
-                renderItem={({ item, index }) => (
-                  <TouchableOpacity
-                    onPress={() => this._removeInstrument(item.key, index)}
-                    style={styles.addIconStyle}
-                  >
-                    <Text style={{ textAlign: "center", letterSpacing: 1.5 }}>
-                      {item.val()}
-                      <Icon name="close" style={{ textAlign: "right" }} />
-                    </Text>
-                  </TouchableOpacity>
-                )}
-                keyExtractor={item => item.key}
-              />
-            </List>
+          <View
+            style={{
+              flex: 1,
+              flexWrap: "wrap",
+              flexDirection: "row",
+              paddingHorizontal: 5
+            }}
+          >
+            {this.state.instrumentList.map((instrument, index) => (
+              <Badge
+                primary
+                style={{ marginRight: 5, marginBottom: 10 }}
+                key={instrument.key}
+              >
+                <TouchableOpacity
+                  onPress={() => this._removeInstrument(instrument.key, index)}
+                >
+                  <Text style={{ color: "white" }}>
+                    {instrument.val()} &times;
+                  </Text>
+                </TouchableOpacity>
+              </Badge>
+            ))}
           </View>
         </Content>
       </Container>
