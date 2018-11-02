@@ -125,7 +125,7 @@ export default class Home extends Component {
           "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
       });
     } else {
-      this._getLocationAsync();
+      this._getLocationAsync().then(this._getCity);
     }
     let userId = firebase.auth().currentUser
       ? firebase.auth().currentUser.uid
