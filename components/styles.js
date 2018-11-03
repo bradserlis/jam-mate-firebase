@@ -8,13 +8,34 @@ const styles = StyleSheet.create({
   topBuffer: {
     paddingTop: 50
   },
+  titleMate: {
+    fontSize: 120,
+    paddingTop: 160,
+    marginBottom: 50,
+    fontFamily: "Avenir",
+    color: "#007bff",
+    fontWeight: "900",
+    textShadowColor: "#111111",
+    textShadowOffset: { width: 4, height: 15 },
+    textShadowRadius: 15,
+    position: "absolute",
+    top: 45,
+    left: -185
+  },
+  profileListText: {
+    textAlign: "center",
+    letterSpacing: 1.5
+  },
+  profileHeaderText: {
+    fontFamily: "Copperplate"
+  },
   title: {
-    fontSize: 100,
+    fontSize: 80,
     paddingTop: 140,
     marginBottom: 50,
-    fontFamily: "Noteworthy",
+    fontFamily: "Avenir",
     color: "#007bff",
-    fontWeight: "300",
+    fontWeight: "900",
     textShadowColor: "#111111",
     textShadowOffset: { width: 4, height: 4 },
     textShadowRadius: 5,

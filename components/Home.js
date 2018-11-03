@@ -216,21 +216,6 @@ Home.defaultProps = {
   userzip: null
 };
 
-const styles = StyleSheet.create({
-  helpText: {
-    fontSize: 25,
-    textAlign: "center",
-    fontWeight: "bold",
-    marginTop: 20,
-    fontStyle: "italic"
-  },
-  overlay: {
-    backgroundColor: "rgba(0,0,0,.2)",
-    height: window.height,
-    width: window.width,
-    flex: 0.5
-  }
-});
 // <Footer>
 // <FooterTab>
 // <Button>

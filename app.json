@@ -4,9 +4,13 @@
     "splash": {
       "image": "./img/music.png"
     },
+    "ios": {
+      "bundleIdentifier": "com.bradleyserlis.jammate"
+    },
     "name": "jammate",
+    "icon": "",
     "slug": "jammate",
     "version": "0.1.0",
-    "description": "testing"
+    "description": "Social Media app connecting local musicians"
   }
 }

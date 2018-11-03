@@ -170,9 +170,6 @@ export default class Search extends Component {
                       name={item.firstname || []}
                       connectedusers={item.connectedusers || []}
                     />
-                    <Text style={{ marginBottom: 5, marginTop: 20 }}>
-                      additional text
-                    </Text>
                   </Body>
                   <Right />
                 </ListItem>
