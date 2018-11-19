@@ -77,7 +77,7 @@ export default class Instruments extends Component {
     if (this.props.instruments) {
       return (
         <View>
-          <View style={{ alignItems: "center" }}>
+          <View>
             <H2 style={styles.profileHeaderText}> Instruments</H2>
           </View>
           <View style={styles.badgeList}>

@@ -11,6 +11,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import {
+  Badge,
   Container,
   Content,
   Header,
@@ -44,33 +45,23 @@ export default class Genres extends Component {
   render() {
     if (this.props.genres) {
       return (
-        <View style={{ alignItems: "center" }}>
-          <H2 style={styles.profileHeaderText}> Genres </H2>
-          <FlatList
-            data={this.props.genres}
-            extraData={this.props.genres}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => {
-              return (
-                <View>
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: "white",
-                      padding: 4,
-                      marginBottom: 6,
-                      borderRadius: 10,
-                      borderColor: "dodgerblue",
-                      borderWidth: 1,
-                      flexDirection: "row",
-                      alignSelf: "center"
-                    }}
-                  >
-                    <Text style={styles.profileListText}>{item}</Text>
-                  </TouchableOpacity>
-                </View>
-              );
-            }}
-          />
+        <View>
+          <View>
+            <H2 style={styles.profileHeaderText}> Genres</H2>
+          </View>
+          <View style={styles.badgeList}>
+            {this.props.genres.map((genre, index) => (
+              <Badge
+                primary
+                style={{ marginRight: 5, marginBottom: 10 }}
+                key={genre.key}
+              >
+                <TouchableOpacity>
+                  <Text style={{ color: "white" }}>{genre.val()}</Text>
+                </TouchableOpacity>
+              </Badge>
+            ))}
+          </View>
         </View>
       );
     }
