@@ -104,12 +104,6 @@ export default class ProfileEditContainer extends Component {
       .once("value")
       .then(snapshot => {
         const user = snapshot.val();
-        console.log("this is what it thinks user is", user);
-        console.log("this is what it thinks userzip would be", user.zipcode);
-        console.log(
-          "this is what it thinks contactinfo would be",
-          user.contactinfo
-        );
         // const contactinfo = user.contactinfo.val();
         this.setState({
           userzip: user.zipcode || "",
@@ -126,12 +120,10 @@ export default class ProfileEditContainer extends Component {
     const textColor = toggle ? "white" : "black";
     let userId = firebase.auth().currentUser.uid;
 
-    let items = ["Guitar", "Bass", "Drums", "Vocals (aggressive)", "Vocals"];
-
     return (
       <Container>
         <Form>
-          <Item floatingLabel>
+          <Item>
             <Label> Contact Info</Label>
             <Input
               onChangeText={formContent =>
@@ -145,7 +137,7 @@ export default class ProfileEditContainer extends Component {
               style={styles.addIconStyle}
               onPress={() => this._addContactInfo(this.state.contactinfo)}
             >
-              <Text style={{ color: "white" }}> Save </Text>
+              <Text style={{ color: "white" }}> Update </Text>
             </Button>
           </Item>
         </Form>
