@@ -206,7 +206,7 @@ export default class Home extends Component {
               </TouchableOpacity>
             </View>
           </Row>
-          <Row style={{ backgroundColor: "#72b4e0" }}>
+          <Row>
             <Col>
               <Instruments instruments={this.state.instrumentList} />
             </Col>

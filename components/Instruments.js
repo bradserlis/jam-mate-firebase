@@ -76,24 +76,33 @@ export default class Instruments extends Component {
   render() {
     if (this.props.instruments) {
       return (
-        <View>
+        <ImageBackground
+          style={{
+            flex: 1,
+            width: window.width,
+            height: window.height
+          }}
+          source={require("../img/binding_dark.png")}
+        >
           <View>
-            <H2 style={styles.profileHeaderText}> Instruments</H2>
+            <View>
+              <H2 style={styles.profileHeaderText}> Instruments</H2>
+            </View>
+            <View style={styles.badgeList}>
+              {this.props.instruments.map((instrument, index) => (
+                <Badge
+                  primary
+                  style={{ marginRight: 5, marginBottom: 10 }}
+                  key={instrument.key}
+                >
+                  <TouchableOpacity>
+                    <Text style={{ color: "white" }}>{instrument.val()}</Text>
+                  </TouchableOpacity>
+                </Badge>
+              ))}
+            </View>
           </View>
-          <View style={styles.badgeList}>
-            {this.props.instruments.map((instrument, index) => (
-              <Badge
-                primary
-                style={{ marginRight: 5, marginBottom: 10 }}
-                key={instrument.key}
-              >
-                <TouchableOpacity>
-                  <Text style={{ color: "white" }}>{instrument.val()}</Text>
-                </TouchableOpacity>
-              </Badge>
-            ))}
-          </View>
-        </View>
+        </ImageBackground>
       );
     }
     return (

@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5
   },
   profileHeaderText: {
-    fontFamily: "Copperplate"
+    fontFamily: "Copperplate",
+    color: "white"
   },
   title: {
     fontSize: 80,
