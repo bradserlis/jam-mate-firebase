@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import {
+  Alert,
+  AlertIOS,
   Text,
   View,
   StyleSheet,
   ImageBackground,
-  Alert,
   Image,
   Platform,
   TouchableOpacity
@@ -30,7 +31,8 @@ import {
   Row,
   Footer,
   FooterTab,
-  Thumbnail
+  Thumbnail,
+  Toast
 } from "native-base";
 import FooterNav from "./FooterNav";
 import ProfileTop from "./ProfileTop";

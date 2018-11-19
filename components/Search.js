@@ -150,33 +150,42 @@ export default class Search extends Component {
 
     return (
       <Container>
-        <Content>
-          <H2 style={styles.notchCompensation}> Search Page </H2>
-          <FlatList
-            data={results}
-            extraData={results}
-            keyExtractor={item => item.userid}
-            renderItem={({ item, index }) => (
-              <List listKey={item.userid}>
-                <ListItem avatar>
-                  <Left>
-                    <Thumbnail source={{ uri: item.userphoto }} />
-                  </Left>
-                  <Body>
-                    <SearchProfilesCard
-                      userid={item.userid}
-                      instruments={item.instruments || []}
-                      genres={item.genres || []}
-                      name={item.firstname || []}
-                      connectedusers={item.connectedusers || []}
-                    />
-                  </Body>
-                  <Right />
-                </ListItem>
-              </List>
-            )}
-          />
-        </Content>
+        <ImageBackground
+          style={{
+            flex: 1,
+            width: window.width,
+            height: window.height
+          }}
+          source={require("../img/binding_dark.png")}
+        >
+          <Content>
+            <H2 style={styles.notchCompensation}> Search </H2>
+            <FlatList
+              data={results}
+              extraData={results}
+              keyExtractor={item => item.userid}
+              renderItem={({ item, index }) => (
+                <List listKey={item.userid}>
+                  <ListItem avatar>
+                    <Left>
+                      <Thumbnail source={{ uri: item.userphoto }} />
+                    </Left>
+                    <Body>
+                      <SearchProfilesCard
+                        userid={item.userid}
+                        instruments={item.instruments || []}
+                        genres={item.genres || []}
+                        name={item.firstname || []}
+                        connectedusers={item.connectedusers || []}
+                      />
+                    </Body>
+                    <Right />
+                  </ListItem>
+                </List>
+              )}
+            />
+          </Content>
+        </ImageBackground>
       </Container>
     );
   }

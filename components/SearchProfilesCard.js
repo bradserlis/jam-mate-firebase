@@ -38,7 +38,8 @@ import {
   Row,
   Footer,
   FooterTab,
-  Thumbnail
+  Thumbnail,
+  Toast
 } from "native-base";
 import FooterNav from "./FooterNav";
 import * as firebase from "firebase";

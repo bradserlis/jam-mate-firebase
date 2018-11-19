@@ -24,7 +24,8 @@ import {
   Title,
   H1,
   H2,
-  H3
+  H3,
+  Toast
 } from "native-base";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
@@ -46,12 +47,7 @@ export default class Landing extends Component {
     header: null
   };
 
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-      }
-    });
-  }
+  componentDidMount() {}
 
   async _loginWithFacebook() {
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
@@ -141,6 +137,9 @@ export default class Landing extends Component {
               transparent
               onPress={() =>
                 this._loginWithFacebook().then(function() {
+                  Toast.show({
+                    text: "Welcome Back"
+                  });
                   navigate("Home");
                 })
               }
