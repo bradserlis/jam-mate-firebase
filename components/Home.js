@@ -54,7 +54,7 @@ export default class Home extends Component {
       location: null,
       errorMessage: null,
       usercityobject: null,
-      instrumentsList: [],
+      instrumentList: [],
       genresList: []
     };
   }
@@ -146,15 +146,21 @@ export default class Home extends Component {
         .database()
         .ref("/users/" + userId)
         .child("instruments")
-        .once("value")
-        .then(instruments => {
-          let jInstruments = instruments.toJSON();
-          let instrumentList = [];
-          for (let key in jInstruments) {
-            instrumentList.push(jInstruments[key]);
-          }
-          this.setState({ instrumentsList: instrumentList });
+        .orderByKey()
+        .on("child_added", snapshot => {
+          this.setState(previousState => ({
+            instrumentList: [...previousState.instrumentList, snapshot]
+          }));
         });
+      // .once("value")
+      // .then(instruments => {
+      //   let jInstruments = instruments.toJSON();
+      //   let instrumentList = [];
+      //   for (let key in jInstruments) {
+      //     instrumentList.push(jInstruments[key]);
+      //   }
+      //   this.setState({ instrumentsList: instrumentList });
+      // });
       firebase
         .database()
         .ref("/users/" + userId)
@@ -197,7 +203,10 @@ export default class Home extends Component {
           </Row>
           <Row style={{ backgroundColor: "#72b4e0" }}>
             <Col>
-              <Instruments instruments={this.state.instrumentsList} />
+              <Instruments
+                instruments={this.state.instrumentList}
+                userid={this.state.uid}
+              />
             </Col>
             <Col>
               <Genres genres={this.state.genresList} />

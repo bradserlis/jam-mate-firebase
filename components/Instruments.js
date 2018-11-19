@@ -12,6 +12,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import {
+  Badge,
   Container,
   Content,
   Header,
@@ -39,38 +40,59 @@ export default class Instruments extends Component {
     super(props);
   }
 
+  // <View style={{ alignItems: "center" }}>
+  //           <H2 style={styles.profileHeaderText}> Instruments </H2>
+  //           <FlatList
+  //             data={this.props.instruments}
+  //             extraData={this.props.instruments}
+  //             keyExtractor={(item, index) => index.toString()}
+  //             renderItem={({ item, index }) => {
+  //               return (
+  //                 <View>
+  //                   <TouchableOpacity
+  //                     style={{
+  //                       backgroundColor: "white",
+  //                       padding: 4,
+  //                       marginBottom: 6,
+  //                       borderRadius: 10,
+  //                       borderColor: "dodgerblue",
+  //                       borderWidth: 1,
+  //                       flexDirection: "row",
+  //                       alignSelf: "center"
+  //                     }}
+  //                   >
+  //                     <Text style={styles.profileListText}>{item}</Text>
+  //                   </TouchableOpacity>
+  //                 </View>
+  //               );
+  //             }}
+  //           />
+  //         </View>
+  //       );
+  //     }
+
   componentDidMount() {}
 
   render() {
     if (this.props.instruments) {
       return (
-        <View style={{ alignItems: "center" }}>
-          <H2 style={styles.profileHeaderText}> Instruments </H2>
-          <FlatList
-            data={this.props.instruments}
-            extraData={this.props.instruments}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => {
-              return (
-                <View>
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: "white",
-                      padding: 4,
-                      marginBottom: 6,
-                      borderRadius: 10,
-                      borderColor: "dodgerblue",
-                      borderWidth: 1,
-                      flexDirection: "row",
-                      alignSelf: "center"
-                    }}
-                  >
-                    <Text style={styles.profileListText}>{item}</Text>
-                  </TouchableOpacity>
-                </View>
-              );
-            }}
-          />
+        <View>
+          <View style={{ alignItems: "center" }}>
+            <H2 style={styles.profileHeaderText}> Instruments</H2>
+          </View>
+          <View style={styles.badgeList}>
+            {this.props.instruments.map((instrument, index) => (
+              <Badge
+                primary
+                style={{ marginRight: 5, marginBottom: 10 }}
+                key={instrument.key}
+              >
+                <TouchableOpacity>
+                  <Text style={{ color: "white" }}>{instrument.val()}</Text>
+                </TouchableOpacity>
+              </Badge>
+            ))}
+          </View>
         </View>
       );
     }

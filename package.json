@@ -36,6 +36,6 @@
     "react-navigation-material-bottom-tabs": "^0.4.0"
   },
   "repository": "git@github.com:bradserlis/jam-mate-firebase.git",
-  "author": "",
+  "author": "Bradley Serlis",
   "license": "MIT"
 }

@@ -103,14 +103,7 @@ export default class InstrumentAdder extends Component {
             </Button>
           </Form>
 
-          <View
-            style={{
-              flex: 1,
-              flexWrap: "wrap",
-              flexDirection: "row",
-              paddingHorizontal: 5
-            }}
-          >
+          <View style={styles.badgeList}>
             {this.state.instrumentList.map((instrument, index) => (
               <Badge
                 primary

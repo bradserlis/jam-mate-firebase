@@ -70,6 +70,12 @@ const styles = StyleSheet.create({
     width: window.width,
     flex: 1
   },
+  badgeList: {
+    flex: 1,
+    flexWrap: "wrap",
+    flexDirection: "row",
+    paddingHorizontal: 5
+  },
   buttons: {
     flex: 1,
     justifyContent: "center",
