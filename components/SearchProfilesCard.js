@@ -41,6 +41,7 @@ import {
   Thumbnail,
   Toast
 } from "native-base";
+import { LinearGradient } from "expo";
 import FooterNav from "./FooterNav";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
@@ -128,7 +129,7 @@ export default class SearchProfilesCard extends Component {
     );
 
     return (
-      <View>
+      <LinearGradient colors={["#4c669f", "#3b5998", "#192f6a"]}>
         <Card>
           <CardItem>
             <Body>
@@ -158,7 +159,7 @@ export default class SearchProfilesCard extends Component {
             </Body>
           </CardItem>
         </Card>
-      </View>
+      </LinearGradient>
     );
   }
 }

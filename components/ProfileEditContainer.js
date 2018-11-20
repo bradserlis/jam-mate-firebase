@@ -122,25 +122,27 @@ export default class ProfileEditContainer extends Component {
 
     return (
       <Container>
-        <Form>
-          <Item>
-            <Label> Contact Info</Label>
-            <Input
-              onChangeText={formContent =>
-                this.setState({
-                  contactinfo: formContent
-                })
-              }
-              value={this.state.contactinfo}
-            />
-            <Button
-              style={styles.addIconStyle}
-              onPress={() => this._addContactInfo(this.state.contactinfo)}
-            >
-              <Text style={{ color: "white" }}> Update </Text>
-            </Button>
-          </Item>
-        </Form>
+        <Content>
+          <Form>
+            <Item>
+              <Label> Contact Info</Label>
+              <Input
+                onChangeText={formContent =>
+                  this.setState({
+                    contactinfo: formContent
+                  })
+                }
+                value={this.state.contactinfo}
+              />
+              <Button
+                style={styles.addIconStyle}
+                onPress={() => this._addContactInfo(this.state.contactinfo)}
+              >
+                <Text style={{ color: "white" }}> Update </Text>
+              </Button>
+            </Item>
+          </Form>
+        </Content>
         <InstrumentAdder userId={userId} />
         <GenreAdder userId={userId} />
         <Footer>
@@ -165,4 +167,3 @@ export default class ProfileEditContainer extends Component {
 //     flexDirection: "column"
 //   }
 // });
-
