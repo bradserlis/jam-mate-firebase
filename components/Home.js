@@ -40,7 +40,34 @@ import Instruments from "./Instruments";
 import Messages from "./Messages";
 import Genres from "./Genres";
 import * as firebase from "firebase";
+import geofire from "geofire";
+
 import * as Animatable from "react-native-animatable";
+
+//GEOFIRE setup
+
+// const firebaseconfig = {
+//   apiKey: "AIzaSyCIK6eLFSDEOOKY8zoWwXcfvpn5qlAlN9c",
+//   authDomain: "jammate-1627c.firebaseapp.com",
+//   databaseURL: "https://jammate-1627c.firebaseio.com",
+//   projectId: "jammate-1627c",
+//   storageBucket: "jammate-1627c.appspot.com",
+//   messagingSenderId: "666389462465"
+// };
+
+// firebase.initializeApp(firebaseconfig);
+
+// //GEOFIRE setup
+// let userId = firebase.auth().currentUser;
+// const GeoFire = require("geofire");
+// const firebaseRef = firebase
+//   .database()
+//   .ref("/users/" + userId)
+//   .child("location");
+// const geoFire = new GeoFire(firebaseRef);
+//
+
+//
 
 export default class Home extends Component {
   constructor(props) {
@@ -182,9 +209,24 @@ export default class Home extends Component {
       //   this.setState({ genresList: genreList });
       // });
     }
+    const geoFire = new geofire(
+      firebase.database().ref("users/" + this.state.uid)
+    );
+    geoFire.set("location_key", [12, -12]).then(
+      function() {
+        console.log("Provided key has been added to GeoFire");
+      },
+      function(error) {
+        console.log("Error: " + error);
+      }
+    );
   };
 
   render() {
+    // geofire
+    //   ? console.log("there is geofire")
+    //   : console.log("there is no geofire");
+
     const { navigate } = this.props.navigation;
     let text = "Waiting..";
     if (this.state.errorMessage) {

@@ -29,6 +29,7 @@ import {
 import Router from "./routes/Router";
 import { MainTabNavigator } from "./routes/MainTabNavigator";
 import * as firebase from "firebase";
+import geofire from "geofire";
 
 const firebaseconfig = {
   apiKey: "AIzaSyCIK6eLFSDEOOKY8zoWwXcfvpn5qlAlN9c",
@@ -40,6 +41,10 @@ const firebaseconfig = {
 };
 
 firebase.initializeApp(firebaseconfig);
+
+//GEOFIRE setup
+const geoFire = new geofire(firebase.database().ref("users"));
+//
 
 export default class App extends Component {
   render() {
