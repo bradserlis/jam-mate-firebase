@@ -46,6 +46,7 @@ import SearchProfilesCard from "./SearchProfilesCard";
 import SearchProfilesGenres from "./SearchProfilesGenres";
 import CreateMessageModal from "./CreateMessageModal";
 import * as firebase from "firebase";
+import geofire from "geofire";
 import * as Animatable from "react-native-animatable";
 import styles from "./styles";
 
@@ -84,6 +85,9 @@ export default class Search extends Component {
 
   componentDidMount = () => {
     const currentUser = firebase.auth().currentUser.uid;
+    const geoFire = new geofire(
+      firebase.database().ref("users/" + currentUser)
+    );
     handleShowCreateMessageModal();
     let newList = [];
     let ref = firebase.database().ref("/users/");
@@ -103,6 +107,18 @@ export default class Search extends Component {
           usersArray: newList
         });
       });
+    geoFire.get("location_key").then(
+      function(location) {
+        if (location === null) {
+          console.log("key is not in Geofire");
+        } else {
+          console.log("this is where you are at:", location);
+        }
+      },
+      function(error) {
+        console.log("Error:", error);
+      }
+    );
   };
 
   _getArray = users => {
