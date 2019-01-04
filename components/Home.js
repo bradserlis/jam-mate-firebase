@@ -145,6 +145,17 @@ export default class Home extends Component {
       longitude: thislong
     };
     this.setState({ usercityobject: usercityobject });
+    const geoFire = new geofire(
+      firebase.database().ref("users/" + this.state.uid)
+    );
+    geoFire.set("location_key", [thislat, thislong]).then(
+      function() {
+        console.log("Provided key has been added to GeoFire");
+      },
+      function(error) {
+        console.log("Error: " + error);
+      }
+    );
   };
 
   componentDidMount = () => {
@@ -209,17 +220,6 @@ export default class Home extends Component {
       //   this.setState({ genresList: genreList });
       // });
     }
-    const geoFire = new geofire(
-      firebase.database().ref("users/" + this.state.uid)
-    );
-    geoFire.set("location_key", [12, -12]).then(
-      function() {
-        console.log("Provided key has been added to GeoFire");
-      },
-      function(error) {
-        console.log("Error: " + error);
-      }
-    );
   };
 
   render() {
