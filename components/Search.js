@@ -132,15 +132,19 @@ export default class Search extends Component {
           let nearbyUsers = [];
           //trying to use the GEOQUERY ==
           geoQuery.on("key_entered", function(key, location, distance) {
-            console.log(
-              key +
-                " is within range at " +
-                location +
-                " at a distance of " +
-                distance
-            );
-            nearbyUsers.push({ key, location });
-            console.log("these are nearby users:", nearbyUsers);
+            if (key === currentUser) {
+              console.log("you are already in here man", key, location);
+            } else {
+              console.log(
+                key +
+                  " is within range at " +
+                  location +
+                  " at a distance of " +
+                  distance
+              );
+              nearbyUsers.push({ key, location });
+              console.log("these are nearby users:", nearbyUsers);
+            }
           });
           // ==
           // ********
