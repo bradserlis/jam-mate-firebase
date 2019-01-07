@@ -55,19 +55,26 @@ export default class Search extends Component {
     super(props);
     this.state = {
       usersArray: [],
-      isCreateMessageModalVisible: false
-    };
-    handleShowCreateMessageModal = () => {
-      this.setState({
-        isCreateMessageModalVisible: true
-      });
+      isCreateMessageModalVisible: false,
+      location: null,
+      userLocation: []
     };
   }
-  handleDismissCreateMessageModal = () => {
-    this.setState({
-      isCreateMessageModalVisible: false
-    });
-  };
+
+  // === message modal ===
+
+  // handleShowCreateMessageModal = () => {
+  //     this.setState({
+  //       isCreateMessageModalVisible: true
+  //     });
+  //   };
+  // handleDismissCreateMessageModal = () => {
+  //   this.setState({
+  //     isCreateMessageModalVisible: false
+  //   });
+  // };
+
+  // === message modal ===
 
   static navigationOptions = ({ navigation }) => ({
     title: "Search",
@@ -85,40 +92,87 @@ export default class Search extends Component {
 
   componentDidMount = () => {
     const currentUser = firebase.auth().currentUser.uid;
-    const geoFire = new geofire(
-      firebase.database().ref("users/" + currentUser)
+    // === message modal ===
+
+    // handleShowCreateMessageModal();
+
+    // === message modal ===
+
+    // ******** declare variable for current user's location from geofire
+    const geoFireMe = new geofire(
+      firebase.database().ref("user_locations/" + currentUser)
     );
-    handleShowCreateMessageModal();
-    let newList = [];
-    let ref = firebase.database().ref("/users/");
-    ref
-      .orderByKey()
-      .once("value")
-      .then(snapshot => {
-        snapshot.forEach(userSnapshot => {
-          if (userSnapshot.key !== currentUser) {
-            let myObj = {};
-            myObj["userid"] = userSnapshot.key;
-            myObj["data"] = userSnapshot;
-            newList.push(myObj);
-          }
-        });
-        this.setState({
-          usersArray: newList
-        });
-      });
-    geoFire.get("location_key").then(
-      function(location) {
+    geoFireMe.get("location_key").then(
+      location => {
         if (location === null) {
           console.log("key is not in Geofire");
         } else {
-          console.log("this is where you are at:", location);
+          this.setState({
+            userLocation: location
+          });
+          console.log("sanity check - what is location:", location);
+          console.log(
+            "sanity check - what is state of userLocation:",
+            this.state.userLocation
+          );
         }
       },
-      function(error) {
+      error => {
         console.log("Error:", error);
       }
     );
+    // ********
+
+    // let ref = firebase.database().ref("/users/");
+    // ref
+    //   .orderByKey()
+    //   .once("value")
+    //   .then(snapshot => {
+    //     snapshot.forEach(userSnapshot => {
+    //       if (userSnapshot.key !== currentUser) {
+    //         let myObj = {};
+    //         myObj["userid"] = userSnapshot.key;
+    //         myObj["data"] = userSnapshot;
+    //         newList.push(myObj);
+    //       }
+    //     });
+    //     this.setState({
+    //       usersArray: newList
+    //     });
+    //   });
+
+    // };
+
+    // _getUsers = () => {
+    // ******** declare geofire all users reference point
+    // const geoFire = new geofire(firebase.database().ref("user_locations/"));
+    // ********
+
+    // ******** initialize geoquery
+    // const geoQuery = geoFire.query({
+    //   center: this.state.userLocation,
+    //   radius: 10.5
+    // });
+    // ********
+
+    // ******** retrieve users
+    // let nearbyUsers = [];
+    //trying to use the GEOQUERY ==
+    // console.log("step 2 - this is the geoquery:", geoQuery);
+    // console.log("step 2.1 - this is the geoquery.center:", geoQuery.center());
+    // geoQuery.on("key_entered", function(key, location, distance) {
+    //   console.log(
+    //     key +
+    //       " is within range at " +
+    //       location +
+    //       " at a distance of " +
+    //       distance
+    //   );
+    //   nearbyUsers.push({ key, location });
+    //   console.log("these are nearby users:", nearbyUsers);
+    // });
+    // ==
+    // ********
   };
 
   _getArray = users => {

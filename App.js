@@ -43,7 +43,7 @@ const firebaseconfig = {
 firebase.initializeApp(firebaseconfig);
 
 //GEOFIRE setup
-const geoFire = new geofire(firebase.database().ref("users"));
+const geoFire = new geofire(firebase.database().ref("user_locations"));
 //
 
 export default class App extends Component {

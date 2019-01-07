@@ -146,7 +146,7 @@ export default class Home extends Component {
     };
     this.setState({ usercityobject: usercityobject });
     const geoFire = new geofire(
-      firebase.database().ref("users/" + this.state.uid)
+      firebase.database().ref("user_locations/" + this.state.uid)
     );
     geoFire.set("location_key", [thislat, thislong]).then(
       function() {

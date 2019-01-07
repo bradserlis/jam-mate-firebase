@@ -47,7 +47,7 @@ export default class Landing extends Component {
     header: null
   };
 
-  componentDidMount() {}
+  componentDidMount = () => {};
 
   async _loginWithFacebook() {
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
