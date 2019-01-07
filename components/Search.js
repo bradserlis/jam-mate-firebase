@@ -142,7 +142,7 @@ export default class Search extends Component {
                   " at a distance of " +
                   distance
               );
-              nearbyUsers.push({ key, location });
+              nearbyUsers.push({ key });
               console.log("these are nearby users:", nearbyUsers);
             }
           });
@@ -157,24 +157,23 @@ export default class Search extends Component {
     // ********
 
     // FORMER USERS ARRAY METHOD
-    // let ref = firebase.database().ref("/users/");
-    // ref
-    //   .orderByKey()
-    //   .once("value")
-    //   .then(snapshot => {
-    //     snapshot.forEach(userSnapshot => {
-    //       if (userSnapshot.key !== currentUser) {
-    //         let myObj = {};
-    //         myObj["userid"] = userSnapshot.key;
-    //         myObj["data"] = userSnapshot;
-    //         newList.push(myObj);
-    //       }
-    //     });
-    //     this.setState({
-    //       usersArray: newList
-    //     });
-    //   });
-    //
+    let ref = firebase.database().ref("/users/");
+    ref
+      .orderByKey()
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(userSnapshot => {
+          if (userSnapshot.key !== currentUser) {
+            let myObj = {};
+            myObj["userid"] = userSnapshot.key;
+            myObj["data"] = userSnapshot;
+            newList.push(myObj);
+          }
+        });
+        this.setState({
+          usersArray: newList
+        });
+      });
 
     // };
   };
