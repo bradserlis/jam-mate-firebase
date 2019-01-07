@@ -93,28 +93,57 @@ export default class Search extends Component {
   componentDidMount = () => {
     const currentUser = firebase.auth().currentUser.uid;
     // === message modal ===
-
     // handleShowCreateMessageModal();
-
     // === message modal ===
 
+    // ******** declare geofire all users reference point
+    const geoFire = new geofire(firebase.database().ref("user_locations/"));
+    // ********
+
     // ******** declare variable for current user's location from geofire
-    const geoFireMe = new geofire(
-      firebase.database().ref("user_locations/" + currentUser)
-    );
-    geoFireMe.get("location_key").then(
+    // const geoFireMe = new geofire(
+    //   firebase.database().ref("user_locations/" + currentUser)
+    // );
+    geoFire.get(currentUser).then(
       location => {
         if (location === null) {
           console.log("key is not in Geofire");
         } else {
-          this.setState({
-            userLocation: location
-          });
+          // this.setState({
+          //   userLocation: location
+          // });
           console.log("sanity check - what is location:", location);
+          // console.log(
+          //   "sanity check - what is state of userLocation:",
+          //   this.state.userLocation
+          // );
+          // ******** initialize geoquery
+          const geoQuery = geoFire.query({
+            center: location,
+            radius: 10.5
+          });
+          console.log("step 2 - this is the geoquery:", geoQuery);
           console.log(
-            "sanity check - what is state of userLocation:",
-            this.state.userLocation
+            "step 2.1 - this is the geoquery.center:",
+            geoQuery.center()
           );
+          // ********
+          // ******** retrieve users
+          let nearbyUsers = [];
+          //trying to use the GEOQUERY ==
+          geoQuery.on("key_entered", function(key, location, distance) {
+            console.log(
+              key +
+                " is within range at " +
+                location +
+                " at a distance of " +
+                distance
+            );
+            nearbyUsers.push({ key, location });
+            console.log("these are nearby users:", nearbyUsers);
+          });
+          // ==
+          // ********
         }
       },
       error => {
@@ -123,6 +152,7 @@ export default class Search extends Component {
     );
     // ********
 
+    // FORMER USERS ARRAY METHOD
     // let ref = firebase.database().ref("/users/");
     // ref
     //   .orderByKey()
@@ -140,39 +170,9 @@ export default class Search extends Component {
     //       usersArray: newList
     //     });
     //   });
+    //
 
     // };
-
-    // _getUsers = () => {
-    // ******** declare geofire all users reference point
-    // const geoFire = new geofire(firebase.database().ref("user_locations/"));
-    // ********
-
-    // ******** initialize geoquery
-    // const geoQuery = geoFire.query({
-    //   center: this.state.userLocation,
-    //   radius: 10.5
-    // });
-    // ********
-
-    // ******** retrieve users
-    // let nearbyUsers = [];
-    //trying to use the GEOQUERY ==
-    // console.log("step 2 - this is the geoquery:", geoQuery);
-    // console.log("step 2.1 - this is the geoquery.center:", geoQuery.center());
-    // geoQuery.on("key_entered", function(key, location, distance) {
-    //   console.log(
-    //     key +
-    //       " is within range at " +
-    //       location +
-    //       " at a distance of " +
-    //       distance
-    //   );
-    //   nearbyUsers.push({ key, location });
-    //   console.log("these are nearby users:", nearbyUsers);
-    // });
-    // ==
-    // ********
   };
 
   _getArray = users => {

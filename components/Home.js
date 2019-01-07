@@ -145,10 +145,8 @@ export default class Home extends Component {
       longitude: thislong
     };
     this.setState({ usercityobject: usercityobject });
-    const geoFire = new geofire(
-      firebase.database().ref("user_locations/" + this.state.uid)
-    );
-    geoFire.set("location_key", [thislat, thislong]).then(
+    const geoFire = new geofire(firebase.database().ref("user_locations/"));
+    geoFire.set(this.state.uid, [thislat, thislong]).then(
       function() {
         console.log("Provided key has been added to GeoFire");
       },
