@@ -131,9 +131,12 @@ export default class Search extends Component {
           // ******** retrieve users
           let nearbyUsers = [];
           //trying to use the GEOQUERY ==
-          geoQuery.on("key_entered", function(key, location, distance) {
-            if (key === currentUser) {
-              console.log("you are already in here man", key, location);
+          geoQuery.on("key_entered", (key, location, distance) => {
+            if (
+              key === currentUser ||
+              nearbyUsers.some(user => user.userid === key)
+            ) {
+              console.log("you are already in here", key);
             } else {
               console.log(
                 key +
@@ -142,40 +145,28 @@ export default class Search extends Component {
                   " at a distance of " +
                   distance
               );
-              nearbyUsers.push({ key });
               console.log("these are nearby users:", nearbyUsers);
+
+              // query Firebase USERS node
+              let ref = firebase.database().ref("/users/" + key);
+              ref.once("value").then(snapshot => {
+                let userObj = { userid: key };
+                snapshot.forEach(userProperty => {
+                  userObj[userProperty.key] = userProperty.val();
+                });
+                nearbyUsers.push(userObj);
+                this.setState({
+                  usersArray: nearbyUsers
+                });
+              });
             }
           });
-          // ==
-          // ********
         }
       },
       error => {
         console.log("Error:", error);
       }
     );
-    // ********
-
-    // FORMER USERS ARRAY METHOD
-    let ref = firebase.database().ref("/users/");
-    ref
-      .orderByKey()
-      .once("value")
-      .then(snapshot => {
-        snapshot.forEach(userSnapshot => {
-          if (userSnapshot.key !== currentUser) {
-            let myObj = {};
-            myObj["userid"] = userSnapshot.key;
-            myObj["data"] = userSnapshot;
-            newList.push(myObj);
-          }
-        });
-        this.setState({
-          usersArray: newList
-        });
-      });
-
-    // };
   };
 
   _getArray = users => {
@@ -183,7 +174,7 @@ export default class Search extends Component {
 
     // Loop through each user
     users.forEach(function(originalObj, idx) {
-      let obj = originalObj.data.toJSON();
+      let obj = originalObj;
       // Get the genres
       let genres = [];
       for (let key in obj.genres) {
@@ -219,6 +210,7 @@ export default class Search extends Component {
   render() {
     const { navigate } = this.props.navigation;
     let users = this.state.usersArray;
+    console.log("this is the users in render:", users);
     var results = this._getArray(users);
 
     return (
