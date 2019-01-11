@@ -44,40 +44,18 @@ import geofire from "geofire";
 
 import * as Animatable from "react-native-animatable";
 
-//GEOFIRE setup
-
-// const firebaseconfig = {
-//   apiKey: "AIzaSyCIK6eLFSDEOOKY8zoWwXcfvpn5qlAlN9c",
-//   authDomain: "jammate-1627c.firebaseapp.com",
-//   databaseURL: "https://jammate-1627c.firebaseio.com",
-//   projectId: "jammate-1627c",
-//   storageBucket: "jammate-1627c.appspot.com",
-//   messagingSenderId: "666389462465"
-// };
-
-// firebase.initializeApp(firebaseconfig);
-
-// //GEOFIRE setup
-// let userId = firebase.auth().currentUser;
-// const GeoFire = require("geofire");
-// const firebaseRef = firebase
-//   .database()
-//   .ref("/users/" + userId)
-//   .child("location");
-// const geoFire = new GeoFire(firebaseRef);
-//
-
-//
-
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: (firebase.auth().currentUser || {}).displayName || null,
       user: firebase.auth().currentUser || null,
-      userphoto: firebase.auth().currentUser
-        ? firebase.auth().currentUser.photoURL
-        : null,
+      userphoto:
+        (firebase.auth().currentUser || {}).photoURL ||
+        "./img/Missing_avatar.png",
+      // firebase.auth().currentUser
+      //   ? firebase.auth().currentUser.photoURL
+      //   : "./img/Missing_avatar.png",
       userzip: null,
       uid: firebase.auth().currentUser ? firebase.auth().currentUser.uid : null,
       location: null,
