@@ -34,6 +34,7 @@ import {
   Thumbnail,
   Toast
 } from "native-base";
+import { NavigationEvents } from "react-navigation";
 import FooterNav from "./FooterNav";
 import ProfileTop from "./ProfileTop";
 import Instruments from "./Instruments";
@@ -53,9 +54,6 @@ export default class Home extends Component {
       userphoto:
         (firebase.auth().currentUser || {}).photoURL ||
         "./img/Missing_avatar.png",
-      // firebase.auth().currentUser
-      //   ? firebase.auth().currentUser.photoURL
-      //   : "./img/Missing_avatar.png",
       userzip: null,
       uid: firebase.auth().currentUser ? firebase.auth().currentUser.uid : null,
       location: null,
@@ -124,14 +122,16 @@ export default class Home extends Component {
     };
     this.setState({ usercityobject: usercityobject });
     const geoFire = new geofire(firebase.database().ref("user_locations/"));
-    geoFire.set(this.state.uid, [thislat, thislong]).then(
-      function() {
-        console.log("Provided key has been added to GeoFire");
-      },
-      function(error) {
-        console.log("Error: " + error);
-      }
-    );
+    if (this.state.uid !== null) {
+      geoFire.set(this.state.uid, [thislat, thislong]).then(
+        function() {
+          console.log("Provided key has been added to GeoFire");
+        },
+        function(error) {
+          console.log("Error: " + error);
+        }
+      );
+    }
   };
 
   componentDidMount = () => {
@@ -199,10 +199,6 @@ export default class Home extends Component {
   };
 
   render() {
-    // geofire
-    //   ? console.log("there is geofire")
-    //   : console.log("there is no geofire");
-
     const { navigate } = this.props.navigation;
     let text = "Waiting..";
     if (this.state.errorMessage) {
@@ -213,6 +209,74 @@ export default class Home extends Component {
 
     return (
       <Container>
+        <NavigationEvents
+          onWillFocus={payload => {
+            console.log("hey, you GOT FOCUS", payload);
+          }}
+          // let userId = firebase.auth().currentUser
+          //   ? firebase.auth().currentUser.uid
+          //   : null;
+          // if (userId) {
+          //   this.setState({
+          //     username:
+          //       (firebase.auth().currentUser || {}).displayName || null,
+          //     user: firebase.auth().currentUser,
+          //     uid: userId
+          //   });
+          //   firebase
+          //     .database()
+          //     .ref("/users/" + userId)
+          //     .child("userphoto")
+          //     .once("value")
+          //     .then(snapshot => {
+          //       let userphoto = snapshot.val() || "";
+          //       // TODO : dont try to use userphoto until it has a value
+          //       this.setState({ userphoto: userphoto });
+          //       // ...
+          //     });
+          //   firebase
+          //     .database()
+          //     .ref("/users/" + userId)
+          //     .child("instruments")
+          //     .orderByKey()
+          //     .on("child_added", snapshot => {
+          //       this.setState(previousState => ({
+          //         instrumentList: [snapshot]
+          //       }));
+          //     });
+          //   // .once("value")
+          //   // .then(instruments => {
+          //   //   let jInstruments = instruments.toJSON();
+          //   //   let instrumentList = [];
+          //   //   for (let key in jInstruments) {
+          //   //     instrumentList.push(jInstruments[key]);
+          //   //   }
+          //   //   this.setState({ instrumentsList: instrumentList });
+          //   // });
+          //   firebase
+          //     .database()
+          //     .ref("/users/" + userId)
+          //     .child("genres")
+          //     .on("child_added", snapshot => {
+          //       this.setState(previousState => ({
+          //         genreList: [snapshot]
+          //       }));
+          //     });
+          // .once("value")
+          // .then(genres => {
+          //   let jGenres = genres.toJSON();
+          //   let genreList = [];
+          //   for (let key in jGenres) {
+          //     genreList.push(jGenres[key]);
+          //   }
+          //   this.setState({ genresList: genreList });
+          // });
+          // }
+          // }}
+          // onDidFocus={payload => console.log('did focus',payload)}
+          // onWillBlur={payload => console.log('will blur',payload)}
+          // onDidBlur={payload => console.log('did blur',payload)}
+        />
         <Grid>
           <Row>
             <ProfileTop

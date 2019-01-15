@@ -136,7 +136,7 @@ export default class Landing extends Component {
               style={{ alignSelf: "center", margin: 20 }}
               transparent
               onPress={() =>
-                this._loginWithFacebook().then(function() {
+                this._loginWithFacebook().then(() => {
                   Toast.show({
                     text: "Welcome Back"
                   });
@@ -146,7 +146,7 @@ export default class Landing extends Component {
             >
               <Image
                 source={require("../img/facebook_login.png")}
-                style={{ height: "110%", width: "100%" }}
+                style={{ height: "115%", width: "100%" }}
               />
             </Button>
           </View>
