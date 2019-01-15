@@ -64,6 +64,7 @@ export default class Home extends Component {
     };
   }
 
+  // === DEPRECATED HEADER OPTIONS
   // static navigationOptions = ({ navigation }) => ({
   //   title: "Home",
   //   headerLeft: null,
@@ -84,24 +85,27 @@ export default class Home extends Component {
   //     fontWeight: "bold"
   //   }
   // });
+  // ===
 
-  _getCity = async () => {
-    Expo.Location.reverseGeocodeAsync(this.state.usercityobject)
-      .then(result => {
-        let reverseResult = result;
-        this.setState({ userzip: reverseResult[0].postalCode });
-        let userId = firebase.auth().currentUser.uid;
-        firebase
-          .database()
-          .ref("users")
-          .child(userId)
-          .child("zipcode")
-          .set(reverseResult[0].postalCode);
-      })
-      .catch(error => {
-        console.log("there was an error :-(", error);
-      });
-  };
+  // === DEPRECATED - LOCATION REVERSE GEOCODE FROM DEVICE
+  // _getCity = async () => {
+  //   Expo.Location.reverseGeocodeAsync(this.state.usercityobject)
+  //     .then(result => {
+  //       let reverseResult = result;
+  //       this.setState({ userzip: reverseResult[0].postalCode });
+  //       let userId = firebase.auth().currentUser.uid;
+  //       firebase
+  //         .database()
+  //         .ref("users")
+  //         .child(userId)
+  //         .child("zipcode")
+  //         .set(reverseResult[0].postalCode);
+  //     })
+  //     .catch(error => {
+  //       console.log("there was an error :-(", error);
+  //     });
+  // };
+  // ===
 
   _getLocationAsync = async () => {
     const { Location, Permissions } = Expo;
@@ -111,16 +115,16 @@ export default class Home extends Component {
         errorMessage: "Permission to access location was denied"
       });
     }
-
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
     let thislat = this.state.location.coords.latitude;
     let thislong = this.state.location.coords.longitude;
-    let usercityobject = {
-      latitude: thislat,
-      longitude: thislong
-    };
-    this.setState({ usercityobject: usercityobject });
+    // let usercityobject = {
+    //   latitude: thislat,
+    //   longitude: thislong
+    // };
+
+    // this.setState({ usercityobject: usercityobject });
     const geoFire = new geofire(firebase.database().ref("user_locations/"));
     if (this.state.uid !== null) {
       geoFire.set(this.state.uid, [thislat, thislong]).then(
@@ -141,7 +145,7 @@ export default class Home extends Component {
           "Oops, this will not work on Sketch in an Android emulator. Try it on your device!"
       });
     } else {
-      this._getLocationAsync().then(this._getCity);
+      this._getLocationAsync();
     }
     let userId = firebase.auth().currentUser
       ? firebase.auth().currentUser.uid
@@ -200,13 +204,15 @@ export default class Home extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    let text = "Waiting..";
-    if (this.state.errorMessage) {
-      text = this.state.errorMessage;
-    } else if (this.state.location) {
-      text = JSON.stringify(this.state.location);
-    }
 
+    //=== LOCATION ERROR MESSAGE
+    // let text = "Waiting..";
+    // if (this.state.errorMessage) {
+    //   text = this.state.errorMessage;
+    // } else if (this.state.location) {
+    //   text = JSON.stringify(this.state.location);
+    // }
+    //===
     return (
       <Container>
         <NavigationEvents
@@ -311,6 +317,7 @@ Home.defaultProps = {
   userzip: null
 };
 
+// === DEPRECATED - FOOTER
 // <Footer>
 // <FooterTab>
 // <Button>
@@ -333,3 +340,4 @@ Home.defaultProps = {
 // </Button>
 // </FooterTab>
 // </Footer>
+// ===

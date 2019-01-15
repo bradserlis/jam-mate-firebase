@@ -98,12 +98,7 @@ export default class Search extends Component {
 
     // ******** declare geofire all users reference point
     const geoFire = new geofire(firebase.database().ref("user_locations/"));
-    // ********
 
-    // ******** declare variable for current user's location from geofire
-    // const geoFireMe = new geofire(
-    //   firebase.database().ref("user_locations/" + currentUser)
-    // );
     geoFire.get(currentUser).then(
       location => {
         if (location === null) {
@@ -130,7 +125,7 @@ export default class Search extends Component {
           // ********
           // ******** retrieve users
           let nearbyUsers = [];
-          //trying to use the GEOQUERY ==
+          //GEOQUERIES ==
           geoQuery.on("key_exited", key => {
             nearbyUsers = nearbyUsers.filter(user => user.userid !== key);
             this.setState({
@@ -179,7 +174,7 @@ export default class Search extends Component {
     let results = [];
 
     // Loop through each user
-    users.forEach(function(originalObj, idx) {
+    users.forEach((originalObj, idx) => {
       let obj = originalObj;
       // Get the genres
       let genres = [];
