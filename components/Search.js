@@ -120,7 +120,7 @@ export default class Search extends Component {
           // ******** initialize geoquery
           const geoQuery = geoFire.query({
             center: location,
-            radius: 10.5
+            radius: 33
           });
           console.log("step 2 - this is the geoquery:", geoQuery);
           console.log(
@@ -131,6 +131,12 @@ export default class Search extends Component {
           // ******** retrieve users
           let nearbyUsers = [];
           //trying to use the GEOQUERY ==
+          geoQuery.on("key_exited", key => {
+            nearbyUsers = nearbyUsers.filter(user => user.userid !== key);
+            this.setState({
+              usersArray: nearbyUsers
+            });
+          });
           geoQuery.on("key_entered", (key, location, distance) => {
             if (
               key === currentUser ||
