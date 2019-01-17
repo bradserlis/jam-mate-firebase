@@ -291,7 +291,7 @@ export default class Home extends Component {
             />
             <View style={{ marginRight: 10 }}>
               <TouchableOpacity onPress={() => navigate("ProfileEdit")}>
-                <Icon name="menu" />
+                <Icon name="ios-menu" />
                 <Text>Edit</Text>
               </TouchableOpacity>
             </View>

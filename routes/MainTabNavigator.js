@@ -29,12 +29,12 @@ export default (MainTabNavigator = createMaterialBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === "Home") {
-          iconName = "contact";
+          iconName = "ios-contact";
           backBehavior: "none";
         } else if (routeName === "Connections") {
-          iconName = "chatboxes";
+          iconName = "ios-chatboxes";
         } else if (routeName === "Search") {
-          iconName = "people";
+          iconName = "ios-people";
         }
         return <Icon name={iconName} size={2} style={{ marginBottom: -1 }} />;
       }

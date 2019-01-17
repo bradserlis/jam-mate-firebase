@@ -148,8 +148,8 @@ export default class ProfileEditContainer extends Component {
         <Footer>
           <FooterTab style={{ paddingBottom: 0 }}>
             <Button onPress={() => this.props.navigation("Home")}>
-              <Icon name="contact" />
-              <Text>Return Home</Text>}
+              <Icon name="ios-contact" />
+              <Text>Return Home</Text>
             </Button>
           </FooterTab>
         </Footer>

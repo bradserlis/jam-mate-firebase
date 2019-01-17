@@ -99,7 +99,7 @@ export default class InstrumentAdder extends Component {
               style={{ width: "80%" }}
             />
             <Button onPress={() => this._addInstrument()}>
-              <Icon name="add" />
+              <Icon name="ios-add" />
             </Button>
           </Form>
 
