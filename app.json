@@ -10,7 +10,7 @@
     "name": "jammate",
     "icon": "./img/icon.png",
     "slug": "jammate",
-    "version": "0.1.2",
+    "version": "0.1.4",
     "description": "Social Media app connecting local musicians"
   }
 }
