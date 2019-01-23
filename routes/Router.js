@@ -30,7 +30,8 @@ const Router = createSwitchNavigator(
   {
     Landing: Landing,
     MainTabNavigator: MyNavigator,
-    ProfileEdit: ProfileEdit
+    ProfileEdit: ProfileEdit,
+    MessagesIndividual: MessagesIndividual
   },
   {
     initialRouteName: "Landing"

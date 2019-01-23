@@ -21,6 +21,9 @@ export default (MainTabNavigator = createMaterialBottomTabNavigator(
     },
     Connections: {
       screen: Connections
+    },
+    Messages: {
+      screen: Messages
     }
   },
   {
@@ -35,6 +38,8 @@ export default (MainTabNavigator = createMaterialBottomTabNavigator(
           iconName = "ios-chatboxes";
         } else if (routeName === "Search") {
           iconName = "ios-people";
+        } else if (routeName === "Messages") {
+          iconName = "ios-chatbubbles";
         }
         return <Icon name={iconName} size={2} style={{ marginBottom: -1 }} />;
       }
