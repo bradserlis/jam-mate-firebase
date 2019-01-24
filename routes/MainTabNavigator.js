@@ -35,17 +35,17 @@ export default (MainTabNavigator = createMaterialBottomTabNavigator(
           iconName = "ios-contact";
           backBehavior: "none";
         } else if (routeName === "Connections") {
-          iconName = "ios-chatboxes";
+          iconName = "ios-link";
         } else if (routeName === "Search") {
           iconName = "ios-people";
         } else if (routeName === "Messages") {
           iconName = "ios-chatbubbles";
         }
-        return <Icon name={iconName} size={2} style={{ marginBottom: -1 }} />;
+        return <Icon name={iconName} size={2} style={{ marginBottom: -2.5 }} />;
       }
     }),
     // tabBarComponent: react-navigation-tabs,
-    initialRouteName: "Messages",
+    initialRouteName: "Home",
     tabBarPosition: "bottom",
     animationEnabled: true,
     swipeEnabled: false,

@@ -119,6 +119,11 @@ export default class SearchProfilesCard extends Component {
       }
     });
   };
+
+  _sendMessage = u => {
+    console.log("you are sending a message to:", u);
+  };
+
   render() {
     let currentUserId = firebase.auth().currentUser.uid;
 
@@ -156,6 +161,13 @@ export default class SearchProfilesCard extends Component {
                   <Text> Send Contact Info to {this.props.name} </Text>
                 </Button>
               ) : null}
+              <Button
+                onPress={() => {
+                  this._sendMessage(this.props.userid);
+                }}
+              >
+                <Text> Message </Text>
+              </Button>
             </Body>
           </CardItem>
         </Card>

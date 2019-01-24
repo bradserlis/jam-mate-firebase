@@ -56,27 +56,25 @@ export default class Messages extends Component {
     };
   }
 
+  //*** WILL BE MOVING TO INDIVIDUAL MESSAGE SCREEN ***
   _addMessage = () => {
-    let ref = firebase.database().ref("/messages/");
-    ref.push(this.state.formContent);
-    let messageList = this.state.messages;
-    messageList.push(this.state.formContent);
-    this.setState({
-      messages: messageList
-    });
-    console.log("added new message", this.state.formContent);
-    console.log("state of messages:", this.state.messages);
+    // let key = firebase
+    //   .database()
+    //   .ref("/messages/")
+    //   .push().key;
+    // let ref = firebase.database().ref("/messages/" + key);
+    // ref.child("message").push(this.state.formContent);
+    // ref.child("timestamp").push(Date.now());
+    // ref.child("user").push("Bradley");
+
     this.setState({
       formContent: "",
       refresh: !this.state.refresh
     });
   };
+  //***  ***
 
-  _getMessages = () => {
-    let results = this.state.messages;
-    console.log("set results to:", results);
-    return results;
-  };
+  _getMessages = () => {};
 
   static navigationOptions = {
     title: "Messages",
@@ -123,7 +121,6 @@ export default class Messages extends Component {
         messages: [...previousState.messages, snapshot.val()]
       }));
     });
-    console.log("whats messages state look like", this.state.messages);
   }
 
   render() {
@@ -144,9 +141,7 @@ export default class Messages extends Component {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <List>
-                <ListItem>
-                  <Text> {item} </Text>
-                </ListItem>
+                <Text> {item} </Text>
               </List>
             )}
           />

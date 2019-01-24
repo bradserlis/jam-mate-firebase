@@ -34,7 +34,7 @@ const Router = createSwitchNavigator(
     MessagesIndividual: MessagesIndividual
   },
   {
-    initialRouteName: "MainTabNavigator"
+    initialRouteName: "Landing"
   }
 );
 
