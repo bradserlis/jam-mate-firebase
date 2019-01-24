@@ -40,21 +40,41 @@ import FooterNav from "./FooterNav";
 import CreateMessage from "./CreateMessage";
 import MessagesIndividual from "./MessagesIndividual";
 import * as firebase from "firebase";
-import { GiftedChat } from "react-native-gifted-chat";
 
 export default class Messages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [],
+      refresh: false,
+      formContent: "",
+      messages: ["test message 1!", "Here is another, join us!"],
       messagers: [
         {
           user: "test1"
         }
       ]
     };
-    _getMessages = () => {};
   }
+
+  _addMessage = () => {
+    let messageList = this.state.messages;
+    messageList.push(this.state.formContent);
+    this.setState({
+      messages: messageList
+    });
+    console.log("added new message", this.state.formContent);
+    console.log("state of messages:", this.state.messages);
+    this.setState({
+      formContent: "",
+      refresh: !this.state.refresh
+    });
+  };
+
+  _getMessages = () => {
+    let results = this.state.messages;
+    console.log("set results to:", results);
+    return results;
+  };
 
   static navigationOptions = {
     title: "Messages",
@@ -69,77 +89,68 @@ export default class Messages extends Component {
   };
 
   componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          user: "Michael",
-          message: "Hey man, this is my first message to you, from Michael",
-          timestamp: new Date()
-        },
-        {
-          user: "Michael",
-          message:
-            "I felt like I should send you another, actually -- still from Michael",
-          timestamp: new Date()
-        },
-        {
-          user: "test1",
-          message: "Hi I am a user too - lets play music, from test1",
-          timestamp: new Date()
-        },
-        {
-          user: "Michael",
-          message:
-            "Wanted to see how this organized, since test1 messaged between, from Michael",
-          timestamp: new Date()
-        }
-      ]
-    });
+    //   {
+    //     user: "Michael",
+    //     message: "Hey man, this is my first message to you, from Michael",
+    //     timestamp: new Date()
+    //   },
+    //   {
+    //     user: "Michael",
+    //     message:
+    //       "I felt like I should send you another, actually -- still from Michael",
+    //     timestamp: new Date()
+    //   },
+    //   {
+    //     user: "test1",
+    //     message: "Hi I am a user too - lets play music, from test1",
+    //     timestamp: new Date()
+    //   },
+    //   {
+    //     user: "Michael",
+    //     message:
+    //       "Wanted to see how this organized, since test1 messaged between, from Michael",
+    //     timestamp: new Date()
+    //   }
+    // ]
   }
 
-  onSend(messages = []) {
-    // this.setState(previousState => ({
-    //   messages: GiftedChat.append(previousState.messages, messages),
-    // }))
-  }
-
-  componentDidMount() {
-    _getMessages();
-  }
+  componentDidMount() {}
 
   render() {
     const { navigate } = this.props.navigation;
     let messagersList = this.state.messages
       .map(item => item.user)
       .filter((item, index, arr) => arr.indexOf(item) == index);
-    console.log("here is that messagersList", messagersList);
+    // console.log("here is that messagersList", messagersList);
     let messages = this.state.messages;
 
     return (
       <Container>
         <Content>
+          <H2>Messages </H2>
           <FlatList
-            data={messagersList}
-            extraData={messagersList}
+            data={messages}
+            extraData={this.state.refresh}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <List>
                 <ListItem>
-                  <TouchableOpacity
-                    style={{ marginBottom: 5, marginTop: 20 }}
-                    onPress={() =>
-                      navigate("MessagesIndividual", {
-                        name: item,
-                        messages: messages
-                      })
-                    }
-                  >
-                    <Text> {item} </Text>
-                  </TouchableOpacity>
+                  <Text> {item} </Text>
                 </ListItem>
               </List>
             )}
           />
+          <Form style={{ flex: 1, flexDirection: "row" }}>
+            <Input
+              placeholder="Add Message..."
+              onChangeText={formContent => this.setState({ formContent })}
+              value={this.state.formContent}
+              style={{ width: "80%" }}
+            />
+            <Button onPress={() => this._addMessage()}>
+              <Icon name="ios-add" />
+            </Button>
+          </Form>
         </Content>
       </Container>
     );
@@ -165,3 +176,28 @@ Messages.defaultProps = {
 //     </Button>
 //   </FooterTab>
 // </Footer>
+
+// === former messages setup - touchable opacity by name
+// <FlatList
+// data={messagersList}
+// extraData={messagersList}
+// keyExtractor={(item, index) => index.toString()}
+// renderItem={({ item, index }) => (
+// <List>
+// <ListItem>
+// <TouchableOpacity
+// style={{ marginBottom: 5, marginTop: 20 }}
+// onPress={() =>
+// navigate("MessagesIndividual", {
+// name: item,
+// messages: messages
+// })
+// }
+// >
+// <Text> {item} </Text>
+// </TouchableOpacity>
+// </ListItem>
+// </List>
+// )}
+// />
+// ===
