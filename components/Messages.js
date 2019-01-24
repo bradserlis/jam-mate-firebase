@@ -47,7 +47,7 @@ export default class Messages extends Component {
     this.state = {
       refresh: false,
       formContent: "",
-      messages: ["test message 1!", "Here is another, join us!"],
+      messages: [],
       messagers: [
         {
           user: "test1"
@@ -114,7 +114,15 @@ export default class Messages extends Component {
     // ]
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    let ref = firebase.database().ref("/messages/");
+    ref.on("child_added", snapshot => {
+      this.setState(previousState => ({
+        messages: [...previousState.messages, snapshot.val()]
+      }));
+    });
+    console.log("whats messages state look like", this.state.messages);
+  }
 
   render() {
     const { navigate } = this.props.navigation;
