@@ -57,6 +57,8 @@ export default class Messages extends Component {
   }
 
   _addMessage = () => {
+    let ref = firebase.database().ref("/messages/");
+    ref.push(this.state.formContent);
     let messageList = this.state.messages;
     messageList.push(this.state.formContent);
     this.setState({
