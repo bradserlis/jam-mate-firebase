@@ -26,6 +26,8 @@ import {
   H2,
   Root
 } from "native-base";
+import { AppLoading, Asset, Font, Icon } from "expo";
+
 import Router from "./routes/Router";
 import { MainTabNavigator } from "./routes/MainTabNavigator";
 import * as firebase from "firebase";
@@ -47,16 +49,50 @@ const geoFire = new geofire(firebase.database().ref("user_locations"));
 //
 
 export default class App extends Component {
+  state = {
+    isLoadingComplete: false
+  };
+
+  _loadResourcesAsync = async () => {
+    return Promise.all([
+      Asset.loadAsync([
+        require("./img/music.jpg"),
+        require("./img/binding_dark.png"),
+        require("./img/facebook_login.png")
+      ])
+    ]);
+  };
+
+  _handleLoadingError = error => {
+    // In this case, you might want to report the error to your error
+    // reporting service, for example Sentry
+    console.warn(error);
+  };
+
+  _handleFinishLoading = () => {
+    this.setState({ isLoadingComplete: true });
+  };
+
   render() {
-    return (
-      <Root>
-        <SafeAreaView style={{ flex: 1 }}>
-          <Container>
-            <Router />
-          </Container>
-        </SafeAreaView>
-      </Root>
-    );
+    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+      return (
+        <AppLoading
+          startAsync={this._loadResourcesAsync}
+          onError={this._handleLoadingError}
+          onFinish={this._handleFinishLoading}
+        />
+      );
+    } else {
+      return (
+        <Root>
+          <SafeAreaView style={{ flex: 1 }}>
+            <Container>
+              <Router />
+            </Container>
+          </SafeAreaView>
+        </Root>
+      );
+    }
   }
 }
 
