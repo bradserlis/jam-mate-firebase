@@ -11,9 +11,10 @@
       "bundleIdentifier": "com.bradleyserlis.jammate"
     },
     "name": "jammate",
+    "orientation": "portrait",
     "icon": "./img/icon.png",
     "slug": "jammate",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "description": "Social Media app connecting local musicians"
   }
 }

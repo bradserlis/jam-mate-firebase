@@ -99,11 +99,7 @@ export default class Landing extends Component {
     return (
       <Container>
         <ImageBackground
-          style={{
-            flex: 1,
-            width: window.width,
-            height: window.height
-          }}
+          style={styles.fullScreen}
           imageStyle={{ resizeMode: "cover" }}
           source={require("../img/music.jpg")}
         >
