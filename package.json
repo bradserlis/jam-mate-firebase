@@ -1,6 +1,6 @@
 {
   "name": "jammate",
-  "version": "0.1.4",
+  "version": "0.1.7",
   "private": true,
   "devDependencies": {
     "jest-expo": "^31.0.0",

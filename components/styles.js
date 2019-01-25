@@ -8,6 +8,14 @@ const styles = StyleSheet.create({
   topBuffer: {
     paddingTop: 50
   },
+  centerMe: {
+    textAlign: "center"
+  },
+  fullScreen: {
+    width: window.width,
+    height: window.height,
+    flex: 1
+  },
   titleMate: {
     fontSize: 120,
     paddingTop: 160,

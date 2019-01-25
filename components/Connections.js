@@ -130,23 +130,31 @@ export default class Connections extends Component {
       <Container>
         <Content>
           <H2> Connections </H2>
-          <FlatList
-            data={this.state.contactinfo}
-            extraData={this.state.contactinfo}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <List>
-                <ListItem>
-                  <TouchableOpacity style={{ marginBottom: 5, marginTop: 20 }}>
-                    <Text>
-                      {" "}
-                      {item.firstname} {item.lastname} : {item.contactinfo}{" "}
-                    </Text>
-                  </TouchableOpacity>
-                </ListItem>
-              </List>
-            )}
-          />
+          {this.state.contactinfo.length < 1 ? (
+            <View style={{ padding: 15 }}>
+              <Text style={styles.centerMe}> No Connections </Text>
+            </View>
+          ) : (
+            <FlatList
+              data={this.state.contactinfo}
+              extraData={this.state.contactinfo}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item, index }) => (
+                <List>
+                  <ListItem>
+                    <TouchableOpacity
+                      style={{ marginBottom: 5, marginTop: 20 }}
+                    >
+                      <Text>
+                        {" "}
+                        {item.firstname} {item.lastname} : {item.contactinfo}{" "}
+                      </Text>
+                    </TouchableOpacity>
+                  </ListItem>
+                </List>
+              )}
+            />
+          )}
         </Content>
       </Container>
     );

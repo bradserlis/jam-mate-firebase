@@ -89,39 +89,37 @@ export default class InstrumentAdder extends Component {
 
   render() {
     return (
-      <Container>
-        <Content>
-          <Form style={{ flex: 1, flexDirection: "row" }}>
-            <Input
-              placeholder="Enter New Instrument..."
-              onChangeText={formContent => this.setState({ formContent })}
-              value={this.state.formContent}
-              style={{ width: "80%" }}
-            />
-            <Button onPress={() => this._addInstrument()}>
-              <Icon name="ios-add" />
-            </Button>
-          </Form>
+      <View>
+        <Form style={{ flex: 1, flexDirection: "row" }}>
+          <Input
+            placeholder="Enter New Instrument..."
+            onChangeText={formContent => this.setState({ formContent })}
+            value={this.state.formContent}
+            style={{ width: "80%" }}
+          />
+          <Button onPress={() => this._addInstrument()}>
+            <Icon name="ios-add" />
+          </Button>
+        </Form>
 
-          <View style={styles.badgeList}>
-            {this.state.instrumentList.map((instrument, index) => (
-              <Badge
-                primary
-                style={{ marginRight: 5, marginBottom: 10 }}
-                key={instrument.key}
+        <View style={styles.badgeList}>
+          {this.state.instrumentList.map((instrument, index) => (
+            <Badge
+              primary
+              style={{ marginRight: 5, marginBottom: 10 }}
+              key={instrument.key}
+            >
+              <TouchableOpacity
+                onPress={() => this._removeInstrument(instrument.key, index)}
               >
-                <TouchableOpacity
-                  onPress={() => this._removeInstrument(instrument.key, index)}
-                >
-                  <Text style={{ color: "white" }}>
-                    {instrument.val()} &times;
-                  </Text>
-                </TouchableOpacity>
-              </Badge>
-            ))}
-          </View>
-        </Content>
-      </Container>
+                <Text style={{ color: "white" }}>
+                  {instrument.val()} &times;
+                </Text>
+              </TouchableOpacity>
+            </Badge>
+          ))}
+        </View>
+      </View>
     );
   }
 }

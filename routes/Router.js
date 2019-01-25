@@ -4,7 +4,7 @@ import MyNavigator from "./MainTabNavigator";
 import Landing from "../components/Landing";
 import Home from "../components/Home";
 import ProfileEdit from "../components/ProfileEdit";
-import Search from "../components/Search";
+import Nearby from "../components/Nearby";
 import FooterNav from "../components/FooterNav";
 import Messages from "../components/Messages";
 import Connections from "../components/Connections";
