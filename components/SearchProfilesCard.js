@@ -120,8 +120,28 @@ export default class SearchProfilesCard extends Component {
     });
   };
 
-  _sendMessage = u => {
-    console.log("you are sending a message to:", u);
+  _sendMessage = targetUserId => {
+    console.log("you are sending a message to:", targetUserId);
+    let currentUserId = firebase.auth().currentUser.uid;
+    // === CHECK IF MESSAGE "ROOM" BETWEEN USERS EXISTS
+    let messageRoomsRef = firebase
+      .database()
+      .ref("/users/" + currentUserId + "/messagerooms");
+    messageRoomsRef.once("value").then(snapshot => {
+      let users = snapshot;
+      // targetuserId : roomId
+      if (users.some(id => id.key() === targetUserId)) {
+        // If True...
+        console.log("matched user", targetUserId);
+        // create message TO
+        // grab key of
+      }
+    });
+    // if (messagerooms.some(id => id === u)) {
+    //   console.log("This user has an open message with you", u);
+    // } else {
+    //   console.log("this user does not have an open message with you", u);
+    // }
   };
 
   render() {

@@ -45,7 +45,7 @@ export default (MainTabNavigator = createMaterialBottomTabNavigator(
       }
     }),
     // tabBarComponent: react-navigation-tabs,
-    initialRouteName: "Home",
+    initialRouteName: "Messages",
     tabBarPosition: "bottom",
     animationEnabled: true,
     swipeEnabled: false,

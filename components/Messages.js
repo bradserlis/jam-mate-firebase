@@ -58,14 +58,13 @@ export default class Messages extends Component {
 
   //*** WILL BE MOVING TO INDIVIDUAL MESSAGE SCREEN ***
   _addMessage = () => {
-    // let key = firebase
-    //   .database()
-    //   .ref("/messages/")
-    //   .push().key;
-    // let ref = firebase.database().ref("/messages/" + key);
-    // ref.child("message").push(this.state.formContent);
-    // ref.child("timestamp").push(Date.now());
-    // ref.child("user").push("Bradley");
+    let key = firebase
+      .database()
+      .ref("/messages/")
+      .push().key;
+    let ref = firebase.database().ref("/messages/" + Date.now());
+    ref.child("message").set(this.state.formContent);
+    ref.child("user").set("Bradley");
 
     this.setState({
       formContent: "",
@@ -115,12 +114,12 @@ export default class Messages extends Component {
   }
 
   componentDidMount() {
-    let ref = firebase.database().ref("/messages/");
-    ref.on("child_added", snapshot => {
-      this.setState(previousState => ({
-        messages: [...previousState.messages, snapshot.val()]
-      }));
-    });
+    // let ref = firebase.database().ref("/messages/");
+    // ref.on("child_added", snapshot => {
+    //   this.setState(previousState => ({
+    //     messages: [...previousState.messages, snapshot.val()]
+    //   }));
+    // });
   }
 
   render() {

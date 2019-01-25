@@ -107,7 +107,7 @@ export default class Search extends Component {
           // this.setState({
           //   userLocation: location
           // });
-          console.log("sanity check - what is location:", location);
+          // console.log("sanity check - what is location:", location);
           // console.log(
           //   "sanity check - what is state of userLocation:",
           //   this.state.userLocation
@@ -117,11 +117,11 @@ export default class Search extends Component {
             center: location,
             radius: 33
           });
-          console.log("step 2 - this is the geoquery:", geoQuery);
-          console.log(
-            "step 2.1 - this is the geoquery.center:",
-            geoQuery.center()
-          );
+          // console.log("step 2 - this is the geoquery:", geoQuery);
+          // console.log(
+          //   "step 2.1 - this is the geoquery.center:",
+          //   geoQuery.center()
+          // );
           // ********
           // ******** retrieve users
           let nearbyUsers = [];
@@ -137,16 +137,16 @@ export default class Search extends Component {
               key === currentUser ||
               nearbyUsers.some(user => user.userid === key)
             ) {
-              console.log("you are already in here", key);
+              // console.log("you are already in here", key);
             } else {
-              console.log(
-                key +
-                  " is within range at " +
-                  location +
-                  " at a distance of " +
-                  distance
-              );
-              console.log("these are nearby users:", nearbyUsers);
+              // console.log(
+              //   key +
+              //     " is within range at " +
+              //     location +
+              //     " at a distance of " +
+              //     distance
+              // );
+              // console.log("these are nearby users:", nearbyUsers);
 
               // query Firebase USERS node
               let ref = firebase.database().ref("/users/" + key);
@@ -191,6 +191,11 @@ export default class Search extends Component {
       for (let key in obj.connectedusers) {
         connectedusers.push(obj.connectedusers[key]);
       }
+      // Get messagerooms
+      // let messagerooms = [];
+      // for (let key in obj.messagerooms) {
+      //   messagerooms.push(obj.messagerooms[key]);
+      // }
       // Add the result to the table
       results.push({
         userid: originalObj.userid,
@@ -202,6 +207,7 @@ export default class Search extends Component {
         genres: genres,
         instruments: instruments,
         connectedusers: connectedusers
+        // messagerooms: messagerooms
       });
     });
 
@@ -211,7 +217,7 @@ export default class Search extends Component {
   render() {
     const { navigate } = this.props.navigation;
     let users = this.state.usersArray;
-    console.log("this is the users in render:", users);
+    // console.log("this is the users in render:", users);
     var results = this._getArray(users);
 
     return (
