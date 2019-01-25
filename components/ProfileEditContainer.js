@@ -142,9 +142,9 @@ export default class ProfileEditContainer extends Component {
               </Button>
             </Item>
           </Form>
+          <InstrumentAdder userId={userId} />
+          <GenreAdder userId={userId} />
         </Content>
-        <InstrumentAdder userId={userId} />
-        <GenreAdder userId={userId} />
         <Footer>
           <FooterTab style={{ paddingBottom: 0 }}>
             <Button onPress={() => this.props.navigation("Home")}>

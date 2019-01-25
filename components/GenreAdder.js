@@ -89,37 +89,35 @@ export default class GenreAdder extends Component {
 
   render() {
     return (
-      <Container>
-        <Content>
-          <Form style={{ flex: 1, flexDirection: "row" }}>
-            <Input
-              placeholder="Genres..."
-              onChangeText={formContent => this.setState({ formContent })}
-              value={this.state.formContent}
-              style={{ width: "80%" }}
-            />
-            <Button onPress={() => this._addGenre()}>
-              <Icon name="ios-add" />
-            </Button>
-          </Form>
+      <View>
+        <Form style={{ flex: 1, flexDirection: "row" }}>
+          <Input
+            placeholder="Genres..."
+            onChangeText={formContent => this.setState({ formContent })}
+            value={this.state.formContent}
+            style={{ width: "80%" }}
+          />
+          <Button onPress={() => this._addGenre()}>
+            <Icon name="ios-add" />
+          </Button>
+        </Form>
 
-          <View style={styles.badgeList}>
-            {this.state.genreList.map((genre, index) => (
-              <Badge
-                primary
-                style={{ marginRight: 5, marginBottom: 10 }}
-                key={genre.key}
+        <View style={styles.badgeList}>
+          {this.state.genreList.map((genre, index) => (
+            <Badge
+              primary
+              style={{ marginRight: 5, marginBottom: 10 }}
+              key={genre.key}
+            >
+              <TouchableOpacity
+                onPress={() => this._removeGenre(genre.key, index)}
               >
-                <TouchableOpacity
-                  onPress={() => this._removeGenre(genre.key, index)}
-                >
-                  <Text style={{ color: "white" }}>{genre.val()} &times;</Text>
-                </TouchableOpacity>
-              </Badge>
-            ))}
-          </View>
-        </Content>
-      </Container>
+                <Text style={{ color: "white" }}>{genre.val()} &times;</Text>
+              </TouchableOpacity>
+            </Badge>
+          ))}
+        </View>
+      </View>
     );
   }
 }
