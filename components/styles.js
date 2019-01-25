@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
   topBuffer: {
     paddingTop: 50
   },
+  centerMe: {
+    textAlign: "center"
+  },
   titleMate: {
     fontSize: 120,
     paddingTop: 160,

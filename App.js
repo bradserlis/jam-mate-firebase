@@ -7,7 +7,8 @@ import {
   Navigator,
   Image,
   ImageBackground,
-  SafeAreaView
+  SafeAreaView,
+  ActivityIndicator
 } from "react-native";
 import {
   Container,
@@ -102,6 +103,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
   },
   overlay: {
     backgroundColor: "rgba(0,0,0,.2)",

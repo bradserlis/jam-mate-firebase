@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Router from "./Router";
 import Landing from "../components/Landing";
 import Home from "../components/Home";
-import Search from "../components/Search";
+import Nearby from "../components/Nearby";
 import Messages from "../components/Messages";
 import Connections from "../components/Connections";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
@@ -16,8 +16,9 @@ export default (MainTabNavigator = createMaterialBottomTabNavigator(
       screen: Home,
       title: "Profile"
     },
-    Search: {
-      screen: Search
+    Nearby: {
+      screen: Nearby,
+      title: "Nearby"
     },
     Connections: {
       screen: Connections
@@ -33,7 +34,7 @@ export default (MainTabNavigator = createMaterialBottomTabNavigator(
           backBehavior: "none";
         } else if (routeName === "Connections") {
           iconName = "ios-chatboxes";
-        } else if (routeName === "Search") {
+        } else if (routeName === "Nearby") {
           iconName = "ios-people";
         }
         return <Icon name={iconName} size={2} style={{ marginBottom: -1 }} />;

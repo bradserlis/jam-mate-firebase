@@ -50,7 +50,7 @@ import geofire from "geofire";
 import * as Animatable from "react-native-animatable";
 import styles from "./styles";
 
-export default class Search extends Component {
+export default class Nearby extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -77,7 +77,7 @@ export default class Search extends Component {
   // === message modal ===
 
   static navigationOptions = ({ navigation }) => ({
-    title: "Search",
+    title: "Nearby",
     headerLeft: null,
     headerStyle: {
       backgroundColor: "#007bff"
@@ -213,40 +213,66 @@ export default class Search extends Component {
     let users = this.state.usersArray;
     console.log("this is the users in render:", users);
     var results = this._getArray(users);
-
     return (
       <Container>
         <Content>
-          <H2 style={styles.notchCompensation}> Search </H2>
-          <FlatList
-            data={results}
-            extraData={results}
-            keyExtractor={item => item.userid}
-            renderItem={({ item, index }) => (
-              <List listKey={item.userid}>
-                <ListItem avatar>
-                  <Left>
-                    <Thumbnail source={{ uri: item.userphoto }} />
-                  </Left>
-                  <Body>
-                    <SearchProfilesCard
-                      userid={item.userid}
-                      instruments={item.instruments || []}
-                      genres={item.genres || []}
-                      name={item.firstname || []}
-                      connectedusers={item.connectedusers || []}
-                    />
-                  </Body>
-                  <Right />
-                </ListItem>
-              </List>
-            )}
-          />
+          <H2 style={styles.notchCompensation}> Nearby Users </H2>
+          <View>
+            <View style={{ padding: 15 }}>
+              <Text style={styles.centerMe}>
+                Nearby Users will Display Below
+              </Text>
+            </View>
+            <View>
+              <Text>
+                When you SEND CONTACT INFO, your provided contact info will be
+                shared with that user.
+              </Text>
+            </View>
+            <View>
+              <Text style={{ fontSize: 12, lineHeight: 18 }}>
+                You can change your contact info from your Home page by clicking
+                "Edit"
+              </Text>
+            </View>
+          </View>
+
+          {results.length < 1 ? (
+            <View style={{ margin: 20 }}>
+              <Text style={styles.modalTitleText}>No Users nearby</Text>
+            </View>
+          ) : (
+            <FlatList
+              data={results}
+              extraData={results}
+              keyExtractor={item => item.userid}
+              renderItem={({ item, index }) => (
+                <List listKey={item.userid}>
+                  <ListItem avatar>
+                    <Left>
+                      <Thumbnail source={{ uri: item.userphoto }} />
+                    </Left>
+                    <Body>
+                      <SearchProfilesCard
+                        userid={item.userid}
+                        instruments={item.instruments || []}
+                        genres={item.genres || []}
+                        name={item.firstname || []}
+                        connectedusers={item.connectedusers || []}
+                      />
+                    </Body>
+                    <Right />
+                  </ListItem>
+                </List>
+              )}
+            />
+          )}
         </Content>
       </Container>
     );
   }
 }
+
 // <CreateMessageModal
 // isVisible={this.state.isCreateMessageModalVisible}
 // onBackdropPress={this.handleDismissCreateMessageModal}
