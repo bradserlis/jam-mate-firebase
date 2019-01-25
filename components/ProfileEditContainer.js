@@ -65,16 +65,16 @@ export default class ProfileEditContainer extends Component {
   //   }
   // };
 
-  _onPress = () => {
+  _onPress() {
     let newState = !this.state.toggle;
     this.setState({
       toggle: newState
     });
-  };
+  }
 
-  _onStateChange = newState => {
+  _onStateChange(newState) {
     this.setState({ toggleState: value });
-  };
+  }
 
   _addContactInfo = contact => {
     let userId = firebase.auth().currentUser.uid;
