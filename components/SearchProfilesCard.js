@@ -120,7 +120,7 @@ export default class SearchProfilesCard extends Component {
     });
   };
 
-  _sendMessage = targetUserId => {
+  _openRoom = targetUserId => {
     console.log("you are sending a message to:", targetUserId);
     let currentUserId = firebase.auth().currentUser.uid;
     // === CHECK IF MESSAGE "ROOM" BETWEEN USERS EXISTS
@@ -133,6 +133,7 @@ export default class SearchProfilesCard extends Component {
       if (users.some(id => id.key() === targetUserId)) {
         // If True...
         console.log("matched user", targetUserId);
+        console.log("matched room is...", id.val());
         // create message TO
         // grab key of
       }
