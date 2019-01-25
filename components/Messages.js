@@ -64,7 +64,7 @@ export default class Messages extends Component {
       .push().key;
     let ref = firebase.database().ref("/messages/" + Date.now());
     ref.child("message").set(this.state.formContent);
-    ref.child("user").set("Bradley");
+    ref.child("user").set(firebase.auth().currentUser.uid);
 
     this.setState({
       formContent: "",
