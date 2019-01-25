@@ -4,13 +4,16 @@
     "splash": {
       "image": "./img/music.png"
     },
+    "facebookScheme": "fb2085907415001272",
+    "facebookAppId": "2085907415001272",
+    "facebookDisplayName": "Jammate",
     "ios": {
       "bundleIdentifier": "com.bradleyserlis.jammate"
     },
     "name": "jammate",
     "icon": "./img/icon.png",
     "slug": "jammate",
-    "version": "0.1.2",
+    "version": "0.1.6",
     "description": "Social Media app connecting local musicians"
   }
 }
