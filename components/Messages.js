@@ -107,30 +107,35 @@ export default class Messages extends Component {
     // ]
   }
 
-  _getMessagers = messagersIds => {
+  _getMessagers = messagerObjects => {
     let ref = firebase.database().ref("/users/");
     // Loop through each user for id
-    let idlist = messagersIds.map(id => {
-      return id;
-    });
     ref
       .orderByKey()
       .once("value")
       .then(snapshot => {
-        let userIds = Object.keys(snapshot.toJSON());
-        let users = userIds.map(id => {
-          let user = snapshot.toJSON()[id];
-          user.key = id;
-          return user;
-        });
-        let connectedusers = users.filter(item => {
-          const isConnectedUser = idlist.some(id => id == item.key);
-          return isConnectedUser;
-        });
-        let messagerInfo = connectedusers.map(user => {
+        let userQueryResults = snapshot.toJSON();
+
+        let messagerIds = Object.keys(messagerObjects);
+        // let users = userIds.map(id => {
+        //   let user = snapshot.toJSON()[id];
+        //   user.key = id;
+        //   return user;
+        // });
+        // let usersWithRooms = users.filter(user => {
+        //   const hasRoom = messagerIds.some(id => id == user.key);
+        //   return hasRoom;
+        // });
+        // map through messagerIds
+        let messagerInfo = messagerIds.map(userid => {
+          console.log('userid:', userid);
+          let messager = userQueryResults[userid];
+          console.log('messager:', messager);
           return {
-            firstname: user.firstname,
-            lastname: user.lastname
+            userid,
+            firstname: messager.firstname,
+            lastname: messager.lastname,
+            roomId: messagerObjects[userid]
           };
         });
         this.setState({
@@ -144,44 +149,18 @@ export default class Messages extends Component {
       .database()
       .ref("/users/" + firebase.auth().currentUser.uid)
       .child("messagerooms");
-    let messagersIds = [];
-    let messagerObject = [];
+    // let messagersIds = [];
+    let messagerObjects = {};
     ref.once("value").then(snapshot => {
-      snapshot.forEach(user => {
-        let messagerObj = {};
-        messagerObj[user.key] = user.val();
-        messagerObject.push(messagerObj);
-        messagersIds.push(user.key);
-      });
-      console.log("messagersIds before _getMessagers", messagersIds);
-      console.log("messagerObject after didMount", messagerObject);
-      this._getMessagers(messagersIds);
+      const messageRooms = snapshot.toJSON();
+      // console.log("messagersIds before _getMessagers", messagersIds);
+      this._getMessagers(messageRooms);
     });
-    //   messagersIds.forEach(messagerId => {
-    //     firebase
-    //       .database()
-    //       .ref("/users/" + messagerId)
-    //       .child("firstname")
-    //       .once("value")
-    //       .then(firstname => {
-    //         messagerNames.push(firstname);
-    //       });
-    //   });
-    //   console.log("messagerNames before setstate:", messagerNames);
-    //   this.setState({
-    //     messagers: messagerNames
-    //   });
-    //   console.log("messagerNames at the end?", messagerNames);
-    //   console.log("these are the messagers:", this.state.messagers);
-    // });
   }
 
   render() {
     const { navigate } = this.props.navigation;
-    // let messagersList = this.state.messages
-    //   .map(item => item.user)
-    //   .filter((item, index, arr) => arr.indexOf(item) == index);
-    // console.log("here is that messagersList", messagersList);
+
     let messages = this.state.messages;
     let messagers = this.state.messagers;
 
@@ -194,10 +173,13 @@ export default class Messages extends Component {
             extraData={this.state.refresh}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
-              <TouchableOpacity style={{ marginBottom: 5, marginTop: 20 }}>
+              <TouchableOpacity
+                style={{ marginBottom: 5, marginTop: 20 }}
+              >
                 <Text>
                   {" "}
-                  {item.firstname} {item.lastname}{" "}
+                  {item.userid}
+                  {item.firstname} {item.lastname} {item.roomId}{" "}
                 </Text>
               </TouchableOpacity>
             )}
