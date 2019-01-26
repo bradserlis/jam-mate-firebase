@@ -53,20 +53,7 @@ export default class Messages extends Component {
   }
 
   //*** WILL BE MOVING TO INDIVIDUAL MESSAGE SCREEN ***
-  _addMessage = () => {
-    let key = firebase
-      .database()
-      .ref("/messages/")
-      .push().key;
-    let ref = firebase.database().ref("/messages/" + Date.now());
-    ref.child("message").set(this.state.formContent);
-    ref.child("user").set(firebase.auth().currentUser.uid);
 
-    this.setState({
-      formContent: "",
-      refresh: !this.state.refresh
-    });
-  };
   //***  ***
 
   static navigationOptions = {
@@ -128,9 +115,9 @@ export default class Messages extends Component {
         // });
         // map through messagerIds
         let messagerInfo = messagerIds.map(userid => {
-          console.log('userid:', userid);
+          console.log("userid:", userid);
           let messager = userQueryResults[userid];
-          console.log('messager:', messager);
+          console.log("messager:", messager);
           return {
             userid,
             firstname: messager.firstname,
@@ -175,6 +162,14 @@ export default class Messages extends Component {
             renderItem={({ item, index }) => (
               <TouchableOpacity
                 style={{ marginBottom: 5, marginTop: 20 }}
+                onPress={() => {
+                  navigate("MessagesIndividual", {
+                    firstname: item.firstname,
+                    lastname: item.lastname,
+                    roomId: item.roomId,
+                    userId: item.userId
+                  });
+                }}
               >
                 <Text>
                   {" "}
@@ -184,17 +179,6 @@ export default class Messages extends Component {
               </TouchableOpacity>
             )}
           />
-          <Form style={{ flex: 1, flexDirection: "row" }}>
-            <Input
-              placeholder="Add Message..."
-              onChangeText={formContent => this.setState({ formContent })}
-              value={this.state.formContent}
-              style={{ width: "80%" }}
-            />
-            <Button onPress={() => this._addMessage()}>
-              <Icon name="ios-add" />
-            </Button>
-          </Form>
         </Content>
       </Container>
     );

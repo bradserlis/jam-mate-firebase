@@ -43,7 +43,8 @@ export default class Messages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCreateMessageModalVisible: false
+      isCreateMessageModalVisible: false,
+      formContent: ""
     };
     handleShowCreateMessageModal = () => {
       this.setState({
@@ -54,6 +55,26 @@ export default class Messages extends Component {
   handleDismissCreateMessageModal = () => {
     this.setState({
       isCreateMessageModalVisible: false
+    });
+  };
+
+  _addMessage = () => {
+    let messageRoomId = this.props.navigation.getParam("roomId", null);
+    // let key = firebase
+    //   .database()
+    //   .ref("/rooms/" + messageRoomId)
+    //   .child("messages")
+    //   .push().key;
+    let ref = firebase
+      .database()
+      .ref("/rooms/" + messageRoomId)
+      .child("/messages/" + Date.now());
+    ref.child("message").set(this.state.formContent);
+    ref.child("user").set(firebase.auth().currentUser.uid);
+
+    this.setState({
+      formContent: "",
+      refresh: !this.state.refresh
     });
   };
 
@@ -70,37 +91,44 @@ export default class Messages extends Component {
 
   componentWillMount() {}
 
-  componentDidMount() {}
+  componentDidMount() {
+    let messageRoomId = this.props.navigation.getParam("roomId", null);
+    let ref = firebase
+      .database()
+      .ref("/rooms/" + messageRoomId)
+      .child("messages");
 
+    // const username = navigate.getParam("firstname", "name-goes-here");
+    // const messages = navigate
+    //   .getParam("messages", null)
+    //   // filter to only show item.user which matches username (declared above)
+    //   .filter((item, index, arr) => item.user == username)
+    //   // and...now map all of that users' messages into an array, to render
+    //   .map(item => item.message);
+    // console.log("username passed?", username);
+    // console.log("messages passed?", messages);
+  }
   componentWillUnmount() {}
 
   render() {
-    const { navigation } = this.props;
-    const username = navigation.getParam("name", "name-goes-here");
-    const messages = navigation
-      .getParam("messages", null)
-      // filter to only show item.user which matches username (declared above)
-      .filter((item, index, arr) => item.user == username)
-      // and...now map all of that users' messages into an array, to render
-      .map(item => item.message);
-    console.log("username passed?", username);
-    console.log("messages passed?", messages);
+    const { navigate } = this.props;
+    // const username = navigate.getParam(firstname, "nothing came over");
+    let messages = ["hey i am a message"];
 
     return (
       <Container>
         <Content>
-          <FlatList
-            data={messages}
-            extraData={messages}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <List>
-                <ListItem>
-                  <Text> {item} </Text>
-                </ListItem>
-              </List>
-            )}
-          />
+          <Form style={{ flex: 1, flexDirection: "row" }}>
+            <Input
+              placeholder="Add Message..."
+              onChangeText={formContent => this.setState({ formContent })}
+              value={this.state.formContent}
+              style={{ width: "80%" }}
+            />
+            <Button onPress={() => this._addMessage()}>
+              <Icon name="ios-add" />
+            </Button>
+          </Form>
           <Button onPress={() => handleShowCreateMessageModal()}>
             <Text>Test me</Text>
           </Button>
@@ -113,3 +141,15 @@ export default class Messages extends Component {
     );
   }
 }
+
+/* <FlatList
+  data={messages}
+  extraData={messages}
+  keyExtractor={(item, index) => index.toString()}
+  renderItem={({ item, index }) => (
+    <List>
+      <ListItem>
+        <Text> {item} </Text>
+      </ListItem>
+    </List>
+/> */
