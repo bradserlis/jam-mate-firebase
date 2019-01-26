@@ -122,6 +122,10 @@ class SearchProfilesCard extends Component {
     });
   };
 
+  _createRoom = targetUserId => {
+    console.log("looks like we need a room for", targetUserId);
+  };
+
   _openRoom = targetUserId => {
     const { navigate } = this.props.navigation;
 
@@ -135,14 +139,15 @@ class SearchProfilesCard extends Component {
       let users = snapshot.toJSON();
       console.log("what is snapshot", users);
       users.hasOwnProperty(targetUserId)
-        ? navigate("Messages")
-        : console.log("it did not find a match");
+        ? //   // If True...
+          navigate("Messages")
+        : // If no room yet exists....
+          this._createRoom(targetUserId);
 
       // let theRooms = Object.keys(users);
       // console.log("what are THE ROOMS?", theRooms);
       // targetuserId : roomId
       // if (users.some(id => id.key === targetUserId)) {
-      //   // If True...
       //   console.log("matched user", targetUserId);
       //   console.log("matched room is...", id.val());
       // navigate("Messages");

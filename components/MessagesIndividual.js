@@ -148,15 +148,15 @@ class MessagesIndividual extends Component {
               <Icon name="ios-add" />
             </Button>
           </Form>
-          <Button
-            title="GO BACK!"
-            onPress={() => {
-              navigate("Messages");
-            }}
-          >
-            <Text>GO BACK</Text>
-          </Button>
         </Content>
+        <Footer style={{ marginBottom: -50 }}>
+          <FooterTab style={{ paddingBottom: 5 }}>
+            <Button onPress={() => navigate("Messages")}>
+              <Icon name="ios-arrow-dropleft" />
+              <Text>Back</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
       </Container>
     );
   }
