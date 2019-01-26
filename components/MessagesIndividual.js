@@ -44,19 +44,20 @@ export default class Messages extends Component {
     super(props);
     this.state = {
       isCreateMessageModalVisible: false,
-      formContent: ""
+      formContent: "",
+      messages: []
     };
-    handleShowCreateMessageModal = () => {
-      this.setState({
-        isCreateMessageModalVisible: true
-      });
-    };
+    //   handleShowCreateMessageModal = () => {
+    //     this.setState({
+    //       isCreateMessageModalVisible: true
+    //     });
+    //   };
+    // }
+    // handleDismissCreateMessageModal = () => {
+    //   this.setState({
+    //     isCreateMessageModalVisible: false
+    //   });
   }
-  handleDismissCreateMessageModal = () => {
-    this.setState({
-      isCreateMessageModalVisible: false
-    });
-  };
 
   _addMessage = () => {
     let messageRoomId = this.props.navigation.getParam("roomId", null);
@@ -97,27 +98,51 @@ export default class Messages extends Component {
       .database()
       .ref("/rooms/" + messageRoomId)
       .child("messages");
-
-    // const username = navigate.getParam("firstname", "name-goes-here");
-    // const messages = navigate
-    //   .getParam("messages", null)
-    //   // filter to only show item.user which matches username (declared above)
-    //   .filter((item, index, arr) => item.user == username)
-    //   // and...now map all of that users' messages into an array, to render
-    //   .map(item => item.message);
-    // console.log("username passed?", username);
-    // console.log("messages passed?", messages);
+    ref.orderByKey().on("child_added", snapshot => {
+      this.setState(previousState => ({
+        messages: [...previousState.messages, snapshot.toJSON()]
+      }));
+      console.log("this is messages state", this.state.messages);
+    });
   }
   componentWillUnmount() {}
 
   render() {
     const { navigate } = this.props;
+    let messages = this.state.messages;
     // const username = navigate.getParam(firstname, "nothing came over");
-    let messages = ["hey i am a message"];
 
     return (
       <Container>
         <Content>
+          <FlatList
+            data={messages}
+            extraData={this.state.refresh}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <List>
+                <ListItem>
+                  <View style={{ marginRight: 15 }}>
+                    <Text>
+                      {item.user !== firebase.auth().currentUser.uid
+                        ? this.props.navigation.getParam("firstname")
+                        : null}
+                    </Text>
+                  </View>
+                  <View>
+                    <Text>{item.message}</Text>
+                  </View>
+                  <View style={{ marginLeft: 15 }}>
+                    <Text>
+                      {item.user === firebase.auth().currentUser.uid
+                        ? firebase.auth().currentUser.displayName
+                        : null}
+                    </Text>
+                  </View>
+                </ListItem>
+              </List>
+            )}
+          />
           <Form style={{ flex: 1, flexDirection: "row" }}>
             <Input
               placeholder="Add Message..."
@@ -141,15 +166,3 @@ export default class Messages extends Component {
     );
   }
 }
-
-/* <FlatList
-  data={messages}
-  extraData={messages}
-  keyExtractor={(item, index) => index.toString()}
-  renderItem={({ item, index }) => (
-    <List>
-      <ListItem>
-        <Text> {item} </Text>
-      </ListItem>
-    </List>
-/> */
