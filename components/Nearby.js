@@ -265,6 +265,7 @@ export default class Nearby extends Component {
                         genres={item.genres || []}
                         name={item.firstname || []}
                         connectedusers={item.connectedusers || []}
+                        navigate={navigate}
                       />
                     </Body>
                     <Right />

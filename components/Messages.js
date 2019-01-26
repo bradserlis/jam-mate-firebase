@@ -167,7 +167,8 @@ export default class Messages extends Component {
                     firstname: item.firstname,
                     lastname: item.lastname,
                     roomId: item.roomId,
-                    userId: item.userid
+                    userId: item.userid,
+                    navigate: navigate
                   });
                 }}
               >

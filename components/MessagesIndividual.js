@@ -35,11 +35,14 @@ import {
   CheckBox,
   Separator
 } from "native-base";
+import { withNavigation } from "react-navigation";
+
 import FooterNav from "./FooterNav";
+import BackButton from "./BackButton";
 import CreateMessageModal from "./CreateMessageModal";
 import * as firebase from "firebase";
 
-export default class Messages extends Component {
+class MessagesIndividual extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -108,7 +111,7 @@ export default class Messages extends Component {
   componentWillUnmount() {}
 
   render() {
-    const { navigate } = this.props;
+    const { navigate } = this.props.navigation;
     let messages = this.state.messages;
     // const username = navigate.getParam(firstname, "nothing came over");
 
@@ -121,19 +124,16 @@ export default class Messages extends Component {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <List>
-                <ListItem>
-                  <View style={{ margin: 10 }}>
-                    <Text>
-                      {item.user !== firebase.auth().currentUser.uid ||
-                      !item.user
-                        ? this.props.navigation.getParam("firstname")
-                        : firebase.auth().currentUser.displayName}
-                    </Text>
-                  </View>
-                  <View style={{ marginTop: 20 }}>
-                    <Text style={{ paddingRight: 20 }}>{item.message}</Text>
-                  </View>
-                </ListItem>
+                <View style={{ marginTop: 5 }}>
+                  <Text>
+                    {item.user !== firebase.auth().currentUser.uid || !item.user
+                      ? this.props.navigation.getParam("firstname")
+                      : firebase.auth().currentUser.displayName}
+                  </Text>
+                </View>
+                <View style={{ marginBottom: 10 }}>
+                  <Text style={{ paddingRight: 20 }}>{item.message}</Text>
+                </View>
               </List>
             )}
           />
@@ -148,11 +148,21 @@ export default class Messages extends Component {
               <Icon name="ios-add" />
             </Button>
           </Form>
+          <Button
+            title="GO BACK!"
+            onPress={() => {
+              navigate("Messages");
+            }}
+          >
+            <Text>GO BACK</Text>
+          </Button>
         </Content>
       </Container>
     );
   }
 }
+
+export default withNavigation(MessagesIndividual);
 
 // <View style={{ marginRight: 15 }}>
 // <Text>

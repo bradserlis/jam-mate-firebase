@@ -41,13 +41,15 @@ import {
   Thumbnail,
   Toast
 } from "native-base";
+import { withNavigation } from "react-navigation";
+
 import { LinearGradient } from "expo";
 import FooterNav from "./FooterNav";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
 import styles from "./styles";
 
-export default class SearchProfilesCard extends Component {
+class SearchProfilesCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -121,6 +123,8 @@ export default class SearchProfilesCard extends Component {
   };
 
   _openRoom = targetUserId => {
+    const { navigate } = this.props.navigation;
+
     console.log("you are sending a message to:", targetUserId);
     let currentUserId = firebase.auth().currentUser.uid;
     // === CHECK IF MESSAGE "ROOM" BETWEEN USERS EXISTS
@@ -128,15 +132,22 @@ export default class SearchProfilesCard extends Component {
       .database()
       .ref("/users/" + currentUserId + "/messagerooms");
     messageRoomsRef.once("value").then(snapshot => {
-      let users = snapshot;
+      let users = snapshot.toJSON();
+      console.log("what is snapshot", users);
+      users.hasOwnProperty(targetUserId)
+        ? navigate("Messages")
+        : console.log("it did not find a match");
+
+      // let theRooms = Object.keys(users);
+      // console.log("what are THE ROOMS?", theRooms);
       // targetuserId : roomId
-      if (users.some(id => id.key() === targetUserId)) {
-        // If True...
-        console.log("matched user", targetUserId);
-        console.log("matched room is...", id.val());
-        // create message TO
-        // grab key of
-      }
+      // if (users.some(id => id.key === targetUserId)) {
+      //   // If True...
+      //   console.log("matched user", targetUserId);
+      //   console.log("matched room is...", id.val());
+      // navigate("Messages");
+      // create message TO
+      // grab key of
     });
     // if (messagerooms.some(id => id === u)) {
     //   console.log("This user has an open message with you", u);
@@ -146,6 +157,8 @@ export default class SearchProfilesCard extends Component {
   };
 
   render() {
+    const { navigate } = this.props.navigation;
+
     let currentUserId = firebase.auth().currentUser.uid;
 
     let combo = ["INSTRUMENTS"].concat(
@@ -184,7 +197,7 @@ export default class SearchProfilesCard extends Component {
               ) : null}
               <Button
                 onPress={() => {
-                  this._sendMessage(this.props.userid);
+                  this._openRoom(this.props.userid);
                 }}
               >
                 <Text> Message </Text>
@@ -196,6 +209,8 @@ export default class SearchProfilesCard extends Component {
     );
   }
 }
+
+export default withNavigation(SearchProfilesCard);
 
 SearchProfilesCard.defaultProps = {
   instruments: [],
