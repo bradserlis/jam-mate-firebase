@@ -122,22 +122,16 @@ export default class Messages extends Component {
             renderItem={({ item, index }) => (
               <List>
                 <ListItem>
-                  <View style={{ marginRight: 15 }}>
+                  <View style={{ margin: 10 }}>
                     <Text>
-                      {item.user !== firebase.auth().currentUser.uid
+                      {item.user !== firebase.auth().currentUser.uid ||
+                      !item.user
                         ? this.props.navigation.getParam("firstname")
-                        : null}
+                        : firebase.auth().currentUser.displayName}
                     </Text>
                   </View>
-                  <View>
-                    <Text>{item.message}</Text>
-                  </View>
-                  <View style={{ marginLeft: 15 }}>
-                    <Text>
-                      {item.user === firebase.auth().currentUser.uid
-                        ? firebase.auth().currentUser.displayName
-                        : null}
-                    </Text>
+                  <View style={{ marginTop: 20 }}>
+                    <Text style={{ paddingRight: 20 }}>{item.message}</Text>
                   </View>
                 </ListItem>
               </List>
@@ -154,15 +148,44 @@ export default class Messages extends Component {
               <Icon name="ios-add" />
             </Button>
           </Form>
-          <Button onPress={() => handleShowCreateMessageModal()}>
-            <Text>Test me</Text>
-          </Button>
-          <CreateMessageModal
-            isVisible={this.state.isCreateMessageModalVisible}
-            onBackdropPress={this.handleDismissCreateMessageModal}
-          />
         </Content>
       </Container>
     );
   }
+}
+
+// <View style={{ marginRight: 15 }}>
+// <Text>
+//   {item.user !== firebase.auth().currentUser.uid
+//     ? this.props.navigation.getParam("firstname")
+//     : null}
+// </Text>
+// </View>
+// <View style={{ margin: 10 }}>
+// <Text>{item.message}</Text>
+// </View>
+// <View style={{ marginLeft: 15 }}>
+// <Text>
+//   {item.user === firebase.auth().currentUser.uid
+//     ? firebase.auth().currentUser.displayName
+//     : null}
+// </Text>
+// </View>
+
+{
+  /* <Button onPress={() => handleShowCreateMessageModal()}> */
+}
+{
+  /* <Text>Test me</Text> */
+}
+{
+  /* </Button> */
+}
+{
+  /* <CreateMessageModal */
+}
+// isVisible={this.state.isCreateMessageModalVisible}
+// onBackdropPress={this.handleDismissCreateMessageModal}
+{
+  /* /> */
 }
