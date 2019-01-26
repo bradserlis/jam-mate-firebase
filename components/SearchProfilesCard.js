@@ -123,7 +123,43 @@ class SearchProfilesCard extends Component {
   };
 
   _createRoom = targetUserId => {
-    console.log("looks like we need a room for", targetUserId);
+    // setup the variables
+    let currentUserId = firebase.auth().currentUser.uid;
+    let newRoomKey = firebase
+      .database()
+      .ref("/rooms/")
+      .push().key;
+    let newRoomRef = firebase.database().ref("/rooms/" + newRoomKey);
+    let newRoomMessageRef = newRoomRef.child("/messages/" + Date.now());
+    // initialize members data
+    newRoomRef.child("members").push(targetUserId);
+    newRoomRef.child("members").push(currentUserId);
+    // add message
+    AlertIOS.prompt("Message", "Enter your message", firstMessage => {
+      newRoomMessageRef.child("message").set(firstMessage);
+      newRoomMessageRef.child("user").set(currentUserId);
+      // give alert that connection was sent
+      Alert.alert("Message sent");
+    });
+    // Add userid and roomid to messageRooms array for each user
+    let targetObj = {};
+    let currentUserObj = {};
+    targetObj[targetUserId] = newRoomKey;
+    currentUserObj[currentUserId] = newRoomKey;
+    console.log("what does the currentUserobj look like", currentUserObj);
+    console.log("what does the targetobj look like", targetObj);
+    firebase
+      .database()
+      .ref("/users/" + currentUserId)
+      .child("messagerooms")
+      .child(targetUserId)
+      .set(newRoomKey);
+    firebase
+      .database()
+      .ref("/users/" + targetUserId)
+      .child("messagerooms")
+      .child(currentUserId)
+      .set(newRoomKey);
   };
 
   _openRoom = targetUserId => {
