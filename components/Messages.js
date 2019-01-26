@@ -52,10 +52,6 @@ export default class Messages extends Component {
     };
   }
 
-  //*** WILL BE MOVING TO INDIVIDUAL MESSAGE SCREEN ***
-
-  //***  ***
-
   static navigationOptions = {
     title: "Messages",
     headerLeft: null,
@@ -68,31 +64,7 @@ export default class Messages extends Component {
     }
   };
 
-  componentWillMount() {
-    //   {
-    //     user: "Michael",
-    //     message: "Hey man, this is my first message to you, from Michael",
-    //     timestamp: new Date()
-    //   },
-    //   {
-    //     user: "Michael",
-    //     message:
-    //       "I felt like I should send you another, actually -- still from Michael",
-    //     timestamp: new Date()
-    //   },
-    //   {
-    //     user: "test1",
-    //     message: "Hi I am a user too - lets play music, from test1",
-    //     timestamp: new Date()
-    //   },
-    //   {
-    //     user: "Michael",
-    //     message:
-    //       "Wanted to see how this organized, since test1 messaged between, from Michael",
-    //     timestamp: new Date()
-    //   }
-    // ]
-  }
+  componentWillMount() {}
 
   _getMessagers = messagerObjects => {
     let ref = firebase.database().ref("/users/");
@@ -104,15 +76,7 @@ export default class Messages extends Component {
         let userQueryResults = snapshot.toJSON();
 
         let messagerIds = Object.keys(messagerObjects);
-        // let users = userIds.map(id => {
-        //   let user = snapshot.toJSON()[id];
-        //   user.key = id;
-        //   return user;
-        // });
-        // let usersWithRooms = users.filter(user => {
-        //   const hasRoom = messagerIds.some(id => id == user.key);
-        //   return hasRoom;
-        // });
+
         // map through messagerIds
         let messagerInfo = messagerIds.map(userid => {
           console.log("userid:", userid);
@@ -174,8 +138,7 @@ export default class Messages extends Component {
               >
                 <Text>
                   {" "}
-                  {item.userid}
-                  {item.firstname} {item.lastname} {item.roomId}{" "}
+                  {item.firstname} {item.lastname}{" "}
                 </Text>
               </TouchableOpacity>
             )}
@@ -205,28 +168,3 @@ Messages.defaultProps = {
 //     </Button>
 //   </FooterTab>
 // </Footer>
-
-// === former messages setup - touchable opacity by name
-// <FlatList
-// data={messagersList}
-// extraData={messagersList}
-// keyExtractor={(item, index) => index.toString()}
-// renderItem={({ item, index }) => (
-// <List>
-// <ListItem>
-// <TouchableOpacity
-// style={{ marginBottom: 5, marginTop: 20 }}
-// onPress={() =>
-// navigate("MessagesIndividual", {
-// name: item,
-// messages: messages
-// })
-// }
-// >
-// <Text> {item} </Text>
-// </TouchableOpacity>
-// </ListItem>
-// </List>
-// )}
-// />
-// ===

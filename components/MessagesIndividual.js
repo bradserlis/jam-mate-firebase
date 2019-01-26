@@ -126,9 +126,9 @@ class MessagesIndividual extends Component {
               <List>
                 <View style={{ marginTop: 5 }}>
                   <Text>
-                    {item.user !== firebase.auth().currentUser.uid || !item.user
-                      ? this.props.navigation.getParam("firstname")
-                      : firebase.auth().currentUser.displayName}
+                    {item.user === firebase.auth().currentUser.uid || !item.user
+                      ? firebase.auth().currentUser.displayName
+                      : this.props.navigation.getParam("firstname")}
                   </Text>
                 </View>
                 <View style={{ marginBottom: 10 }}>

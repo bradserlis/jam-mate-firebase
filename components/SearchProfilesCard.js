@@ -179,22 +179,7 @@ class SearchProfilesCard extends Component {
           navigate("Messages")
         : // If no room yet exists....
           this._createRoom(targetUserId);
-
-      // let theRooms = Object.keys(users);
-      // console.log("what are THE ROOMS?", theRooms);
-      // targetuserId : roomId
-      // if (users.some(id => id.key === targetUserId)) {
-      //   console.log("matched user", targetUserId);
-      //   console.log("matched room is...", id.val());
-      // navigate("Messages");
-      // create message TO
-      // grab key of
     });
-    // if (messagerooms.some(id => id === u)) {
-    //   console.log("This user has an open message with you", u);
-    // } else {
-    //   console.log("this user does not have an open message with you", u);
-    // }
   };
 
   render() {
