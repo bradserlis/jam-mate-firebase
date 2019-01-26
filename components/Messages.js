@@ -47,12 +47,8 @@ export default class Messages extends Component {
     this.state = {
       refresh: false,
       formContent: "",
-      messages: [],
-      messagers: [
-        {
-          user: "test1"
-        }
-      ]
+      messagerObject: [],
+      messagers: []
     };
   }
 
@@ -72,8 +68,6 @@ export default class Messages extends Component {
     });
   };
   //***  ***
-
-  _getMessages = () => {};
 
   static navigationOptions = {
     title: "Messages",
@@ -113,35 +107,99 @@ export default class Messages extends Component {
     // ]
   }
 
+  _getMessagers = messagersIds => {
+    let ref = firebase.database().ref("/users/");
+    // Loop through each user for id
+    let idlist = messagersIds.map(id => {
+      return id;
+    });
+    ref
+      .orderByKey()
+      .once("value")
+      .then(snapshot => {
+        let userIds = Object.keys(snapshot.toJSON());
+        let users = userIds.map(id => {
+          let user = snapshot.toJSON()[id];
+          user.key = id;
+          return user;
+        });
+        let connectedusers = users.filter(item => {
+          const isConnectedUser = idlist.some(id => id == item.key);
+          return isConnectedUser;
+        });
+        let messagerInfo = connectedusers.map(user => {
+          return {
+            firstname: user.firstname,
+            lastname: user.lastname
+          };
+        });
+        this.setState({
+          messagers: messagerInfo
+        });
+      });
+  };
+
   componentDidMount() {
-    // let ref = firebase.database().ref("/messages/");
-    // ref.on("child_added", snapshot => {
-    //   this.setState(previousState => ({
-    //     messages: [...previousState.messages, snapshot.val()]
-    //   }));
+    let ref = firebase
+      .database()
+      .ref("/users/" + firebase.auth().currentUser.uid)
+      .child("messagerooms");
+    let messagersIds = [];
+    let messagerObject = [];
+    ref.once("value").then(snapshot => {
+      snapshot.forEach(user => {
+        let messagerObj = {};
+        messagerObj[user.key] = user.val();
+        messagerObject.push(messagerObj);
+        messagersIds.push(user.key);
+      });
+      console.log("messagersIds before _getMessagers", messagersIds);
+      console.log("messagerObject after didMount", messagerObject);
+      this._getMessagers(messagersIds);
+    });
+    //   messagersIds.forEach(messagerId => {
+    //     firebase
+    //       .database()
+    //       .ref("/users/" + messagerId)
+    //       .child("firstname")
+    //       .once("value")
+    //       .then(firstname => {
+    //         messagerNames.push(firstname);
+    //       });
+    //   });
+    //   console.log("messagerNames before setstate:", messagerNames);
+    //   this.setState({
+    //     messagers: messagerNames
+    //   });
+    //   console.log("messagerNames at the end?", messagerNames);
+    //   console.log("these are the messagers:", this.state.messagers);
     // });
   }
 
   render() {
     const { navigate } = this.props.navigation;
-    let messagersList = this.state.messages
-      .map(item => item.user)
-      .filter((item, index, arr) => arr.indexOf(item) == index);
+    // let messagersList = this.state.messages
+    //   .map(item => item.user)
+    //   .filter((item, index, arr) => arr.indexOf(item) == index);
     // console.log("here is that messagersList", messagersList);
     let messages = this.state.messages;
+    let messagers = this.state.messagers;
 
     return (
       <Container>
         <Content>
           <H2>Messages </H2>
           <FlatList
-            data={messages}
+            data={messagers}
             extraData={this.state.refresh}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
-              <List>
-                <Text> {item} </Text>
-              </List>
+              <TouchableOpacity style={{ marginBottom: 5, marginTop: 20 }}>
+                <Text>
+                  {" "}
+                  {item.firstname} {item.lastname}{" "}
+                </Text>
+              </TouchableOpacity>
             )}
           />
           <Form style={{ flex: 1, flexDirection: "row" }}>
