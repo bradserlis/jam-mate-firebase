@@ -87,9 +87,9 @@ export default class App extends Component {
       return (
         <Root>
           <SafeAreaView style={{ flex: 1 }}>
-            <Container>
+            <View style={{ flex: 1 }}>
               <Router />
-            </Container>
+            </View>
           </SafeAreaView>
         </Root>
       );

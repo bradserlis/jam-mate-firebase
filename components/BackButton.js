@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-native";
-import { withNavigation } from "react-navigation";
+import { withNavigation, NavigationActions } from "react-navigation";
 
 class BackButton extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class BackButton extends React.Component {
       <Button
         title="Back"
         onPress={() => {
-          this.props.navigation.goBack();
+          this.props.navigation.dispatch(goBack(null));
         }}
       />
     );

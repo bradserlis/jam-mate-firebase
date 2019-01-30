@@ -37,6 +37,7 @@ import {
   Toast
 } from "native-base";
 import styles from "./styles";
+import BackButton from "./BackButton";
 import InstrumentAdder from "./InstrumentAdder";
 import GenreAdder from "./GenreAdder";
 import * as firebase from "firebase";
@@ -62,7 +63,8 @@ export default class ProfileEditContainer extends Component {
   //   headerTintColor: "#fff",
   //   headerTitleStyle: {
   //     fontWeight: "bold"
-  //   }
+  //   },
+
   // };
 
   _onPress() {
