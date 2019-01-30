@@ -34,7 +34,8 @@ import {
   List,
   ListItem,
   CheckBox,
-  Separator
+  Separator,
+  Thumbnail
 } from "native-base";
 import FooterNav from "./FooterNav";
 import CreateMessage from "./CreateMessage";
@@ -82,11 +83,13 @@ export default class Messages extends Component {
           console.log("userid:", userid);
           let messager = userQueryResults[userid];
           console.log("messager:", messager);
+          console.log("does this return photo URL?", messager.userphoto);
           return {
             userid,
             firstname: messager.firstname,
             lastname: messager.lastname,
-            roomId: messagerObjects[userid]
+            roomId: messagerObjects[userid],
+            userphoto: messager.userphoto
           };
         });
         this.setState({
@@ -124,23 +127,32 @@ export default class Messages extends Component {
             extraData={this.state.refresh}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
-              <TouchableOpacity
-                style={{ marginBottom: 5, marginTop: 20 }}
-                onPress={() => {
-                  navigate("MessagesIndividual", {
-                    firstname: item.firstname,
-                    lastname: item.lastname,
-                    roomId: item.roomId,
-                    userId: item.userid,
-                    navigate: navigate
-                  });
-                }}
-              >
-                <Text>
-                  {" "}
-                  {item.firstname} {item.lastname}{" "}
-                </Text>
-              </TouchableOpacity>
+              <List>
+                <ListItem avatar>
+                  <Left>
+                    <Thumbnail source={{ uri: item.userphoto }} />
+                  </Left>
+                  <Body>
+                    <TouchableOpacity
+                      style={{ marginBottom: 5, marginTop: 20 }}
+                      onPress={() => {
+                        navigate("MessagesIndividual", {
+                          firstname: item.firstname,
+                          lastname: item.lastname,
+                          roomId: item.roomId,
+                          userId: item.userid,
+                          navigate: navigate
+                        });
+                      }}
+                    >
+                      <Text>
+                        {" "}
+                        {item.firstname} {item.lastname}{" "}
+                      </Text>
+                    </TouchableOpacity>
+                  </Body>
+                </ListItem>
+              </List>
             )}
           />
         </Content>
