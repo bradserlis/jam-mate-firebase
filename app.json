@@ -8,7 +8,11 @@
     "facebookAppId": "2085907415001272",
     "facebookDisplayName": "Jammate",
     "ios": {
-      "bundleIdentifier": "com.bradleyserlis.jammate"
+      "bundleIdentifier": "com.bradleyserlis.jammate",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Your location is needed to find and be found by other users near you under the 'Nearby' tab.",
+        "NSLocationAlwaysUsageDescription": "Your location is needed to find and be found by other users near you under the 'Nearby' tab."
+      }
     },
     "name": "jammate",
     "orientation": "portrait",
