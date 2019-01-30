@@ -145,8 +145,8 @@ export default class ProfileEditContainer extends Component {
           <InstrumentAdder userId={userId} />
           <GenreAdder userId={userId} />
         </Content>
-        <Footer>
-          <FooterTab style={{ paddingBottom: 0 }}>
+        <Footer style={{ marginBottom: -50 }}>
+          <FooterTab style={{ paddingBottom: 5 }}>
             <Button onPress={() => this.props.navigation("Home")}>
               <Icon name="ios-contact" />
               <Text>Return Home</Text>
