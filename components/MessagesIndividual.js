@@ -142,7 +142,7 @@ class MessagesIndividual extends Component {
                           alignItems: "flex-end"
                         }}
                       >
-                        <View>
+                        <View style={{ flexDirection: "reverse-row" }}>
                           <Text style={{ color: "white", fontWeight: "bold" }}>
                             {firebase.auth().currentUser.displayName}
                           </Text>
@@ -150,7 +150,8 @@ class MessagesIndividual extends Component {
                         <View
                           style={{
                             marginRight: 10,
-                            flex: 0.8
+                            flex: 1,
+                            alignSelf: "flex-end"
                           }}
                         >
                           <Text
