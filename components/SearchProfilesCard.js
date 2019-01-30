@@ -67,7 +67,6 @@ class SearchProfilesCard extends Component {
 
   _addContact = targetUser => {
     let currentuser = firebase.auth().currentUser.uid;
-    console.log("current user sanity check", currentuser);
     let ref = firebase
       .database()
       .ref("/users/" + currentuser)
@@ -146,8 +145,7 @@ class SearchProfilesCard extends Component {
     let currentUserObj = {};
     targetObj[targetUserId] = newRoomKey;
     currentUserObj[currentUserId] = newRoomKey;
-    console.log("what does the currentUserobj look like", currentUserObj);
-    console.log("what does the targetobj look like", targetObj);
+
     firebase
       .database()
       .ref("/users/" + currentUserId)
@@ -165,7 +163,6 @@ class SearchProfilesCard extends Component {
   _openRoom = targetUserId => {
     const { navigate } = this.props.navigation;
 
-    console.log("you are sending a message to:", targetUserId);
     let currentUserId = firebase.auth().currentUser.uid;
     // === CHECK IF MESSAGE "ROOM" BETWEEN USERS EXISTS
     let messageRoomsRef = firebase
@@ -173,7 +170,6 @@ class SearchProfilesCard extends Component {
       .ref("/users/" + currentUserId + "/messagerooms");
     messageRoomsRef.once("value").then(snapshot => {
       let users = snapshot.toJSON();
-      console.log("what is snapshot", users);
       users.hasOwnProperty(targetUserId)
         ? //   // If True...
           navigate("Messages")

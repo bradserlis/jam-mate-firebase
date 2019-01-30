@@ -80,10 +80,7 @@ export default class Messages extends Component {
 
         // map through messagerIds
         let messagerInfo = messagerIds.map(userid => {
-          console.log("userid:", userid);
           let messager = userQueryResults[userid];
-          console.log("messager:", messager);
-          console.log("does this return photo URL?", messager.userphoto);
           return {
             userid,
             firstname: messager.firstname,
@@ -107,7 +104,6 @@ export default class Messages extends Component {
     let messagerObjects = {};
     ref.once("value").then(snapshot => {
       const messageRooms = snapshot.toJSON();
-      // console.log("messagersIds before _getMessagers", messagersIds);
       this._getMessagers(messageRooms);
     });
   }
