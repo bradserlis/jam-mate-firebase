@@ -27,7 +27,7 @@ import {
   H2,
   Root
 } from "native-base";
-import { AppLoading, Asset, Font, Icon } from "expo";
+import { AppLoading, Constants, Asset, Font, Icon } from "expo";
 
 import Router from "./routes/Router";
 import { MainTabNavigator } from "./routes/MainTabNavigator";
@@ -75,6 +75,16 @@ export default class App extends Component {
   };
 
   render() {
+    console.log("checking the device...", Constants.platform.ios.model);
+    console.log("checking the device #2...", Constants.deviceName);
+    console.log("checking the platform...", Platform.OS);
+    const majorVersionIOS = parseInt(Platform.Version, 10);
+    const paddingTop = majorVersionIOS < 11 ? 35 : 15;
+    const paddingBottom =
+      Constants.deviceName === "iPhone 8 Plus" && Platform.OS === "ios"
+        ? 41
+        : 15;
+
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
@@ -87,9 +97,9 @@ export default class App extends Component {
       return (
         <Root>
           <SafeAreaView style={{ flex: 1 }}>
-            <View style={{ flex: 1 }}>
+            <Container>
               <Router />
-            </View>
+            </Container>
           </SafeAreaView>
         </Root>
       );

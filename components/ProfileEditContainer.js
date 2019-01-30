@@ -125,36 +125,47 @@ export default class ProfileEditContainer extends Component {
     return (
       <Container>
         <Content>
-          <Form>
-            <Item>
-              <Label> Contact Info</Label>
-              <Input
-                onChangeText={formContent =>
-                  this.setState({
-                    contactinfo: formContent
-                  })
-                }
-                value={this.state.contactinfo}
-              />
+          <View>
+            <View>
+              <Form>
+                <Item>
+                  <Label> Contact Info</Label>
+                  <Input
+                    onChangeText={formContent =>
+                      this.setState({
+                        contactinfo: formContent
+                      })
+                    }
+                    value={this.state.contactinfo}
+                  />
+                  <Button
+                    style={styles.addIconStyle}
+                    onPress={() => this._addContactInfo(this.state.contactinfo)}
+                  >
+                    <Text style={{ color: "white" }}> Update </Text>
+                  </Button>
+                </Item>
+              </Form>
+            </View>
+            <View>
+              <InstrumentAdder userId={userId} />
+            </View>
+            <View>
+              <GenreAdder userId={userId} />
+            </View>
+
+            <View style={(styles.centerMe, styles.backView)}>
               <Button
-                style={styles.addIconStyle}
-                onPress={() => this._addContactInfo(this.state.contactinfo)}
+                style={styles.backButton}
+                info
+                onPress={() => this.props.navigation("Home")}
               >
-                <Text style={{ color: "white" }}> Update </Text>
+                <Icon name="ios-home" />
+                <Text style={{ color: "white" }}> Go Back </Text>
               </Button>
-            </Item>
-          </Form>
-          <InstrumentAdder userId={userId} />
-          <GenreAdder userId={userId} />
+            </View>
+          </View>
         </Content>
-        <Footer style={{ marginBottom: -50 }}>
-          <FooterTab style={{ paddingBottom: 5 }}>
-            <Button onPress={() => this.props.navigation("Home")}>
-              <Icon name="ios-contact" />
-              <Text>Return Home</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     );
   }

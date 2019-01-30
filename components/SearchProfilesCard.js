@@ -210,6 +210,8 @@ class SearchProfilesCard extends Component {
               />
               {!this.state.userIsConnected ? (
                 <Button
+                  success
+                  style={{ alignSelf: "center" }}
                   onPress={() => {
                     this._addContact(this.props.userid);
                   }}
@@ -218,6 +220,8 @@ class SearchProfilesCard extends Component {
                 </Button>
               ) : null}
               <Button
+                success
+                style={{ alignSelf: "center" }}
                 onPress={() => {
                   this._openRoom(this.props.userid);
                 }}

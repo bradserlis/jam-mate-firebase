@@ -8,8 +8,28 @@ const styles = StyleSheet.create({
   topBuffer: {
     paddingTop: 50
   },
+  backView: {
+    margin: 20
+  },
+  backButton: {
+    alignSelf: "center",
+    padding: 20
+  },
+  editContainerCenter: {
+    marginTop: MODAL_HEIGHT,
+    marginBottom: MODAL_HEIGHT
+  },
+  editContainerSpacing: {
+    marginTop: 10,
+    marginBottom: 10
+  },
   centerMe: {
-    textAlign: "center"
+    flex: 1,
+    textAlign: "center",
+    justifyContent: "center",
+    alignSelf: "stretch",
+    alignContent: "center",
+    alignItems: "center"
   },
   fullScreen: {
     width: window.width,

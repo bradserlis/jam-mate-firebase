@@ -37,6 +37,8 @@ import {
 } from "native-base";
 import { withNavigation } from "react-navigation";
 
+import styles from "./styles";
+
 import FooterNav from "./FooterNav";
 import BackButton from "./BackButton";
 import CreateMessageModal from "./CreateMessageModal";
@@ -148,15 +150,17 @@ class MessagesIndividual extends Component {
               <Icon name="ios-add" />
             </Button>
           </Form>
-        </Content>
-        <Footer style={{ marginBottom: -50 }}>
-          <FooterTab style={{ paddingBottom: 5 }}>
-            <Button onPress={() => navigate("Messages")}>
+          <View style={(styles.centerMe, styles.backView)}>
+            <Button
+              style={styles.backButton}
+              info
+              onPress={() => navigate("Messages")}
+            >
               <Icon name="ios-arrow-dropleft" />
-              <Text>Back</Text>
+              <Text style={{ color: "white" }}>Back</Text>
             </Button>
-          </FooterTab>
-        </Footer>
+          </View>
+        </Content>
       </Container>
     );
   }
