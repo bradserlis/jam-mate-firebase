@@ -128,7 +128,7 @@ class MessagesIndividual extends Component {
             renderItem={({ item, index }) => (
               <List>
                 <ListItem>
-                  <View>
+                  <View style={{ flex: 1 }}>
                     {item.user === firebase.auth().currentUser.uid ||
                     !item.user ? (
                       <View
@@ -138,7 +138,8 @@ class MessagesIndividual extends Component {
                         borderRadius={20}
                         style={{
                           padding: 10,
-                          backgroundColor: "rgb(87, 214, 49)"
+                          backgroundColor: "rgb(87, 214, 49)",
+                          alignItems: "flex-end"
                         }}
                       >
                         <View>
@@ -148,16 +149,14 @@ class MessagesIndividual extends Component {
                         </View>
                         <View
                           style={{
-                            marginLeft: 10,
-                            flexDirection: "column",
+                            marginRight: 10,
                             flex: 0.8
                           }}
                         >
                           <Text
                             style={{
-                              flex: 1,
                               flexWrap: "wrap",
-                              textAlign: "center",
+                              textAlign: "right",
                               color: "white"
                             }}
                           >
@@ -173,7 +172,8 @@ class MessagesIndividual extends Component {
                         borderRadius={20}
                         style={{
                           padding: 10,
-                          backgroundColor: "rgb(54, 143, 226)"
+                          backgroundColor: "rgb(54, 143, 226)",
+                          alignItems: "flex-start"
                         }}
                       >
                         <View>
@@ -184,7 +184,6 @@ class MessagesIndividual extends Component {
                         <View
                           style={{
                             marginLeft: 10,
-                            flexDirection: "column",
                             flex: 0.8
                           }}
                         >
@@ -192,7 +191,6 @@ class MessagesIndividual extends Component {
                             style={{
                               flex: 1,
                               flexWrap: "wrap",
-                              textAlign: "center",
                               color: "white"
                             }}
                           >
