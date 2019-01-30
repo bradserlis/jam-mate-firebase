@@ -115,6 +115,7 @@ class MessagesIndividual extends Component {
   render() {
     const { navigate } = this.props.navigation;
     let messages = this.state.messages;
+    let messageColor = "";
     // const username = navigate.getParam(firstname, "nothing came over");
 
     return (
@@ -126,16 +127,82 @@ class MessagesIndividual extends Component {
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <List>
-                <View style={{ marginTop: 5 }}>
-                  <Text>
-                    {item.user === firebase.auth().currentUser.uid || !item.user
-                      ? firebase.auth().currentUser.displayName
-                      : this.props.navigation.getParam("firstname")}
-                  </Text>
-                </View>
-                <View style={{ marginBottom: 10 }}>
-                  <Text style={{ paddingRight: 20 }}>{item.message}</Text>
-                </View>
+                <ListItem>
+                  <View>
+                    {item.user === firebase.auth().currentUser.uid ||
+                    !item.user ? (
+                      <View
+                        borderStyle={"solid"}
+                        borderColor={"rgb(87, 214, 49)"}
+                        borderWidth={1}
+                        borderRadius={20}
+                        style={{
+                          padding: 10,
+                          backgroundColor: "rgb(87, 214, 49)"
+                        }}
+                      >
+                        <View>
+                          <Text style={{ color: "white", fontWeight: "bold" }}>
+                            {firebase.auth().currentUser.displayName}
+                          </Text>
+                        </View>
+                        <View
+                          style={{
+                            marginLeft: 10,
+                            flexDirection: "column",
+                            flex: 0.8
+                          }}
+                        >
+                          <Text
+                            style={{
+                              flex: 1,
+                              flexWrap: "wrap",
+                              textAlign: "center",
+                              color: "white"
+                            }}
+                          >
+                            {item.message}
+                          </Text>
+                        </View>
+                      </View>
+                    ) : (
+                      <View
+                        borderStyle={"solid"}
+                        borderColor={"rgb(54, 143, 226)"}
+                        borderWidth={1}
+                        borderRadius={20}
+                        style={{
+                          padding: 10,
+                          backgroundColor: "rgb(54, 143, 226)"
+                        }}
+                      >
+                        <View>
+                          <Text style={{ color: "white" }}>
+                            {this.props.navigation.getParam("firstname")}
+                          </Text>
+                        </View>
+                        <View
+                          style={{
+                            marginLeft: 10,
+                            flexDirection: "column",
+                            flex: 0.8
+                          }}
+                        >
+                          <Text
+                            style={{
+                              flex: 1,
+                              flexWrap: "wrap",
+                              textAlign: "center",
+                              color: "white"
+                            }}
+                          >
+                            {item.message}
+                          </Text>
+                        </View>
+                      </View>
+                    )}
+                  </View>
+                </ListItem>
               </List>
             )}
           />
@@ -202,4 +269,32 @@ export default withNavigation(MessagesIndividual);
 // onBackdropPress={this.handleDismissCreateMessageModal}
 {
   /* /> */
+}
+
+{
+  /* <View>
+<Text>
+  {item.user === firebase.auth().currentUser.uid ||
+  !item.user
+    ? firebase.auth().currentUser.displayName
+    : this.props.navigation.getParam("firstname")}
+</Text>
+</View>
+<View
+style={{
+  marginLeft: 10,
+  flexDirection: "column",
+  flex: 0.8
+}}
+>
+<Text
+  style={{
+    flex: 1,
+    flexWrap: "wrap",
+    textAlign: "center"
+  }}
+>
+  {item.message}
+</Text>
+</View> */
 }
