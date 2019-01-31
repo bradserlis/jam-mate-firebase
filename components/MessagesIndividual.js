@@ -50,7 +50,8 @@ class MessagesIndividual extends Component {
     this.state = {
       isCreateMessageModalVisible: false,
       formContent: "",
-      messages: []
+      messages: [],
+      refresh: false
     };
     //   handleShowCreateMessageModal = () => {
     //     this.setState({
@@ -108,14 +109,22 @@ class MessagesIndividual extends Component {
         messages: [...previousState.messages, snapshot.toJSON()]
       }));
       console.log("this is messages state", this.state.messages);
+      this.setState({
+        refresh: !this.state.refresh
+      });
     });
   }
-  componentWillUnmount() {}
+  componentWillUnmount = () => {
+    this.setState({
+      refresh: !this.state.refresh
+    });
+  };
 
   render() {
     const { navigate } = this.props.navigation;
     let messages = this.state.messages;
     let messageColor = "";
+
     // const username = navigate.getParam(firstname, "nothing came over");
 
     return (

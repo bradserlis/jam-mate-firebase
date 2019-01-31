@@ -104,10 +104,6 @@ export default class Messages extends Component {
     // let messagersIds = [];
     let messagerObjects = {};
     ref.once("value").then(snapshot => {
-      console.log(
-        "this is what an empty messagerooms looks like",
-        snapshot.toJSON()
-      );
       if (snapshot.toJSON() === null) {
         console.log("this was null", snapshot.toJSON());
         return;
@@ -135,7 +131,7 @@ export default class Messages extends Component {
           ) : (
             <FlatList
               data={messagers}
-              extraData={this.state.refresh}
+              extraData={messagers}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item, index }) => (
                 <List>
