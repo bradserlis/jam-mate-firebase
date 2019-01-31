@@ -223,25 +223,6 @@ export default class Nearby extends Component {
       <Container>
         <Content>
           <H2 style={styles.notchCompensation}> Nearby Users </H2>
-          <View>
-            <View style={{ padding: 15 }}>
-              <Text style={styles.centerMe}>
-                Nearby Users will Display Below
-              </Text>
-            </View>
-            <View>
-              <Text style={{ marginLeft: 7, flexWrap: "wrap" }}>
-                When you SEND CONTACT INFO, your provided contact info will be
-                shared with that user.
-              </Text>
-            </View>
-            <View>
-              <Text style={{ marginLeft: 7, fontSize: 12, lineHeight: 18 }}>
-                You can change your contact info from your Home page by clicking
-                "Edit"
-              </Text>
-            </View>
-          </View>
 
           {results.length < 1 ? (
             <View style={{ margin: 20 }}>
@@ -274,6 +255,20 @@ export default class Nearby extends Component {
               )}
             />
           )}
+          <View style={{ padding: 15 }}>
+            <View>
+              <Text style={styles.centerMe}>
+                When you SEND CONTACT INFO, your provided contact info will be
+                shared with that user.
+              </Text>
+            </View>
+            <View style={{ margin: 5 }}>
+              <Text style={styles.centerMe}>
+                You can change your contact info from your Home page by clicking
+                "Edit"
+              </Text>
+            </View>
+          </View>
         </Content>
       </Container>
     );

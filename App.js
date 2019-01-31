@@ -59,7 +59,8 @@ export default class App extends Component {
       Asset.loadAsync([
         require("./img/music.jpg"),
         require("./img/binding_dark.png"),
-        require("./img/facebook_login.png")
+        require("./img/facebook_login.png"),
+        require("./img/diamond_upholstery.png")
       ])
     ]);
   };

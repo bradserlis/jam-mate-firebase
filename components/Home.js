@@ -219,49 +219,63 @@ export default class Home extends Component {
     //===
     return (
       <Container>
-        <Grid>
-          <Row>
-            <Col size={25}>
-              <View style={{ marginLeft: 5 }}>
-                <TouchableOpacity
-                  onPress={() =>
-                    this._logOut().then(() => {
-                      Toast.show({
-                        text: "Logged Out"
-                      });
-                      navigate("Landing");
-                    })
-                  }
-                >
-                  <Icon name="ios-log-out" />
-                  <Text>Log Out</Text>
-                </TouchableOpacity>
-              </View>
-            </Col>
-            <Col size={50}>
-              <ProfileTop
-                username={this.state.username}
-                userphoto={this.state.userphoto}
-              />
-            </Col>
-            <Col size={25}>
-              <View style={{ alignItems: "flex-end", marginRight: 5 }}>
-                <TouchableOpacity onPress={() => navigate("ProfileEdit")}>
-                  <Icon name="ios-menu" />
-                  <Text>Edit</Text>
-                </TouchableOpacity>
-              </View>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
+        <ImageBackground
+          style={{
+            flex: 1,
+            width: window.width,
+            height: window.height
+          }}
+          imageStyle={{ resizeMode: "repeat" }}
+          source={require("../img/diamond_upholstery.png")}
+        >
+          <Grid>
+            <Row size={50}>
+              <Col size={25}>
+                <View style={{ marginLeft: 5 }}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this._logOut().then(() => {
+                        Toast.show({
+                          text: "Logged Out"
+                        });
+                        navigate("Landing");
+                      })
+                    }
+                  >
+                    <Icon
+                      style={{ color: "rgb(66, 163, 255)" }}
+                      name="ios-log-out"
+                    />
+                    <Text style={{ color: "rgb(66, 163, 255)" }}>Log Out</Text>
+                  </TouchableOpacity>
+                </View>
+              </Col>
+              <Col size={50}>
+                <ProfileTop
+                  username={this.state.username}
+                  userphoto={this.state.userphoto}
+                />
+              </Col>
+              <Col size={25}>
+                <View style={{ alignItems: "flex-end", marginRight: 5 }}>
+                  <TouchableOpacity onPress={() => navigate("ProfileEdit")}>
+                    <Icon
+                      style={{ color: "rgb(66, 163, 255)" }}
+                      name="ios-menu"
+                    />
+                    <Text style={{ color: "rgb(66, 163, 255)" }}>Edit</Text>
+                  </TouchableOpacity>
+                </View>
+              </Col>
+            </Row>
+            <Row size={25}>
               <Instruments instruments={this.state.instrumentList} />
-            </Col>
-            <Col>
+            </Row>
+            <Row size={25}>
               <Genres genres={this.state.genreList} />
-            </Col>
-          </Row>
-        </Grid>
+            </Row>
+          </Grid>
+        </ImageBackground>
       </Container>
     );
   }

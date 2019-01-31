@@ -129,7 +129,7 @@ export default class Connections extends Component {
     return (
       <Container>
         <Content>
-          <H2> Connections </H2>
+          <H2 style={styles.notchCompensation}> Connections </H2>
           {this.state.contactinfo.length < 1 ? (
             <View style={{ padding: 15 }}>
               <Text style={styles.centerMe}> No Connections </Text>

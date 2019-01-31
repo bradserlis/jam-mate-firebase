@@ -183,9 +183,9 @@ class SearchProfilesCard extends Component {
 
     let currentUserId = firebase.auth().currentUser.uid;
 
-    let combo = ["INSTRUMENTS"].concat(
+    let combo = ["INSTRUMENTS:"].concat(
       this.props.instruments,
-      [" ", "GENRES"],
+      [" ", "GENRES:"],
       this.props.genres
     );
 
@@ -193,39 +193,46 @@ class SearchProfilesCard extends Component {
       <LinearGradient colors={["#4c669f", "#3b5998", "#192f6a"]}>
         <Card>
           <CardItem>
-            <Body>
+            <View style={{ flex: 1 }}>
               <H3>{this.props.name}</H3>
               <FlatList
                 data={combo}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
-                  return <Text>{item}</Text>;
+                  return (
+                    <List>
+                      <Text>{item}</Text>
+                    </List>
+                  );
                 }}
               />
               {!this.state.userIsConnected ? (
                 <Button
-                  success
-                  style={{ padding: 10, alignSelf: "center", marginBottom: 3 }}
+                  info
+                  style={{
+                    padding: 7,
+                    margin: 3
+                  }}
                   onPress={() => {
                     this._addContact(this.props.userid);
                   }}
                 >
-                  <Text style={{ color: "white" }}>
+                  <Text style={{ color: "white", fontSize: 12 }}>
                     {" "}
                     Send Contact Info to {this.props.name}{" "}
                   </Text>
                 </Button>
               ) : null}
               <Button
-                success
-                style={{ padding: 10, alignSelf: "center", marginBottom: 3 }}
+                info
+                style={{ padding: 7, margin: 3 }}
                 onPress={() => {
                   this._openRoom(this.props.userid);
                 }}
               >
-                <Text style={{ color: "white" }}> Message </Text>
+                <Text style={{ color: "white", fontSize: 12 }}> Message </Text>
               </Button>
-            </Body>
+            </View>
           </CardItem>
         </Card>
       </LinearGradient>

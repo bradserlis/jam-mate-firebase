@@ -45,33 +45,24 @@ export default class Genres extends Component {
   render() {
     if (this.props.genres) {
       return (
-        <ImageBackground
-          style={{
-            flex: 1,
-            width: window.width,
-            height: window.height
-          }}
-          source={require("../img/binding_dark.png")}
-        >
+        <View style={{ flex: 1 }}>
           <View>
-            <View>
-              <H2 style={styles.profileHeaderText}> Genres</H2>
-            </View>
-            <View style={styles.badgeList}>
-              {this.props.genres.map((genre, index) => (
-                <Badge
-                  primary
-                  style={{ marginRight: 5, marginBottom: 10 }}
-                  key={genre.key}
-                >
-                  <TouchableOpacity>
-                    <Text style={{ color: "white" }}>{genre.val()}</Text>
-                  </TouchableOpacity>
-                </Badge>
-              ))}
-            </View>
+            <H2 style={styles.profileHeaderText}> Genres</H2>
           </View>
-        </ImageBackground>
+          <View style={styles.badgeList}>
+            {this.props.genres.map((genre, index) => (
+              <Badge
+                primary
+                style={{ marginRight: 5, marginBottom: 10 }}
+                key={genre.key}
+              >
+                <TouchableOpacity>
+                  <Text style={{ color: "white" }}>{genre.val()}</Text>
+                </TouchableOpacity>
+              </Badge>
+            ))}
+          </View>
+        </View>
       );
     }
     return (

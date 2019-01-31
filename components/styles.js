@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
   },
   profileHeaderText: {
     fontFamily: "Copperplate",
-    color: "white"
+    alignSelf: "center",
+    color: "black"
   },
   title: {
     fontSize: 80,
@@ -73,7 +74,8 @@ const styles = StyleSheet.create({
     left: -200
   },
   notchCompensation: {
-    marginTop: 0
+    marginTop: 0,
+    alignSelf: "center"
   },
   addIconStyle: {
     padding: 7,

@@ -127,7 +127,7 @@ export default class Messages extends Component {
     return (
       <Container>
         <Content>
-          <H2>Messages </H2>
+          <H2 style={styles.notchCompensation}>Messages </H2>
           {messagers.length < 1 ? (
             <View style={{ margin: 20 }}>
               <Text style={styles.modalTitleText}>No Messages</Text>

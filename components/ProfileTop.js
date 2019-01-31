@@ -49,14 +49,17 @@ export default class ProfileTop extends Component {
           flexDirection: "column"
         }}
       >
-        <Text style={{ fontSize: 25 }}>Hi {this.props.username} !</Text>
-        <Animatable.View animation="zoomIn">
-          <Thumbnail
-            large
-            style={{ width: 140, height: 180 }}
-            source={{ uri: this.props.userphoto }}
-          />
-        </Animatable.View>
+        <Text style={{ fontSize: 25 }}>Hi,</Text>
+        <Text style={{ fontSize: 25 }}>{this.props.username}!</Text>
+        <View style={{ margin: 5 }}>
+          <Animatable.View animation="zoomIn">
+            <Thumbnail
+              large
+              style={{ width: 160, height: 160, borderRadius: 80 }}
+              source={{ uri: this.props.userphoto }}
+            />
+          </Animatable.View>
+        </View>
       </View>
     );
   }
