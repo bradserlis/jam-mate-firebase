@@ -221,31 +221,37 @@ export default class Home extends Component {
       <Container>
         <Grid>
           <Row>
-            <View style={{ flex: 0.5, marginLeft: 10 }}>
-              <TouchableOpacity
-                onPress={() =>
-                  this._logOut().then(() => {
-                    Toast.show({
-                      text: "Logged Out"
-                    });
-                    navigate("Landing");
-                  })
-                }
-              >
-                <Icon name="ios-log-out" />
-                <Text>Log Out</Text>
-              </TouchableOpacity>
-            </View>
-            <ProfileTop
-              username={this.state.username}
-              userphoto={this.state.userphoto}
-            />
-            <View style={{ marginRight: 10 }}>
-              <TouchableOpacity onPress={() => navigate("ProfileEdit")}>
-                <Icon name="ios-menu" />
-                <Text>Edit</Text>
-              </TouchableOpacity>
-            </View>
+            <Col size={25}>
+              <View style={{ marginLeft: 5 }}>
+                <TouchableOpacity
+                  onPress={() =>
+                    this._logOut().then(() => {
+                      Toast.show({
+                        text: "Logged Out"
+                      });
+                      navigate("Landing");
+                    })
+                  }
+                >
+                  <Icon name="ios-log-out" />
+                  <Text>Log Out</Text>
+                </TouchableOpacity>
+              </View>
+            </Col>
+            <Col size={50}>
+              <ProfileTop
+                username={this.state.username}
+                userphoto={this.state.userphoto}
+              />
+            </Col>
+            <Col size={25}>
+              <View style={{ alignItems: "flex-end", marginRight: 5 }}>
+                <TouchableOpacity onPress={() => navigate("ProfileEdit")}>
+                  <Icon name="ios-menu" />
+                  <Text>Edit</Text>
+                </TouchableOpacity>
+              </View>
+            </Col>
           </Row>
           <Row>
             <Col>
