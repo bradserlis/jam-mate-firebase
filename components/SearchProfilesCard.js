@@ -211,22 +211,25 @@ class SearchProfilesCard extends Component {
               {!this.state.userIsConnected ? (
                 <Button
                   success
-                  style={{ alignSelf: "center" }}
+                  style={{ padding: 10, alignSelf: "center", marginBottom: 3 }}
                   onPress={() => {
                     this._addContact(this.props.userid);
                   }}
                 >
-                  <Text> Send Contact Info to {this.props.name} </Text>
+                  <Text style={{ color: "white" }}>
+                    {" "}
+                    Send Contact Info to {this.props.name}{" "}
+                  </Text>
                 </Button>
               ) : null}
               <Button
                 success
-                style={{ alignSelf: "center" }}
+                style={{ padding: 10, alignSelf: "center", marginBottom: 3 }}
                 onPress={() => {
                   this._openRoom(this.props.userid);
                 }}
               >
-                <Text> Message </Text>
+                <Text style={{ color: "white" }}> Message </Text>
               </Button>
             </Body>
           </CardItem>
