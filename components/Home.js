@@ -107,6 +107,10 @@ export default class Home extends Component {
   // };
   // ===
 
+  _logOut = async () => {
+    return firebase.auth().signOut();
+  };
+
   _getLocationAsync = async () => {
     const { Location, Permissions } = Expo;
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -217,6 +221,21 @@ export default class Home extends Component {
       <Container>
         <Grid>
           <Row>
+            <View style={{ marginLeft: 10 }}>
+              <TouchableOpacity
+                onPress={() =>
+                  this._logOut().then(() => {
+                    Toast.show({
+                      text: "Logged Out"
+                    });
+                    navigate("Landing");
+                  })
+                }
+              >
+                <Icon name="ios-log-out" />
+                <Text>Log Out</Text>
+              </TouchableOpacity>
+            </View>
             <ProfileTop
               username={this.state.username}
               userphoto={this.state.userphoto}

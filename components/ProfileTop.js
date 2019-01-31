@@ -47,7 +47,7 @@ export default class ProfileTop extends Component {
           alignItems: "center",
           flex: 1,
           flexDirection: "column",
-          marginLeft: 35
+          marginLeft: -50
         }}
       >
         <Text style={{ fontSize: 25 }}>Hi {this.props.username} !</Text>
