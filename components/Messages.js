@@ -41,6 +41,7 @@ import FooterNav from "./FooterNav";
 import CreateMessage from "./CreateMessage";
 import MessagesIndividual from "./MessagesIndividual";
 import * as firebase from "firebase";
+import styles from "./styles";
 
 export default class Messages extends Component {
   constructor(props) {
@@ -103,8 +104,17 @@ export default class Messages extends Component {
     // let messagersIds = [];
     let messagerObjects = {};
     ref.once("value").then(snapshot => {
-      const messageRooms = snapshot.toJSON();
-      this._getMessagers(messageRooms);
+      console.log(
+        "this is what an empty messagerooms looks like",
+        snapshot.toJSON()
+      );
+      if (snapshot.toJSON() === null) {
+        console.log("this was null", snapshot.toJSON());
+        return;
+      } else {
+        const messageRooms = snapshot.toJSON();
+        this._getMessagers(messageRooms);
+      }
     });
   }
 
@@ -118,39 +128,45 @@ export default class Messages extends Component {
       <Container>
         <Content>
           <H2>Messages </H2>
-          <FlatList
-            data={messagers}
-            extraData={this.state.refresh}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <List>
-                <ListItem avatar>
-                  <Left>
-                    <Thumbnail source={{ uri: item.userphoto }} />
-                  </Left>
-                  <Body>
-                    <TouchableOpacity
-                      style={{ marginBottom: 5, marginTop: 20 }}
-                      onPress={() => {
-                        navigate("MessagesIndividual", {
-                          firstname: item.firstname,
-                          lastname: item.lastname,
-                          roomId: item.roomId,
-                          userId: item.userid,
-                          navigate: navigate
-                        });
-                      }}
-                    >
-                      <Text>
-                        {" "}
-                        {item.firstname} {item.lastname}{" "}
-                      </Text>
-                    </TouchableOpacity>
-                  </Body>
-                </ListItem>
-              </List>
-            )}
-          />
+          {messagers.length < 1 ? (
+            <View style={{ margin: 20 }}>
+              <Text style={styles.modalTitleText}>No Messages</Text>
+            </View>
+          ) : (
+            <FlatList
+              data={messagers}
+              extraData={this.state.refresh}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item, index }) => (
+                <List>
+                  <ListItem avatar>
+                    <Left>
+                      <Thumbnail source={{ uri: item.userphoto }} />
+                    </Left>
+                    <Body>
+                      <TouchableOpacity
+                        style={{ marginBottom: 5, marginTop: 20 }}
+                        onPress={() => {
+                          navigate("MessagesIndividual", {
+                            firstname: item.firstname,
+                            lastname: item.lastname,
+                            roomId: item.roomId,
+                            userId: item.userid,
+                            navigate: navigate
+                          });
+                        }}
+                      >
+                        <Text>
+                          {" "}
+                          {item.firstname} {item.lastname}{" "}
+                        </Text>
+                      </TouchableOpacity>
+                    </Body>
+                  </ListItem>
+                </List>
+              )}
+            />
+          )}
         </Content>
       </Container>
     );
