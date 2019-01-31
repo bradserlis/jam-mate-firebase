@@ -221,7 +221,7 @@ export default class Home extends Component {
       <Container>
         <Grid>
           <Row>
-            <View style={{ marginLeft: 10 }}>
+            <View style={{ flex: 0.5, marginLeft: 10 }}>
               <TouchableOpacity
                 onPress={() =>
                   this._logOut().then(() => {

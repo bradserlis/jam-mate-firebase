@@ -199,13 +199,7 @@ class SearchProfilesCard extends Component {
                 data={combo}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
-                  return (
-                    <List>
-                      <ListItem listKey={"a" + index.toString()}>
-                        <Text>{item}</Text>
-                      </ListItem>
-                    </List>
-                  );
+                  return <Text>{item}</Text>;
                 }}
               />
               {!this.state.userIsConnected ? (

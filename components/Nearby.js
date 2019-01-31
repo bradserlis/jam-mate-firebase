@@ -230,13 +230,13 @@ export default class Nearby extends Component {
               </Text>
             </View>
             <View>
-              <Text>
+              <Text style={{ marginLeft: 7, flexWrap: "wrap" }}>
                 When you SEND CONTACT INFO, your provided contact info will be
                 shared with that user.
               </Text>
             </View>
             <View>
-              <Text style={{ fontSize: 12, lineHeight: 18 }}>
+              <Text style={{ marginLeft: 7, fontSize: 12, lineHeight: 18 }}>
                 You can change your contact info from your Home page by clicking
                 "Edit"
               </Text>
@@ -254,7 +254,7 @@ export default class Nearby extends Component {
               keyExtractor={item => item.userid}
               renderItem={({ item, index }) => (
                 <List listKey={item.userid}>
-                  <ListItem avatar>
+                  <ListItem thumbnail>
                     <Left>
                       <Thumbnail source={{ uri: item.userphoto }} />
                     </Left>
