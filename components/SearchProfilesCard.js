@@ -170,11 +170,13 @@ class SearchProfilesCard extends Component {
       .ref("/users/" + currentUserId + "/messagerooms");
     messageRoomsRef.once("value").then(snapshot => {
       let users = snapshot.toJSON();
-      users.hasOwnProperty(targetUserId)
-        ? //   // If True...
-          navigate("Messages")
-        : // If no room yet exists....
-          this._createRoom(targetUserId);
+      if (snapshot.toJSON() === null) {
+        this._createRoom(targetUserId);
+      } else if (users.hasOwnProperty(targetUserId)) {
+        navigate("Messages");
+      } else {
+        this._createRoom(targetUserId);
+      }
     });
   };
 
