@@ -42,7 +42,6 @@ import Messages from "./Messages";
 import Genres from "./Genres";
 import * as firebase from "firebase";
 import geofire from "geofire";
-import CookieManager from 'react-native-cookies';
 
 import * as Animatable from "react-native-animatable";
 
@@ -108,12 +107,8 @@ export default class Home extends Component {
   // };
   // ===
 
-  _logOut = () => {
-    CookieManager.clearAll()
-.then(()=>{
-
-  return firebase.auth().signOut();
-}
+  _logOut = async () => {
+    return firebase.auth().signOut();
   };
 
   _getLocationAsync = async () => {

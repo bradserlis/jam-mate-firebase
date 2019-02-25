@@ -39,7 +39,8 @@ export default class Landing extends Component {
       user: null,
       userphoto: null,
       firstname: null,
-      lastname: null
+      lastname: null,
+      fbToken: null
     };
   }
 
@@ -49,12 +50,15 @@ export default class Landing extends Component {
 
   componentDidMount = () => {};
 
-  async _loginWithFacebook() {
+  _loginWithFacebook = async () => {
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
       "2085907415001272",
       { permissions: ["public_profile", "email"] }
     );
     if (type == "success") {
+      this.setState({
+        fbToken: token
+      });
       const response = await fetch(
         `https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large),first_name,last_name`
       );
@@ -91,7 +95,7 @@ export default class Landing extends Component {
           console.log(error);
         });
     }
-  }
+  };
 
   render() {
     const { navigate } = this.props.navigation;
@@ -126,6 +130,15 @@ export default class Landing extends Component {
                   Toast.show({
                     text: "Welcome Back"
                   });
+                  fetch(
+                    `https://graph.facebook.com/${
+                      this.state.fbToken
+                    }/permissions`,
+                    {
+                      method: "DELETE",
+                      body: this.state.fbToken
+                    }
+                  );
                   navigate("Home");
                 })
               }

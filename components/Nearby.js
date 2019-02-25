@@ -115,7 +115,7 @@ export default class Nearby extends Component {
           // ******** initialize geoquery
           const geoQuery = geoFire.query({
             center: location,
-            radius: 33
+            radius: 57
           });
           // console.log("step 2 - this is the geoquery:", geoQuery);
           // console.log(
