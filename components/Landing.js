@@ -70,16 +70,6 @@ export default class Landing extends Component {
         fId: facebookId
       });
       const credential = firebase.auth.FacebookAuthProvider.credential(token);
-      fetch(`https://graph.facebook.com/${this.state.fId}/permissions`, {
-        method: "DELETE",
-        body: `access_token=${this.state.fbToken}`
-      }).then(response => {
-        if (response.ok) {
-          console.log("response was ok", response);
-        } else {
-          console.log("response no good", response);
-        }
-      });
       return firebase
         .auth()
         .signInAndRetrieveDataWithCredential(credential)
@@ -105,6 +95,16 @@ export default class Landing extends Component {
               .child("userphoto")
               .set(jresponse.picture.data.url);
           }
+          fetch(`https://graph.facebook.com/${this.state.fId}/permissions`, {
+            method: "DELETE",
+            body: `access_token=${this.state.fbToken}`
+          }).then(response => {
+            if (response.ok) {
+              console.log("response was ok", response);
+            } else {
+              console.log("response no good", response);
+            }
+          });
         })
         .catch(error => {
           console.log(error);
