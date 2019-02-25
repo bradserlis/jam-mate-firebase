@@ -40,7 +40,8 @@ export default class Landing extends Component {
       userphoto: null,
       firstname: null,
       lastname: null,
-      fbToken: null
+      fbToken: null,
+      fId: null
     };
   }
 
@@ -63,7 +64,11 @@ export default class Landing extends Component {
         `https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large),first_name,last_name`
       );
       const jresponse = await response.json();
-
+      const facebookId = jresponse.id;
+      console.log("this is the fid", facebookId);
+      this.setState({
+        fId: facebookId
+      });
       const credential = firebase.auth.FacebookAuthProvider.credential(token);
       return firebase
         .auth()
@@ -131,9 +136,7 @@ export default class Landing extends Component {
                     text: "Welcome Back"
                   });
                   fetch(
-                    `https://graph.facebook.com/${
-                      this.state.fbToken
-                    }/permissions`,
+                    `https://graph.facebook.com/${this.state.fId}/permissions`,
                     {
                       method: "DELETE",
                       body: this.state.fbToken
