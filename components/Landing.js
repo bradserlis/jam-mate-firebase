@@ -70,11 +70,21 @@ export default class Landing extends Component {
         fId: facebookId
       });
       const credential = firebase.auth.FacebookAuthProvider.credential(token);
+      fetch(`https://graph.facebook.com/${this.state.fId}/permissions`, {
+        method: "DELETE",
+        body: `access_token=${this.state.fbToken}`
+      }).then(response => {
+        if (response.ok) {
+          console.log("response was ok", response);
+        } else {
+          console.log("response no good", response);
+        }
+      });
       return firebase
         .auth()
         .signInAndRetrieveDataWithCredential(credential)
-        .then(function() {
-          userId = firebase.auth().currentUser.uid;
+        .then(() => {
+          const userId = firebase.auth().currentUser.uid;
           if (userId) {
             firebase
               .database()
@@ -135,13 +145,6 @@ export default class Landing extends Component {
                   Toast.show({
                     text: "Welcome Back"
                   });
-                  fetch(
-                    `https://graph.facebook.com/${this.state.fId}/permissions`,
-                    {
-                      method: "DELETE",
-                      body: this.state.fbToken
-                    }
-                  );
                   navigate("Home");
                 })
               }
