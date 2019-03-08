@@ -8,9 +8,7 @@ https://trello.com/b/MJ8VWGqW/jammate-reactnative
 
 # Screenshots
 
-![3 5-inch screenshot 1](https://user-images.githubusercontent.com/36775791/53999855-e389bd00-40f9-11e9-8d9c-607b62239141.jpg)
-![3 5-inch screenshot 2](https://user-images.githubusercontent.com/36775791/53999856-e4225380-40f9-11e9-914e-cb333e1fcd5f.jpg)
-![3 5-inch screenshot 3](https://user-images.githubusercontent.com/36775791/53999857-e4225380-40f9-11e9-8886-9324e7fee68f.jpg)
+![screen shot 2019-03-07 at 4 57 50 pm](https://user-images.githubusercontent.com/36775791/53999915-33688400-40fa-11e9-8d7e-cdf81bbbddd8.png)
 
 # What is it?
 
