@@ -1,18 +1,16 @@
 # JamMate
 
-![jammate](https://user-images.githubusercontent.com/36775791/53999651-13849080-40f9-11e9-975e-bf6d1f392bcf.png)
+[Try JamMate now on IOS!](https://itunes.apple.com/us/app/jammate/id1441181021?ls=1&mt=8 "JamMate")
 
 # Trello
 
 https://trello.com/b/MJ8VWGqW/jammate-reactnative
 
-[Try JamMate now on IOS!](https://itunes.apple.com/us/app/jammate/id1441181021?ls=1&mt=8 "JamMate")
-
 # Screenshots
 
-![4 7-inch screenshot 1](https://user-images.githubusercontent.com/36775791/53999630-f780ef00-40f8-11e9-9822-5e0563313f92.jpg)
-![4 7-inch screenshot 2](https://user-images.githubusercontent.com/36775791/53999631-f780ef00-40f8-11e9-9061-074947270e5d.jpg)
-![4 7-inch screenshot 3](https://user-images.githubusercontent.com/36775791/53999632-f780ef00-40f8-11e9-8089-b98509499992.jpg)
+![3 5-inch screenshot 1](https://user-images.githubusercontent.com/36775791/53999855-e389bd00-40f9-11e9-8d9c-607b62239141.jpg)
+![3 5-inch screenshot 2](https://user-images.githubusercontent.com/36775791/53999856-e4225380-40f9-11e9-914e-cb333e1fcd5f.jpg)
+![3 5-inch screenshot 3](https://user-images.githubusercontent.com/36775791/53999857-e4225380-40f9-11e9-8886-9324e7fee68f.jpg)
 
 # What is it?
 
