@@ -108,7 +108,6 @@ class MessagesIndividual extends Component {
       this.setState(previousState => ({
         messages: [...previousState.messages, snapshot.toJSON()]
       }));
-      console.log("this is messages state", this.state.messages);
       this.setState({
         refresh: !this.state.refresh
       });
