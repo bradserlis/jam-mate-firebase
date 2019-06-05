@@ -83,7 +83,6 @@ export default class Connections extends Component {
       .once("value")
       .then(snapshot => {
         snapshot.forEach(function(userSnapshot) {
-          console.log("here is a usersnapshot", userSnapshot);
           newList.push(userSnapshot);
         });
         this._getArray(newList);

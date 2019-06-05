@@ -1,6 +1,6 @@
 {
   "name": "jammate",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": true,
   "devDependencies": {
     "jest-expo": "^31.0.0",
@@ -27,7 +27,7 @@
     "lodash": "^4.17.11",
     "merge": "1.2.1",
     "morgan": "^1.9.1",
-    "native-base": "^2.10.0",
+    "native-base": "^2.12.1",
     "plist": "^3.0.1",
     "react": "16.5.0",
     "react-devtools-core": "^3.4.3",
@@ -39,6 +39,7 @@
     "react-native-paper": "^2.3.0",
     "react-navigation": "^2.18.3",
     "react-navigation-material-bottom-tabs": "^0.4.0",
+    "ws": "^7.0.0",
     "xmlbuilder": "^10.1.1"
   },
   "repository": "git@github.com:bradserlis/jam-mate-firebase.git",

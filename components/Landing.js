@@ -65,7 +65,6 @@ export default class Landing extends Component {
       );
       const jresponse = await response.json();
       const facebookId = jresponse.id;
-      console.log("this is the fid", facebookId);
       this.setState({
         fId: facebookId
       });
@@ -100,9 +99,9 @@ export default class Landing extends Component {
             body: `access_token=${this.state.fbToken}`
           }).then(response => {
             if (response.ok) {
-              console.log("response was ok", response);
+              console.log("response was ok");
             } else {
-              console.log("response no good", response);
+              console.log("response no good");
             }
           });
         })
