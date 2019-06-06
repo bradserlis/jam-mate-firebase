@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Router from "./Router";
 import Landing from "../../login/containers/Landing";
 import Home from "../../profile/containers/Home";
-import Nearby from "../../components/Nearby";
+import Nearby from "../../nearby/containers/Nearby";
 import Messages from "../../messages/containers/Messages";
 import Connections from "../../connections/containers/Connections";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";

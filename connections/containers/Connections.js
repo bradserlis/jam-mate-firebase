@@ -40,8 +40,6 @@ import {
   Ul,
   Li
 } from "native-base";
-import SearchProfilesCard from "../../components/SearchProfilesCard";
-import SearchProfilesGenres from "../../components/SearchProfilesGenres";
 import CreateMessageModal from "../../messages/components/CreateMessageModal";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";

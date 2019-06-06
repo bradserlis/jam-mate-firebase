@@ -4,7 +4,7 @@ import MyNavigator from "./MainTabNavigator";
 import Landing from "../../login/containers/Landing";
 import Home from "../../profile/containers/Home";
 import ProfileEdit from "../../profile/containers/ProfileEdit";
-import Nearby from "../../components/Nearby";
+import Nearby from "../../nearby/containers/Nearby";
 import FooterNav from "../../components/FooterNav";
 import Messages from "../../messages/containers/Messages";
 import Connections from "../../connections/containers/Connections";
