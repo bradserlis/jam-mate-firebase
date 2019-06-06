@@ -44,7 +44,7 @@ import {
 import FooterNav from "./FooterNav";
 import SearchProfilesCard from "./SearchProfilesCard";
 import SearchProfilesGenres from "./SearchProfilesGenres";
-import CreateMessageModal from "./CreateMessageModal";
+import CreateMessageModal from "../messages/components/CreateMessageModal";
 import * as firebase from "firebase";
 import geofire from "geofire";
 import * as Animatable from "react-native-animatable";

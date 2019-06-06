@@ -6,9 +6,9 @@ import Home from "../../components/Home";
 import ProfileEdit from "../../components/ProfileEdit";
 import Nearby from "../../components/Nearby";
 import FooterNav from "../../components/FooterNav";
-import Messages from "../../components/Messages";
+import Messages from "../../messages/containers/Messages";
 import Connections from "../../connections/containers/Connections";
-import MessagesIndividual from "../../components/MessagesIndividual";
+import MessagesIndividual from "../../messages/components/MessagesIndividual";
 import {
   createSwitchNavigator,
   createStackNavigator,

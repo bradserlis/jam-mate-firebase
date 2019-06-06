@@ -37,11 +37,10 @@ import {
 } from "native-base";
 import { withNavigation } from "react-navigation";
 
-import styles from "../common/styles/styles";
+import styles from "../../common/styles/styles";
 
-import FooterNav from "./FooterNav";
-import BackButton from "../common/components/BackButton";
-import CreateMessageModal from "./CreateMessageModal";
+import BackButton from "../../common/components/BackButton";
+import CreateMessageModal from "../components/CreateMessageModal";
 import * as firebase from "firebase";
 
 class MessagesIndividual extends Component {

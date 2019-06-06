@@ -6,7 +6,7 @@ import Router from "./Router";
 import Landing from "../../components/Landing";
 import Home from "../../components/Home";
 import Nearby from "../../components/Nearby";
-import Messages from "../../components/Messages";
+import Messages from "../../messages/containers/Messages";
 import Connections from "../../connections/containers/Connections";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 

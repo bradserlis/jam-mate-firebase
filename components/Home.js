@@ -35,10 +35,9 @@ import {
   Toast
 } from "native-base";
 import { NavigationEvents } from "react-navigation";
-import FooterNav from "./FooterNav";
 import ProfileTop from "./ProfileTop";
 import Instruments from "./Instruments";
-import Messages from "./Messages";
+import Messages from "../messages/containers/Messages";
 import Genres from "./Genres";
 import * as firebase from "firebase";
 import geofire from "geofire";

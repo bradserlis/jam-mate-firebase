@@ -36,7 +36,6 @@ import {
   CheckBox,
   Separator
 } from "native-base";
-import FooterNav from "./FooterNav";
 import * as firebase from "firebase";
 
 export default class CreateMessage extends Component {
