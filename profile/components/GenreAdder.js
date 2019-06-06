@@ -13,8 +13,8 @@ import {
   Content,
   Header,
   Form,
-  Icon,
   Input,
+  Icon,
   Item,
   Button,
   Label,
@@ -32,42 +32,41 @@ import {
   CheckBox,
   Badge
 } from "native-base";
-import FooterNav from "./FooterNav";
-import styles from "../common/styles/styles";
+import styles from "../../common/styles/styles";
 import * as firebase from "firebase";
 
-var tempInstrumentList = [];
+var tempGenreList = [];
 
-export default class InstrumentAdder extends Component {
+export default class GenreAdder extends Component {
   constructor(props) {
     super(props);
     this.state = {
       formContent: "",
-      instrumentList: [],
+      genreList: [],
       refresher: false
     };
   }
 
-  _addInstrument = () => {
+  _addGenre = () => {
     let userId = firebase.auth().currentUser.uid;
     firebase
       .database()
       .ref("/users/" + userId)
-      .child("instruments")
+      .child("genres")
       .push(this.state.formContent);
     this.setState({
       formContent: ""
     });
   };
 
-  _removeInstrument = (key, index) => {
+  _removeGenre = (key, index) => {
     refreshCheck = this.state.refresher;
-    let tempList = this.state.instrumentList;
+    let tempList = this.state.genreList;
     let userId = this.props.userId;
     let ref = firebase
       .database()
       .ref("/users/" + userId)
-      .child("instruments");
+      .child("genres");
     tempList.splice(index, 1);
     this.setState({
       refresher: !refreshCheck
@@ -79,10 +78,10 @@ export default class InstrumentAdder extends Component {
     let ref = firebase
       .database()
       .ref("/users/" + this.props.userId)
-      .child("instruments");
+      .child("genres");
     ref.orderByKey().on("child_added", snapshot => {
       this.setState(previousState => ({
-        instrumentList: [...previousState.instrumentList, snapshot]
+        genreList: [...previousState.genreList, snapshot]
       }));
     });
   };
@@ -92,29 +91,27 @@ export default class InstrumentAdder extends Component {
       <View>
         <Form style={{ flex: 1, flexDirection: "row" }}>
           <Input
-            placeholder="Enter New Instrument..."
+            placeholder="Genres..."
             onChangeText={formContent => this.setState({ formContent })}
             value={this.state.formContent}
             style={{ width: "80%" }}
           />
-          <Button onPress={() => this._addInstrument()}>
+          <Button onPress={() => this._addGenre()}>
             <Icon name="ios-add" />
           </Button>
         </Form>
 
         <View style={styles.badgeList}>
-          {this.state.instrumentList.map((instrument, index) => (
+          {this.state.genreList.map((genre, index) => (
             <Badge
               primary
               style={{ marginRight: 5, marginBottom: 10 }}
-              key={instrument.key}
+              key={genre.key}
             >
               <TouchableOpacity
-                onPress={() => this._removeInstrument(instrument.key, index)}
+                onPress={() => this._removeGenre(genre.key, index)}
               >
-                <Text style={{ color: "white" }}>
-                  {instrument.val()} &times;
-                </Text>
+                <Text style={{ color: "white" }}>{genre.val()} &times;</Text>
               </TouchableOpacity>
             </Badge>
           ))}

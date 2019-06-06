@@ -36,10 +36,10 @@ import {
   Separator,
   Toast
 } from "native-base";
-import styles from "../common/styles/styles";
-import BackButton from "../common/components/BackButton";
-import InstrumentAdder from "./InstrumentAdder";
-import GenreAdder from "./GenreAdder";
+import styles from "../../common/styles/styles";
+import BackButton from "../../common/components/BackButton";
+import InstrumentAdder from "../components/InstrumentAdder";
+import GenreAdder from "../components/GenreAdder";
 import * as firebase from "firebase";
 
 export default class ProfileEditContainer extends Component {

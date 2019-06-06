@@ -35,14 +35,14 @@ import {
   Toast
 } from "native-base";
 import { NavigationEvents } from "react-navigation";
-import ProfileTop from "./ProfileTop";
-import Instruments from "./Instruments";
-import Messages from "../messages/containers/Messages";
-import Genres from "./Genres";
 import * as firebase from "firebase";
 import geofire from "geofire";
-
 import * as Animatable from "react-native-animatable";
+
+import ProfileTop from "../components/ProfileTop";
+import Instruments from "../components/Instruments";
+import Messages from "../../messages/containers/Messages";
+import Genres from "../components/Genres";
 
 export default class Home extends Component {
   constructor(props) {
@@ -225,7 +225,7 @@ export default class Home extends Component {
             height: window.height
           }}
           imageStyle={{ resizeMode: "repeat" }}
-          source={require("../img/diamond_upholstery.png")}
+          source={require("../../img/diamond_upholstery.png")}
         >
           <Grid>
             <Row size={50}>

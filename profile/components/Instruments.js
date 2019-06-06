@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "../common/styles/styles";
+import styles from "../../common/styles/styles";
 import {
   Text,
   View,

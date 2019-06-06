@@ -4,7 +4,7 @@ import { Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import Router from "./Router";
 import Landing from "../../components/Landing";
-import Home from "../../components/Home";
+import Home from "../../profile/containers/Home";
 import Nearby from "../../components/Nearby";
 import Messages from "../../messages/containers/Messages";
 import Connections from "../../connections/containers/Connections";
