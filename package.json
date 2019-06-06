@@ -41,6 +41,8 @@
     "react-native-paper": "^2.3.0",
     "react-navigation": "^2.18.3",
     "react-navigation-material-bottom-tabs": "^0.4.0",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1",
     "ws": "^7.0.0",
     "xmlbuilder": "^10.1.1"
   },

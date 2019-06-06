@@ -40,13 +40,10 @@ import {
   Ul,
   Li
 } from "native-base";
-import FooterNav from "./FooterNav";
-import SearchProfilesCard from "./SearchProfilesCard";
-import SearchProfilesGenres from "./SearchProfilesGenres";
-import CreateMessageModal from "./CreateMessageModal";
+import CreateMessageModal from "../../messages/components/CreateMessageModal";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
-import styles from "./styles";
+import styles from "../../common/styles/styles";
 
 export default class Connections extends Component {
   constructor(props) {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FlatList, Text, View, StyleSheet, ImageBackground, Alert, Image, Platform, TouchableOpacity, ScrollView} from 'react-native';
 import { Card, CardImage, CardItem, Container, Content, Header, Form, Input, Icon, Item, Button,
  Label, Left, List, ListItem, Body, Right, Title, H3, H2, Grid, Col, Row, Footer, FooterTab, Thumbnail} from 'native-base';
- import FooterNav from './FooterNav';
  import * as firebase from 'firebase';
  import * as Animatable from 'react-native-animatable';
 

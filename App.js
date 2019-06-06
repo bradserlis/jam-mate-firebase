@@ -28,9 +28,11 @@ import {
   Root
 } from "native-base";
 import { AppLoading, Asset, Font, Icon } from "expo";
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
 
-import Router from "./routes/Router";
-import { MainTabNavigator } from "./routes/MainTabNavigator";
+import Router from "./navigation/navigators/Router";
+import { MainTabNavigator } from "./navigation/navigators/MainTabNavigator";
 import * as firebase from "firebase";
 import geofire from "geofire";
 

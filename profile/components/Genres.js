@@ -33,7 +33,7 @@ import {
   FooterTab,
   Thumbnail
 } from "native-base";
-import styles from "./styles";
+import styles from "../../common/styles/styles";
 
 export default class Genres extends Component {
   constructor(props) {
