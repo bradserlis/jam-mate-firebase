@@ -3,11 +3,11 @@ import { Platform } from "react-native";
 import { Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import Router from "./Router";
-import Landing from "../components/Landing";
-import Home from "../components/Home";
-import Nearby from "../components/Nearby";
-import Messages from "../components/Messages";
-import Connections from "../components/Connections";
+import Landing from "../../components/Landing";
+import Home from "../../components/Home";
+import Nearby from "../../components/Nearby";
+import Messages from "../../components/Messages";
+import Connections from "../../connections/containers/Connections";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 
 export default (MainTabNavigator = createMaterialBottomTabNavigator(

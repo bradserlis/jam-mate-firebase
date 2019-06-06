@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import App from "../App";
+import App from "../../App";
 import MyNavigator from "./MainTabNavigator";
-import Landing from "../components/Landing";
-import Home from "../components/Home";
-import ProfileEdit from "../components/ProfileEdit";
-import Nearby from "../components/Nearby";
-import FooterNav from "../components/FooterNav";
-import Messages from "../components/Messages";
-import Connections from "../components/Connections";
-import MessagesIndividual from "../components/MessagesIndividual";
+import Landing from "../../components/Landing";
+import Home from "../../components/Home";
+import ProfileEdit from "../../components/ProfileEdit";
+import Nearby from "../../components/Nearby";
+import FooterNav from "../../components/FooterNav";
+import Messages from "../../components/Messages";
+import Connections from "../../connections/containers/Connections";
+import MessagesIndividual from "../../components/MessagesIndividual";
 import {
   createSwitchNavigator,
   createStackNavigator,
