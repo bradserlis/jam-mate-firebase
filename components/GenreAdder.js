@@ -33,7 +33,7 @@ import {
   Badge
 } from "native-base";
 import FooterNav from "./FooterNav";
-import styles from "./styles";
+import styles from "../common/styles/styles";
 import * as firebase from "firebase";
 
 var tempGenreList = [];

@@ -46,7 +46,7 @@ import SearchProfilesGenres from "./SearchProfilesGenres";
 import CreateMessageModal from "./CreateMessageModal";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
-import styles from "./styles";
+import styles from "../common/styles/styles";
 
 export default class Connections extends Component {
   constructor(props) {

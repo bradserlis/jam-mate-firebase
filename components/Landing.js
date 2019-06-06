@@ -29,7 +29,7 @@ import {
 } from "native-base";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
-import styles from "./styles";
+import styles from "../common/styles/styles";
 
 export default class Landing extends Component {
   constructor(props) {

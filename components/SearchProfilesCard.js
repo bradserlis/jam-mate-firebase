@@ -47,7 +47,7 @@ import { LinearGradient } from "expo";
 import FooterNav from "./FooterNav";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
-import styles from "./styles";
+import styles from "../common/styles/styles";
 
 class SearchProfilesCard extends Component {
   constructor(props) {

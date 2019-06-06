@@ -41,7 +41,7 @@ import FooterNav from "./FooterNav";
 import CreateMessage from "./CreateMessage";
 import MessagesIndividual from "./MessagesIndividual";
 import * as firebase from "firebase";
-import styles from "./styles";
+import styles from "../common/styles/styles";
 
 export default class Messages extends Component {
   constructor(props) {

@@ -36,8 +36,8 @@ import {
   Separator,
   Toast
 } from "native-base";
-import styles from "./styles";
-import BackButton from "./BackButton";
+import styles from "../common/styles/styles";
+import BackButton from "../common/components/BackButton";
 import InstrumentAdder from "./InstrumentAdder";
 import GenreAdder from "./GenreAdder";
 import * as firebase from "firebase";
