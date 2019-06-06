@@ -29,8 +29,8 @@ import {
 } from "native-base";
 import { AppLoading, Asset, Font, Icon } from "expo";
 
-import Router from "./routes/Router";
-import { MainTabNavigator } from "./routes/MainTabNavigator";
+import Router from "./Navigation/Router";
+import { MainTabNavigator } from "./Navigation/MainTabNavigator";
 import * as firebase from "firebase";
 import geofire from "geofire";
 
