@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import App from "../../App";
 import MyNavigator from "./MainTabNavigator";
-import Landing from "../../components/Landing";
+import Landing from "../../login/containers/Landing";
 import Home from "../../profile/containers/Home";
 import ProfileEdit from "../../profile/containers/ProfileEdit";
 import Nearby from "../../components/Nearby";

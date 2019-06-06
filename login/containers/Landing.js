@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Login from "./Login";
 import {
   Text,
   View,
@@ -29,7 +28,7 @@ import {
 } from "native-base";
 import * as firebase from "firebase";
 import * as Animatable from "react-native-animatable";
-import styles from "../common/styles/styles";
+import styles from "../../common/styles/styles";
 
 export default class Landing extends Component {
   constructor(props) {
@@ -119,7 +118,7 @@ export default class Landing extends Component {
         <ImageBackground
           style={styles.fullScreen}
           imageStyle={{ resizeMode: "cover" }}
-          source={require("../img/music.jpg")}
+          source={require("../../img/music.jpg")}
         >
           <View style={styles.overlay}>
             <Left />
@@ -149,7 +148,7 @@ export default class Landing extends Component {
               }
             >
               <Image
-                source={require("../img/facebook_login.png")}
+                source={require("../../img/facebook_login.png")}
                 style={{ height: "115%", width: "100%" }}
               />
             </Button>
