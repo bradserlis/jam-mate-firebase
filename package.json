@@ -3,6 +3,7 @@
   "version": "0.1.9",
   "private": true,
   "devDependencies": {
+    "braces": "^2.3.1",
     "jest-expo": "^33.0.2",
     "react-native-scripts": "^2.0.1",
     "react-test-renderer": "16.3.1",
@@ -21,7 +22,6 @@
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
-    "braces": "^2.3.1",
     "expo": "^31.0.4",
     "firebase": "^5.7.1",
     "geofire": "^4.1.2",
