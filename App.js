@@ -28,13 +28,12 @@ import {
   Root
 } from "native-base";
 import { AppLoading, Asset, Font, Icon } from "expo";
-import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
+import geofire from "geofire";
+import * as firebase from "firebase";
 
 import Router from "./navigation/navigators/Router";
-import { MainTabNavigator } from "./navigation/navigators/MainTabNavigator";
-import * as firebase from "firebase";
-import geofire from "geofire";
+import configureStore from './store';
 
 const firebaseconfig = {
   apiKey: "AIzaSyCIK6eLFSDEOOKY8zoWwXcfvpn5qlAlN9c",
@@ -78,6 +77,8 @@ export default class App extends Component {
   };
 
   render() {
+    let store = configureStore();
+
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <AppLoading
@@ -88,13 +89,15 @@ export default class App extends Component {
       );
     } else {
       return (
-        <Root>
-          <SafeAreaView style={{ flex: 1 }}>
-            <Container>
-              <Router />
-            </Container>
-          </SafeAreaView>
-        </Root>
+        <Provider store={store}>
+          <Root>
+            <SafeAreaView style={{ flex: 1 }}>
+              <Container>
+                <Router />
+              </Container>
+            </SafeAreaView>
+          </Root>
+        </Provider>
       );
     }
   }

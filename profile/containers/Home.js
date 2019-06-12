@@ -119,9 +119,8 @@ export default class Home extends Component {
       });
     }
     let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
-    let thislat = this.state.location.coords.latitude;
-    let thislong = this.state.location.coords.longitude;
+    let thislat = location.coords.latitude;
+    let thislong = location.coords.longitude;
     // let usercityobject = {
     //   latitude: thislat,
     //   longitude: thislong
