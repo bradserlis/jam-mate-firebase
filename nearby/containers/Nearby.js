@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   FlatList,
   Text,
@@ -10,7 +10,7 @@ import {
   Platform,
   TouchableOpacity,
   SafeAreaView
-} from "react-native";
+} from 'react-native';
 import {
   Card,
   CardImage,
@@ -40,15 +40,20 @@ import {
   Thumbnail,
   Ul,
   Li
-} from "native-base";
-import SearchProfilesCard from "../components/SearchProfilesCard";
-import CreateMessageModal from "../../messages/components/CreateMessageModal";
-import * as firebase from "firebase";
-import geofire from "geofire";
-import * as Animatable from "react-native-animatable";
-import styles from "../../common/styles/styles";
+} from 'native-base';
+import * as firebase from 'firebase';
+import geofire from 'geofire';
+import * as Animatable from 'react-native-animatable';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { setAllUsers } from '../actions/actions';
 
-export default class Nearby extends Component {
+import { allUsersSelector } from '../selectors/selectors';
+import CreateMessageModal from '../../messages/components/CreateMessageModal';
+import SearchProfilesCard from '../components/SearchProfilesCard';
+import styles from '../../common/styles/styles';
+
+class Nearby extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,62 +80,50 @@ export default class Nearby extends Component {
   // === message modal ===
 
   static navigationOptions = ({ navigation }) => ({
-    title: "Nearby",
+    title: 'Nearby',
     headerLeft: null,
     headerStyle: {
-      backgroundColor: "#007bff"
+      backgroundColor: '#007bff'
     },
-    headerTintColor: "#fff",
+    headerTintColor: '#fff',
     headerTitleStyle: {
-      fontWeight: "bold"
+      fontWeight: 'bold'
     }
   });
 
   componentWillMount = () => {};
 
   componentDidMount = () => {
+    console.log('in componnent did mount', this.props);
     const currentUser = firebase.auth().currentUser.uid;
     // === message modal ===
     // handleShowCreateMessageModal();
     // === message modal ===
 
     // ******** declare geofire all users reference point
-    const geoFire = new geofire(firebase.database().ref("user_locations/"));
+    const geoFire = new geofire(firebase.database().ref('user_locations/'));
 
     geoFire.get(currentUser).then(
       location => {
         if (location === null) {
-          console.log("key is not in Geofire");
+          console.log('key is not in Geofire');
         } else {
-          // this.setState({
-          //   userLocation: location
-          // });
-          // console.log("sanity check - what is location:", location);
-          // console.log(
-          //   "sanity check - what is state of userLocation:",
-          //   this.state.userLocation
-          // );
           // ******** initialize geoquery
           const geoQuery = geoFire.query({
             center: location,
             radius: 57
           });
-          // console.log("step 2 - this is the geoquery:", geoQuery);
-          // console.log(
-          //   "step 2.1 - this is the geoquery.center:",
-          //   geoQuery.center()
-          // );
           // ********
           // ******** retrieve users
           let nearbyUsers = [];
           //GEOQUERIES ==
-          geoQuery.on("key_exited", key => {
+          geoQuery.on('key_exited', key => {
             nearbyUsers = nearbyUsers.filter(user => user.userid !== key);
             this.setState({
               usersArray: nearbyUsers
             });
           });
-          geoQuery.on("key_entered", (key, location, distance) => {
+          geoQuery.on('key_entered', (key, location, distance) => {
             if (
               key === currentUser ||
               nearbyUsers.some(user => user.userid === key)
@@ -147,23 +140,21 @@ export default class Nearby extends Component {
               // console.log("these are nearby users:", nearbyUsers);
 
               // query Firebase USERS node
-              let ref = firebase.database().ref("/users/" + key);
-              ref.once("value").then(snapshot => {
+              let ref = firebase.database().ref('/users/' + key);
+              ref.once('value').then(snapshot => {
                 let userObj = { userid: key };
                 snapshot.forEach(userProperty => {
                   userObj[userProperty.key] = userProperty.val();
                 });
                 nearbyUsers.push(userObj);
-                this.setState({
-                  usersArray: nearbyUsers
-                });
+                this.props.setAllUsers(nearbyUsers);
               });
             }
           });
         }
       },
       error => {
-        console.log("Error:", error);
+        console.log('Error:', error);
       }
     );
   };
@@ -201,7 +192,7 @@ export default class Nearby extends Component {
         firstname: obj.firstname,
         lastname: obj.lastname,
         zipcode: obj.zipcode,
-        userphoto: obj.userphoto || "http://temp.changeme.com",
+        userphoto: obj.userphoto || 'http://temp.changeme.com',
         genres: genres,
         instruments: instruments,
         connectedusers: connectedusers
@@ -213,6 +204,7 @@ export default class Nearby extends Component {
   };
 
   render() {
+    console.log('within render', this.props);
     const { navigate } = this.props.navigation;
     let users = this.state.usersArray;
     // console.log("this is the users in render:", users);
@@ -273,23 +265,15 @@ export default class Nearby extends Component {
   }
 }
 
-// <CreateMessageModal
-// isVisible={this.state.isCreateMessageModalVisible}
-// onBackdropPress={this.handleDismissCreateMessageModal}
-// />
-// <Footer>
-//   <FooterTab>
-//     <Button onPress={() => navigate("Home")}>
-//       <Icon name="contact" />
-//       <Text>Profile</Text>
-//     </Button>
-//     <Button>
-//       <Icon name="people" />
-//       <Text>Search</Text>
-//     </Button>
-//     <Button onPress={() => navigate("Messages")}>
-//       <Icon name="chatboxes" />
-//       <Text>Messages</Text>
-//     </Button>
-//   </FooterTab>
-// </Footer>
+const mapStateToProps = state => ({
+  allUsers: allUsersSelector(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  setAllUsers: allUsers => dispatch(setAllUsers(allUsers))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nearby);

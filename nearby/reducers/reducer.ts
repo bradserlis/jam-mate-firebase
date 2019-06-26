@@ -1,29 +1,27 @@
-import { handleActions, Action } from "redux-actions";
+import { handleActions } from 'redux-actions';
+import { Map, List } from 'immutable';
 
-import ActionTypes from "../actions/actionTypes";
-import { getNearbyUsersFromJson } from "../actions/actions";
+import ActionTypes from '../actions/actionTypes';
+import { setAllUsers } from '../actions/actions';
 
-const initialState = {
-  usersArray: null,
-  GET_USERS: null
-};
+export interface INearbyState {
+  allUsers: any;
+}
 
-export interface INearbyState {}
-
-export default handleActions<INearbyState, {}>(
+export default handleActions(
   {
-    [ActionTypes.GET_USERS]: (
+    [ActionTypes.SET_ALL_USERS]: (
       state: INearbyState,
-      action: Action<Date>
+      action
     ): INearbyState => {
-      let usersList = action.payload;
+      let allUsers = List(action.payload);
       return {
         ...state,
-        usersArray: usersList
+        allUsers
       };
     }
   },
   {
-    nearbyUsers: null
+    allUsers: null
   }
 );

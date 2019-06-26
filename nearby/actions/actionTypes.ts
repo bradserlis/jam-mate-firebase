@@ -1,5 +1,5 @@
 enum ActionTypes {
-  GET_USERS = "GET_USERS"
+  SET_ALL_USERS = 'SET_ALL_USERS'
 }
 
 export default ActionTypes;

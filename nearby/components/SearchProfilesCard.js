@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Alert,
   AlertIOS,
@@ -11,7 +11,7 @@ import {
   Platform,
   TouchableOpacity,
   ScrollView
-} from "react-native";
+} from 'react-native';
 import {
   Card,
   CardImage,
@@ -40,13 +40,13 @@ import {
   FooterTab,
   Thumbnail,
   Toast
-} from "native-base";
-import { withNavigation } from "react-navigation";
+} from 'native-base';
+import { withNavigation } from 'react-navigation';
 
-import { LinearGradient } from "expo";
-import * as firebase from "firebase";
-import * as Animatable from "react-native-animatable";
-import styles from "../../common/styles/styles";
+import { LinearGradient } from 'expo';
+import * as firebase from 'firebase';
+import * as Animatable from 'react-native-animatable';
+import styles from '../../common/styles/styles';
 
 class SearchProfilesCard extends Component {
   constructor(props) {
@@ -68,8 +68,8 @@ class SearchProfilesCard extends Component {
     let currentuser = firebase.auth().currentUser.uid;
     let ref = firebase
       .database()
-      .ref("/users/" + currentuser)
-      .child("contactinfo");
+      .ref('/users/' + currentuser)
+      .child('contactinfo');
     // let contactInfo = firebase
     //   .database()
     //   .ref("/users/" + currentuser)
@@ -78,22 +78,22 @@ class SearchProfilesCard extends Component {
     //   .then(snapshot => snapshot.toJSON());
     // console.log("contactInfo is:", contactInfo);
     // check to see if current user has contactinfo string
-    ref.once("value").then(snapshot => {
+    ref.once('value').then(snapshot => {
       let contactInfo = snapshot.val();
-      console.log("contact info?", contactInfo);
+      console.log('contact info?', contactInfo);
       if (!contactInfo) {
-        console.log("didnt find contactinfo");
+        console.log('didnt find contactinfo');
         AlertIOS.prompt(
-          "Add Contact info",
-          "Contact info missing (e.g email, phone #)",
+          'Add Contact info',
+          'Contact info missing (e.g email, phone #)',
           newContactInfo => {
             // update contactinfo for current user
             ref.set(newContactInfo);
             // add currentuser to target user's connecteduser list
             firebase
               .database()
-              .ref("/users/" + targetUser)
-              .child("connectedusers")
+              .ref('/users/' + targetUser)
+              .child('connectedusers')
               .push(currentuser)
               .then(() => {
                 this.setState({
@@ -101,21 +101,21 @@ class SearchProfilesCard extends Component {
                 });
               });
             // give alert that connection was sent
-            Alert.alert("connection sent to", this.props.name);
+            Alert.alert('connection sent to', this.props.name);
           }
         );
       } else {
         firebase
           .database()
-          .ref("/users/" + targetUser)
-          .child("connectedusers")
+          .ref('/users/' + targetUser)
+          .child('connectedusers')
           .push(currentuser)
           .then(() => {
             this.setState({
               userIsConnected: true
             });
           });
-        Alert.alert("connection sent to", this.props.name);
+        Alert.alert('connection sent to', this.props.name);
       }
     });
   };
@@ -125,19 +125,19 @@ class SearchProfilesCard extends Component {
     let currentUserId = firebase.auth().currentUser.uid;
     let newRoomKey = firebase
       .database()
-      .ref("/rooms/")
+      .ref('/rooms/')
       .push().key;
-    let newRoomRef = firebase.database().ref("/rooms/" + newRoomKey);
-    let newRoomMessageRef = newRoomRef.child("/messages/" + Date.now());
+    let newRoomRef = firebase.database().ref('/rooms/' + newRoomKey);
+    let newRoomMessageRef = newRoomRef.child('/messages/' + Date.now());
     // initialize members data
-    newRoomRef.child("members").push(targetUserId);
-    newRoomRef.child("members").push(currentUserId);
+    newRoomRef.child('members').push(targetUserId);
+    newRoomRef.child('members').push(currentUserId);
     // add message
-    AlertIOS.prompt("Message", "Enter your message", firstMessage => {
-      newRoomMessageRef.child("message").set(firstMessage);
-      newRoomMessageRef.child("user").set(currentUserId);
+    AlertIOS.prompt('Message', 'Enter your message', firstMessage => {
+      newRoomMessageRef.child('message').set(firstMessage);
+      newRoomMessageRef.child('user').set(currentUserId);
       // give alert that connection was sent
-      Alert.alert("Message sent");
+      Alert.alert('Message sent');
     });
     // Add userid and roomid to messageRooms array for each user
     let targetObj = {};
@@ -147,14 +147,14 @@ class SearchProfilesCard extends Component {
 
     firebase
       .database()
-      .ref("/users/" + currentUserId)
-      .child("messagerooms")
+      .ref('/users/' + currentUserId)
+      .child('messagerooms')
       .child(targetUserId)
       .set(newRoomKey);
     firebase
       .database()
-      .ref("/users/" + targetUserId)
-      .child("messagerooms")
+      .ref('/users/' + targetUserId)
+      .child('messagerooms')
       .child(currentUserId)
       .set(newRoomKey);
   };
@@ -166,13 +166,13 @@ class SearchProfilesCard extends Component {
     // === CHECK IF MESSAGE "ROOM" BETWEEN USERS EXISTS
     let messageRoomsRef = firebase
       .database()
-      .ref("/users/" + currentUserId + "/messagerooms");
-    messageRoomsRef.once("value").then(snapshot => {
+      .ref('/users/' + currentUserId + '/messagerooms');
+    messageRoomsRef.once('value').then(snapshot => {
       let users = snapshot.toJSON();
       if (snapshot.toJSON() === null) {
         this._createRoom(targetUserId);
       } else if (users.hasOwnProperty(targetUserId)) {
-        navigate("Messages");
+        navigate('Messages');
       } else {
         this._createRoom(targetUserId);
       }
@@ -184,14 +184,14 @@ class SearchProfilesCard extends Component {
 
     let currentUserId = firebase.auth().currentUser.uid;
 
-    let combo = ["INSTRUMENTS:"].concat(
+    let combo = ['INSTRUMENTS:'].concat(
       this.props.instruments,
-      [" ", "GENRES:"],
+      [' ', 'GENRES:'],
       this.props.genres
     );
 
     return (
-      <LinearGradient colors={["#4c669f", "#3b5998", "#192f6a"]}>
+      <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
         <Card>
           <CardItem>
             <View style={{ flex: 1 }}>
@@ -218,9 +218,9 @@ class SearchProfilesCard extends Component {
                     this._addContact(this.props.userid);
                   }}
                 >
-                  <Text style={{ color: "white", fontSize: 12 }}>
-                    {" "}
-                    Send Contact Info to {this.props.name}{" "}
+                  <Text style={{ color: 'white', fontSize: 12 }}>
+                    {' '}
+                    Send Contact Info to {this.props.name}{' '}
                   </Text>
                 </Button>
               ) : null}
@@ -231,7 +231,7 @@ class SearchProfilesCard extends Component {
                   this._openRoom(this.props.userid);
                 }}
               >
-                <Text style={{ color: "white", fontSize: 12 }}> Message </Text>
+                <Text style={{ color: 'white', fontSize: 12 }}> Message </Text>
               </Button>
             </View>
           </CardItem>
