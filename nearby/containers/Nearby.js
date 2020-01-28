@@ -94,7 +94,7 @@ class Nearby extends Component {
   componentWillMount = () => {};
 
   componentDidMount = () => {
-    console.log('in componnent did mount', this.props);
+    this.getAllUsers();
     const currentUser = firebase.auth().currentUser.uid;
     // === message modal ===
     // handleShowCreateMessageModal();
@@ -128,17 +128,8 @@ class Nearby extends Component {
               key === currentUser ||
               nearbyUsers.some(user => user.userid === key)
             ) {
-              // console.log("you are already in here", key);
+              console.log('you are already in here', key);
             } else {
-              // console.log(
-              //   key +
-              //     " is within range at " +
-              //     location +
-              //     " at a distance of " +
-              //     distance
-              // );
-              // console.log("these are nearby users:", nearbyUsers);
-
               // query Firebase USERS node
               let ref = firebase.database().ref('/users/' + key);
               ref.once('value').then(snapshot => {
@@ -147,7 +138,7 @@ class Nearby extends Component {
                   userObj[userProperty.key] = userProperty.val();
                 });
                 nearbyUsers.push(userObj);
-                this.props.setAllUsers(nearbyUsers);
+                // this.props.setAllUsers(nearbyUsers);
               });
             }
           });
@@ -180,11 +171,6 @@ class Nearby extends Component {
       for (let key in obj.connectedusers) {
         connectedusers.push(obj.connectedusers[key]);
       }
-      // Get messagerooms
-      // let messagerooms = [];
-      // for (let key in obj.messagerooms) {
-      //   messagerooms.push(obj.messagerooms[key]);
-      // }
       // Add the result to the table
       results.push({
         userid: originalObj.userid,
@@ -196,15 +182,29 @@ class Nearby extends Component {
         genres: genres,
         instruments: instruments,
         connectedusers: connectedusers
-        // messagerooms: messagerooms
       });
     });
-
     return results;
   };
 
+  getAllUsers = () => {
+    allUsersArray = [];
+    let ref = firebase.database().ref('/users/');
+    ref.once('value').then(snapshot => {
+      console.log('what does a snapshot contain', snapshot);
+      console.log('what happens with toJSON? ', snapshot.toJSON());
+      allUsersArray.push(snapshot.toJSON());
+      this.props.setAllUsers(allUsersArray);
+    });
+    console.log('in the end, this is allUsersArray', allUsersArray);
+    console.log('in the end, this is this.props.nearby', this.props.nearby);
+    console.log(
+      'in the end, this is this.props.nearby',
+      this.props.nearby.allUsers
+    );
+  };
+
   render() {
-    console.log('within render', this.props);
     const { navigate } = this.props.navigation;
     let users = this.state.usersArray;
     // console.log("this is the users in render:", users);
@@ -213,7 +213,6 @@ class Nearby extends Component {
       <Container>
         <Content>
           <H2 style={styles.notchCompensation}> Nearby Users </H2>
-
           {results.length < 1 ? (
             <View style={{ margin: 20 }}>
               <Text style={styles.modalTitleText}>No Users nearby</Text>
