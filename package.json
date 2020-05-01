@@ -21,6 +21,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "acorn": "^5.7.4",
     "babel-core": "^7.0.0-bridge.0",
     "expo": "^31.0.4",
     "firebase": "^5.7.1",
